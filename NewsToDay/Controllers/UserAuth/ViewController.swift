@@ -11,6 +11,7 @@ class UserAuthViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
 
 }
