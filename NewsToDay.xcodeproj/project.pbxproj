@@ -27,8 +27,20 @@
 		8474A1722A083EC500D6EE4E /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8474A1712A083EC500D6EE4E /* SDWebImage */; };
 		8474A1742A083EC500D6EE4E /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8474A1732A083EC500D6EE4E /* SDWebImageMapKit */; };
 		8474A1772A083EEA00D6EE4E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8474A1762A083EEA00D6EE4E /* SnapKit */; };
-		8474A1792A083EEA00D6EE4E /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8474A1782A083EEA00D6EE4E /* SnapKit-Dynamic */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8474A17B2A08485100D6EE4E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0039BD702A07D241002F8F71 /* NewsToDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsToDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,7 +72,6 @@
 				8474A1772A083EEA00D6EE4E /* SnapKit in Frameworks */,
 				8474A1742A083EC500D6EE4E /* SDWebImageMapKit in Frameworks */,
 				8474A1722A083EC500D6EE4E /* SDWebImage in Frameworks */,
-				8474A1792A083EEA00D6EE4E /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +249,7 @@
 				0039BD6C2A07D241002F8F71 /* Sources */,
 				0039BD6D2A07D241002F8F71 /* Frameworks */,
 				0039BD6E2A07D241002F8F71 /* Resources */,
+				8474A17B2A08485100D6EE4E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -248,7 +260,6 @@
 				8474A1712A083EC500D6EE4E /* SDWebImage */,
 				8474A1732A083EC500D6EE4E /* SDWebImageMapKit */,
 				8474A1762A083EEA00D6EE4E /* SnapKit */,
-				8474A1782A083EEA00D6EE4E /* SnapKit-Dynamic */,
 			);
 			productName = NewsToDay;
 			productReference = 0039BD702A07D241002F8F71 /* NewsToDay.app */;
@@ -474,7 +485,6 @@
 				INFOPLIST_FILE = NewsToDay/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -502,7 +512,6 @@
 				INFOPLIST_FILE = NewsToDay/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -575,11 +584,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8474A1752A083EEA00D6EE4E /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		8474A1782A083EEA00D6EE4E /* SnapKit-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8474A1752A083EEA00D6EE4E /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = "SnapKit-Dynamic";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
