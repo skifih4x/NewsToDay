@@ -30,19 +30,6 @@
 		8474A1772A083EEA00D6EE4E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8474A1762A083EEA00D6EE4E /* SnapKit */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		8474A17B2A08485100D6EE4E /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		0039BD702A07D241002F8F71 /* NewsToDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsToDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0039BD732A07D241002F8F71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -71,9 +58,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8474A1772A083EEA00D6EE4E /* SnapKit in Frameworks */,
-				8474A1742A083EC500D6EE4E /* SDWebImageMapKit in Frameworks */,
-				8474A1722A083EC500D6EE4E /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,8 +165,6 @@
 			isa = PBXGroup;
 			children = (
 				0039BD7C2A07D242002F8F71 /* Assets.xcassets */,
-				8474A16B2A0839EE00D6EE4E /* UIColorExtension.swift */,
-				8474A16D2A083AA000D6EE4E /* Resources.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -263,7 +245,7 @@
 			children = (
 				845F820A2A085C54008F94F6 /* UserAuth.swift */,
 			);
-			path = UserAuth;
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,18 +258,12 @@
 				0039BD6C2A07D241002F8F71 /* Sources */,
 				0039BD6D2A07D241002F8F71 /* Frameworks */,
 				0039BD6E2A07D241002F8F71 /* Resources */,
-				8474A17B2A08485100D6EE4E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = NewsToDay;
-			packageProductDependencies = (
-				8474A1712A083EC500D6EE4E /* SDWebImage */,
-				8474A1732A083EC500D6EE4E /* SDWebImageMapKit */,
-				8474A1762A083EEA00D6EE4E /* SnapKit */,
-			);
 			productName = NewsToDay;
 			productReference = 0039BD702A07D241002F8F71 /* NewsToDay.app */;
 			productType = "com.apple.product-type.application";
@@ -316,10 +292,6 @@
 				Base,
 			);
 			mainGroup = 0039BD672A07D241002F8F71;
-			packageReferences = (
-				8474A1702A083EC500D6EE4E /* XCRemoteSwiftPackageReference "SDWebImage" */,
-				8474A1752A083EEA00D6EE4E /* XCRemoteSwiftPackageReference "SnapKit" */,
-			);
 			productRefGroup = 0039BD712A07D241002F8F71 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -354,14 +326,12 @@
 				0039BDA12A07D6E8002F8F71 /* StorageManager.swift in Sources */,
 				0039BD9F2A07D68B002F8F71 /* NetworkManager.swift in Sources */,
 				0039BD9C2A07D65C002F8F71 /* CategoriesViewController.swift in Sources */,
-				8474A16C2A0839EE00D6EE4E /* UIColorExtension.swift in Sources */,
 				0039BD782A07D241002F8F71 /* HomeViewController.swift in Sources */,
 				0039BD8C2A07D4EE002F8F71 /* TabBarController.swift in Sources */,
 				0039BD742A07D241002F8F71 /* AppDelegate.swift in Sources */,
 				0039BD952A07D5B2002F8F71 /* OnboardingViewController.swift in Sources */,
 				0039BD8F2A07D53B002F8F71 /* BookMarksViewController.swift in Sources */,
 				0039BD762A07D241002F8F71 /* SceneDelegate.swift in Sources */,
-				8474A16E2A083AA000D6EE4E /* Resources.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,6 +483,7 @@
 				INFOPLIST_FILE = NewsToDay/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -540,6 +511,7 @@
 				INFOPLIST_FILE = NewsToDay/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -577,43 +549,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		8474A1702A083EC500D6EE4E /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
-		8474A1752A083EEA00D6EE4E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		8474A1712A083EC500D6EE4E /* SDWebImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8474A1702A083EC500D6EE4E /* XCRemoteSwiftPackageReference "SDWebImage" */;
-			productName = SDWebImage;
-		};
-		8474A1732A083EC500D6EE4E /* SDWebImageMapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8474A1702A083EC500D6EE4E /* XCRemoteSwiftPackageReference "SDWebImage" */;
-			productName = SDWebImageMapKit;
-		};
-		8474A1762A083EEA00D6EE4E /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8474A1752A083EEA00D6EE4E /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0039BD682A07D241002F8F71 /* Project object */;
 }
