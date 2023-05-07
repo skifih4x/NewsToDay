@@ -100,6 +100,7 @@
 		0039BD722A07D241002F8F71 /* NewsToDay */ = {
 			isa = PBXGroup;
 			children = (
+				003EA4FF2A082F1400285FAB /* Support */,
 				0039BDA42A07D6FC002F8F71 /* Model */,
 				0039BD9D2A07D681002F8F71 /* Services */,
 				0039BD882A07D4D2002F8F71 /* Controllers */,
@@ -248,6 +249,19 @@
 				8474A17D2A08513D00D6EE4E /* ViewController.swift */,
 			);
 			path = UserAuth;
+		003EA4FF2A082F1400285FAB /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				003EA5002A082F2300285FAB /* Extension */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		003EA5002A082F2300285FAB /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
