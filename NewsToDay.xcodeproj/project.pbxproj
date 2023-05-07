@@ -22,6 +22,8 @@
 		0039BD9F2A07D68B002F8F71 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0039BD9E2A07D68B002F8F71 /* NetworkManager.swift */; };
 		0039BDA12A07D6E8002F8F71 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0039BDA02A07D6E8002F8F71 /* StorageManager.swift */; };
 		0039BDA62A07D703002F8F71 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0039BDA52A07D703002F8F71 /* NewsModel.swift */; };
+		8474A16C2A0839EE00D6EE4E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8474A16B2A0839EE00D6EE4E /* UIColorExtension.swift */; };
+		8474A16E2A083AA000D6EE4E /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8474A16D2A083AA000D6EE4E /* Resources.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		0039BD9E2A07D68B002F8F71 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0039BDA02A07D6E8002F8F71 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		0039BDA52A07D703002F8F71 /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
+		8474A16B2A0839EE00D6EE4E /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		8474A16D2A083AA000D6EE4E /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +157,8 @@
 			isa = PBXGroup;
 			children = (
 				0039BD7C2A07D242002F8F71 /* Assets.xcassets */,
+				8474A16B2A0839EE00D6EE4E /* UIColorExtension.swift */,
+				8474A16D2A083AA000D6EE4E /* Resources.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -283,12 +289,14 @@
 				0039BDA12A07D6E8002F8F71 /* StorageManager.swift in Sources */,
 				0039BD9F2A07D68B002F8F71 /* NetworkManager.swift in Sources */,
 				0039BD9C2A07D65C002F8F71 /* CategoriesViewController.swift in Sources */,
+				8474A16C2A0839EE00D6EE4E /* UIColorExtension.swift in Sources */,
 				0039BD782A07D241002F8F71 /* HomeViewController.swift in Sources */,
 				0039BD8C2A07D4EE002F8F71 /* TabBarController.swift in Sources */,
 				0039BD742A07D241002F8F71 /* AppDelegate.swift in Sources */,
 				0039BD952A07D5B2002F8F71 /* OnboardingViewController.swift in Sources */,
 				0039BD8F2A07D53B002F8F71 /* BookMarksViewController.swift in Sources */,
 				0039BD762A07D241002F8F71 /* SceneDelegate.swift in Sources */,
+				8474A16E2A083AA000D6EE4E /* Resources.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
