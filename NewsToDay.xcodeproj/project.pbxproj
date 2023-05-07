@@ -22,12 +22,12 @@
 		0039BD9F2A07D68B002F8F71 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0039BD9E2A07D68B002F8F71 /* NetworkManager.swift */; };
 		0039BDA12A07D6E8002F8F71 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0039BDA02A07D6E8002F8F71 /* StorageManager.swift */; };
 		0039BDA62A07D703002F8F71 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0039BDA52A07D703002F8F71 /* NewsModel.swift */; };
+		845F820B2A085C54008F94F6 /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845F820A2A085C54008F94F6 /* UserAuth.swift */; };
 		8474A16C2A0839EE00D6EE4E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8474A16B2A0839EE00D6EE4E /* UIColorExtension.swift */; };
 		8474A16E2A083AA000D6EE4E /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8474A16D2A083AA000D6EE4E /* Resources.swift */; };
 		8474A1722A083EC500D6EE4E /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8474A1712A083EC500D6EE4E /* SDWebImage */; };
 		8474A1742A083EC500D6EE4E /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8474A1732A083EC500D6EE4E /* SDWebImageMapKit */; };
 		8474A1772A083EEA00D6EE4E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8474A1762A083EEA00D6EE4E /* SnapKit */; };
-		8474A17E2A08513D00D6EE4E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8474A17D2A08513D00D6EE4E /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -61,9 +61,9 @@
 		0039BD9E2A07D68B002F8F71 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0039BDA02A07D6E8002F8F71 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		0039BDA52A07D703002F8F71 /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
+		845F820A2A085C54008F94F6 /* UserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuth.swift; sourceTree = "<group>"; };
 		8474A16B2A0839EE00D6EE4E /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		8474A16D2A083AA000D6EE4E /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
-		8474A17D2A08513D00D6EE4E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +85,7 @@
 			children = (
 				0039BD722A07D241002F8F71 /* NewsToDay */,
 				0039BD712A07D241002F8F71 /* Products */,
-				8474A16F2A083DF500D6EE4E /* Frameworks */,
+				84D393D22A085B5500661E2C /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,7 +125,7 @@
 		0039BD882A07D4D2002F8F71 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				8474A17C2A08512700D6EE4E /* UserAuth */,
+				84D393D32A085B6F00661E2C /* UserAuth */,
 				0039BD932A07D597002F8F71 /* OnboardingVC */,
 				0039BD8A2A07D4DE002F8F71 /* TabBar */,
 				0039BD892A07D4D7002F8F71 /* HomeVC */,
@@ -249,7 +249,21 @@
 			children = (
 			);
 			path = Extension;
-
+			sourceTree = "<group>";
+		};
+		84D393D22A085B5500661E2C /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		84D393D32A085B6F00661E2C /* UserAuth */ = {
+			isa = PBXGroup;
+			children = (
+				845F820A2A085C54008F94F6 /* UserAuth.swift */,
+			);
+			path = UserAuth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -333,7 +347,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8474A17E2A08513D00D6EE4E /* ViewController.swift in Sources */,
+				845F820B2A085C54008F94F6 /* UserAuth.swift in Sources */,
 				0039BDA62A07D703002F8F71 /* NewsModel.swift in Sources */,
 				0039BD992A07D616002F8F71 /* DetailNewsViewController.swift in Sources */,
 				0039BD922A07D580002F8F71 /* ProfileVC.swift in Sources */,
