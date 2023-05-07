@@ -24,6 +24,10 @@
 		0039BDA62A07D703002F8F71 /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0039BDA52A07D703002F8F71 /* NewsModel.swift */; };
 		8474A16C2A0839EE00D6EE4E /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8474A16B2A0839EE00D6EE4E /* UIColorExtension.swift */; };
 		8474A16E2A083AA000D6EE4E /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8474A16D2A083AA000D6EE4E /* Resources.swift */; };
+		8474A1722A083EC500D6EE4E /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8474A1712A083EC500D6EE4E /* SDWebImage */; };
+		8474A1742A083EC500D6EE4E /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8474A1732A083EC500D6EE4E /* SDWebImageMapKit */; };
+		8474A1772A083EEA00D6EE4E /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8474A1762A083EEA00D6EE4E /* SnapKit */; };
+		8474A1792A083EEA00D6EE4E /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 8474A1782A083EEA00D6EE4E /* SnapKit-Dynamic */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +57,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8474A1772A083EEA00D6EE4E /* SnapKit in Frameworks */,
+				8474A1742A083EC500D6EE4E /* SDWebImageMapKit in Frameworks */,
+				8474A1722A083EC500D6EE4E /* SDWebImage in Frameworks */,
+				8474A1792A083EEA00D6EE4E /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +72,7 @@
 			children = (
 				0039BD722A07D241002F8F71 /* NewsToDay */,
 				0039BD712A07D241002F8F71 /* Products */,
+				8474A16F2A083DF500D6EE4E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -212,6 +221,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		8474A16F2A083DF500D6EE4E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -228,6 +244,12 @@
 			dependencies = (
 			);
 			name = NewsToDay;
+			packageProductDependencies = (
+				8474A1712A083EC500D6EE4E /* SDWebImage */,
+				8474A1732A083EC500D6EE4E /* SDWebImageMapKit */,
+				8474A1762A083EEA00D6EE4E /* SnapKit */,
+				8474A1782A083EEA00D6EE4E /* SnapKit-Dynamic */,
+			);
 			productName = NewsToDay;
 			productReference = 0039BD702A07D241002F8F71 /* NewsToDay.app */;
 			productType = "com.apple.product-type.application";
@@ -256,6 +278,10 @@
 				Base,
 			);
 			mainGroup = 0039BD672A07D241002F8F71;
+			packageReferences = (
+				8474A1702A083EC500D6EE4E /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				8474A1752A083EEA00D6EE4E /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 0039BD712A07D241002F8F71 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -514,6 +540,48 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8474A1702A083EC500D6EE4E /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		8474A1752A083EEA00D6EE4E /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8474A1712A083EC500D6EE4E /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8474A1702A083EC500D6EE4E /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		8474A1732A083EC500D6EE4E /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8474A1702A083EC500D6EE4E /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
+		8474A1762A083EEA00D6EE4E /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8474A1752A083EEA00D6EE4E /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		8474A1782A083EEA00D6EE4E /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8474A1752A083EEA00D6EE4E /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0039BD682A07D241002F8F71 /* Project object */;
 }
