@@ -14,7 +14,6 @@ struct Welcome: Codable {
 }
 
 struct Article: Codable {
-    let source: Source
     let author: String?
     let title, description: String
     let url: String
@@ -23,15 +22,4 @@ struct Article: Codable {
     let content: String
 }
 
-struct Source: Codable {
-    let id: ID?
-    let name: String
-}
 
-enum ID: String, Codable {
-    case businessInsider = "business-insider"
-    case dieZeit = "die-zeit"
-    case engadget = "engadget"
-    case googleNews = "google-news"
-    case wired = "wired"
-}
