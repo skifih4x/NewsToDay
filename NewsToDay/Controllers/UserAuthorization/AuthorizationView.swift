@@ -18,9 +18,9 @@ class AuthorizationView: CustomView {
     //MARK: - Variables
     private lazy var topLabel: UILabel = {
         let element = UILabel()
-        element.text = "Welcome Back"
-        element.font = UIFont.systemFont(ofSize: 24, weight: .heavy)
-        element.textColor = .label
+        element.text = "Welcome Back 👋"
+        element.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        element.textColor = Resources.Colors.blackPrimary
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -28,21 +28,37 @@ class AuthorizationView: CustomView {
     private lazy var greetingLabel: UILabel = {
         let element = UILabel()
         element.text = "I am happy to see you again. You can continue where you left off by logging in"
-        element.font = UIFont.systemFont(ofSize: <#Int#>)
-        element.textColor = <#UIColor#>
+        element.lineBreakMode = .byWordWrapping
+        element.numberOfLines = 2
+        element.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        element.textColor = Resources.Colors.greyPrimary
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
     
-    //Email and passwerd fields
+    private lazy var emailTextField: UITextField = {
+        let element = UITextField()
+        element.layer.cornerRadius = 12
+        element.backgroundColor = Resources.Colors.greyLighter
+        element.translatesAutoresizingMaskIntoConstraints = false
+        return element
+    }()
+    
+    private lazy var passwordTextField: UITextField = {
+        let element = UITextField()
+        element.layer.cornerRadius = 12
+        element.backgroundColor = Resources.Colors.greyLighter
+        element.translatesAutoresizingMaskIntoConstraints = false
+        return element
+    }()
     
     private lazy var signInButton: UIButton = {
         let element = UIButton()
-        element.restorationIdentifier = <#String#>
-        element.backgroundColor = <#UIColor#>
-        element.setTitle(<#String#>, for: .normal)
-        element.setTitleColor(<#UIColor#>, for: .normal)
-        element.titleLabel?.font = UIFont.systemFont(ofSize: <#Int#>)
+        element.backgroundColor = Resources.Colors.purplePrimary
+        element.setTitle("Sign In", for: .normal)
+        element.setTitleColor(.white, for: .normal)
+        element.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        element.layer.cornerRadius = 12
         element.translatesAutoresizingMaskIntoConstraints = false
         element.addTarget(self, action: #selector(didTapSignInButton(_:)), for: .touchUpInside)
         return element
@@ -50,29 +66,27 @@ class AuthorizationView: CustomView {
     
     private lazy var createAccountHStack: UIStackView = {
         let element = UIStackView()
-        element.axis = <#axis#>
-        element.spacing = <#Int#>
-        element.distribution = <#distribution#>
+        element.spacing = 8
+        element.distribution = .fill
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
     
     private lazy var createAccountLabel: UILabel = {
         let element = UILabel()
-        element.text = <#String#>
-        element.font = UIFont.systemFont(ofSize: <#Int#>)
-        element.textColor = <#UIColor#>
+        element.text = "Don't have an account?"
+        element.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        element.textColor = Resources.Colors.blackLighter
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
     
     private lazy var createAccountButton: UIButton = {
         let element = UIButton()
-        element.restorationIdentifier = <#String#>
-        element.backgroundColor = <#UIColor#>
-        element.setTitle(<#String#>, for: .normal)
-        element.setTitleColor(<#UIColor#>, for: .normal)
-        element.titleLabel?.font = UIFont.systemFont(ofSize: <#Int#>)
+        element.backgroundColor = nil
+        element.setTitle("Sign Up", for: .normal)
+        element.setTitleColor(Resources.Colors.blackPrimary, for: .normal)
+        element.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .heavy)
         element.translatesAutoresizingMaskIntoConstraints = false
         element.addTarget(self, action: #selector(didTapCreateAccountButton(_:)), for: .touchUpInside)
         return element
@@ -84,14 +98,47 @@ class AuthorizationView: CustomView {
     override func setViews() {
         super.setViews()
         
-        // Add subviews here
+        self.addSubview(topLabel)
+        self.addSubview(greetingLabel)
+        self.addSubview(emailTextField)
+        self.addSubview(passwordTextField)
+        self.addSubview(signInButton)
+        self.addSubview(createAccountHStack)
+        
+        createAccountHStack.addArrangedSubview(createAccountLabel)
+        createAccountHStack.addArrangedSubview(createAccountButton)
     }
     
     //MARK: - layoutViews
     override func layoutViews() {
         super.layoutViews()
         
-        // Add constraints here
+        NSLayoutConstraint.activate([
+            topLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
+            topLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            
+            greetingLabel.topAnchor.constraint(equalTo: topLabel.bottomAnchor, constant: 12),
+            greetingLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            greetingLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            
+            emailTextField.topAnchor.constraint(equalTo: greetingLabel.bottomAnchor, constant: 32),
+            emailTextField.heightAnchor.constraint(equalToConstant: 56),
+            emailTextField.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            emailTextField.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            
+            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 16),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 56),
+            passwordTextField.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            passwordTextField.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            
+            signInButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 64),
+            signInButton.heightAnchor.constraint(equalToConstant: 56),
+            signInButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            signInButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            
+            createAccountHStack.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -30),
+            createAccountHStack.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+        ])
     }
 }
 
