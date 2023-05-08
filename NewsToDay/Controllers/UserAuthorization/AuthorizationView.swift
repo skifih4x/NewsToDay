@@ -72,7 +72,7 @@ class AuthorizationView: CustomView {
         button.setImage(Resources.Icons.eye, for: .normal)
         button.tintColor = Resources.Colors.greyPrimary
         button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        button.addTarget(self, action: #selector(showPassword(_:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(togglePassword(_:)), for: .touchUpInside)
         let containerViewRight = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 30))
         containerViewRight.addSubview(button)
         button.center = containerViewRight.center
