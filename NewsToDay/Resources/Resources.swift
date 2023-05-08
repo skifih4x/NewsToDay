@@ -37,5 +37,9 @@ enum Resources {
             static var bookmarks = UIImage(named: "tabBarBookmark.svg")
             static var profile = UIImage(named: "tabBarUser.svg")
         }
+        
+        static var mail = UIImage(systemName: "envelope")
+        static var lock = UIImage(systemName: "lock")
+        static var eye = UIImage(systemName: "eye")
     }
 }
