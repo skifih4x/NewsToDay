@@ -14,7 +14,6 @@ struct Welcome: Codable {
 }
 
 struct Article: Codable {
-
     let author: String?
     let title, description: String
     let url: String
