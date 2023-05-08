@@ -68,6 +68,18 @@ class AuthorizationView: CustomView {
         element.leftView = containerView
         element.leftViewMode = .always
         
+        let button = UIButton(type: .custom)
+        button.setImage(Resources.Icons.eye, for: .normal)
+        button.tintColor = Resources.Colors.greyPrimary
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.addTarget(self, action: #selector(showPassword(_:)), for: .touchUpInside)
+        let containerViewRight = UIView(frame: CGRect(x: 0, y: 0, width: 60, height: 30))
+        containerViewRight.addSubview(button)
+        button.center = containerViewRight.center
+        
+        element.rightView = containerViewRight
+        element.rightViewMode = .always
+        
         element.placeholder = "Password"
         element.isSecureTextEntry = true
         element.translatesAutoresizingMaskIntoConstraints = false
@@ -113,8 +125,6 @@ class AuthorizationView: CustomView {
         element.addTarget(self, action: #selector(didTapCreateAccountButton(_:)), for: .touchUpInside)
         return element
     }()
-    
-    
     
     //MARK: - setViews
     override func setViews() {
@@ -174,4 +184,7 @@ private extension AuthorizationView {
         delegate?.AuthorizationView(self, didTapCreateAccountButton: button)
     }
     
+    @objc func togglePassword(_ button: UIButton) {
+        passwordTextField.isSecureTextEntry.toggle()
+    }
 }

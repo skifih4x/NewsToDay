@@ -40,5 +40,6 @@ enum Resources {
         
         static var mail = UIImage(systemName: "envelope")
         static var lock = UIImage(systemName: "lock")
+        static var eye = UIImage(systemName: "eye")
     }
 }
