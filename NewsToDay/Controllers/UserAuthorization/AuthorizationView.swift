@@ -40,6 +40,16 @@ class AuthorizationView: CustomView {
         let element = UITextField()
         element.layer.cornerRadius = 12
         element.backgroundColor = Resources.Colors.greyLighter
+        
+        let imageView = UIImageView(image: UIImage(named: "emailIcon.svg"))
+        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 20))
+        containerView.addSubview(imageView)
+        imageView.center = containerView.center
+        element.leftView = containerView
+        element.leftViewMode = .always
+
+        element.placeholder = "Email Address"
+        element.keyboardType = .emailAddress
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -48,6 +58,16 @@ class AuthorizationView: CustomView {
         let element = UITextField()
         element.layer.cornerRadius = 12
         element.backgroundColor = Resources.Colors.greyLighter
+        
+        let imageView = UIImageView(image: UIImage(named: "passwordIcon.svg"))
+        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 20))
+        containerView.addSubview(imageView)
+        imageView.center = containerView.center
+        element.leftView = containerView
+        element.leftViewMode = .always
+        
+        element.placeholder = "Password"
+        element.isSecureTextEntry = true
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -121,7 +141,7 @@ class AuthorizationView: CustomView {
             greetingLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             greetingLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
-            emailTextField.topAnchor.constraint(equalTo: greetingLabel.bottomAnchor, constant: 32),
+            emailTextField.topAnchor.constraint(equalTo: greetingLabel.bottomAnchor, constant: 40),
             emailTextField.heightAnchor.constraint(equalToConstant: 56),
             emailTextField.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             emailTextField.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
