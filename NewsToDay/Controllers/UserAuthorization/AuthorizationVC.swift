@@ -17,6 +17,13 @@ class AuthorizationViewController: CustomViewController<AuthorizationView> {
 }
 
 extension AuthorizationViewController: AuthorizationViewDelegate {
-    func AuthorizationView(_ view: AuthorizationView, didTapButton button: UIButton) {
+    func AuthorizationView(_ view: AuthorizationView, didTapSignInButton button: UIButton) {
+        
     }
+    
+    func AuthorizationView(_ view: AuthorizationView, didTapCreateAccountButton button: UIButton) {
+        
+    }
+    
+
 }
