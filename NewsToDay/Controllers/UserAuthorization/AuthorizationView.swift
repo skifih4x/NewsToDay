@@ -36,7 +36,7 @@ class AuthorizationView: CustomView {
         return element
     }()
     
-    private lazy var emailTextField: UITextField = {
+    lazy var emailTextField: UITextField = {
         let element = UITextField()
         element.layer.cornerRadius = 12
         element.backgroundColor = Resources.Colors.greyLighter
@@ -54,7 +54,7 @@ class AuthorizationView: CustomView {
         return element
     }()
     
-    private lazy var passwordTextField: UITextField = {
+    lazy var passwordTextField: UITextField = {
         let element = UITextField()
         element.layer.cornerRadius = 12
         element.backgroundColor = Resources.Colors.greyLighter

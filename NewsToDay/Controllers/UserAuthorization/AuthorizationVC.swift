@@ -13,6 +13,8 @@ class AuthorizationViewController: CustomViewController<AuthorizationView> {
         super.viewDidLoad()
         
         customView.delegate = self
+        customView.emailTextField.delegate = self
+        customView.passwordTextField.delegate = self
     }
 }
 
@@ -24,6 +26,31 @@ extension AuthorizationViewController: AuthorizationViewDelegate {
     func AuthorizationView(_ view: AuthorizationView, didTapCreateAccountButton button: UIButton) {
         
     }
-    
+}
 
+extension AuthorizationViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let currentText = textField.text ?? ""
+        let newText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        let hasText = !newText.isEmpty
+        
+        if hasText {
+            if let containerView = textField.leftView {
+                if let imageView = containerView.subviews.first as? UIImageView {
+                    imageView.backgroundColor = .blue // изменяем цвет на синий при начале редактирования
+                }
+            }
+        }
+        else {
+            if let containerView = textField.leftView {
+                if let imageView = containerView.subviews.first as? UIImageView {
+                    imageView.backgroundColor = .white // изменяем цвет на синий при начале редактирования
+                }
+            }
+        }
+
+        return true
+    }
 }
