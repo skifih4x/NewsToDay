@@ -41,7 +41,8 @@ class AuthorizationView: CustomView {
         element.layer.cornerRadius = 12
         element.backgroundColor = Resources.Colors.greyLighter
         
-        let imageView = UIImageView(image: UIImage(named: "emailIcon.svg"))
+        let imageView = UIImageView(image: Resources.Icons.mail)
+        imageView.tintColor = Resources.Colors.greyPrimary
         let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 20))
         containerView.addSubview(imageView)
         imageView.center = containerView.center
@@ -59,7 +60,8 @@ class AuthorizationView: CustomView {
         element.layer.cornerRadius = 12
         element.backgroundColor = Resources.Colors.greyLighter
         
-        let imageView = UIImageView(image: UIImage(named: "passwordIcon.svg"))
+        let imageView = UIImageView(image: Resources.Icons.lock)
+        imageView.tintColor = Resources.Colors.greyPrimary
         let containerView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 20))
         containerView.addSubview(imageView)
         imageView.center = containerView.center

@@ -39,14 +39,14 @@ extension AuthorizationViewController: UITextFieldDelegate {
         if hasText {
             if let containerView = textField.leftView {
                 if let imageView = containerView.subviews.first as? UIImageView {
-                    imageView.backgroundColor = .blue // изменяем цвет на синий при начале редактирования
+                    imageView.tintColor = Resources.Colors.purplePrimary
                 }
             }
         }
         else {
             if let containerView = textField.leftView {
                 if let imageView = containerView.subviews.first as? UIImageView {
-                    imageView.backgroundColor = .white // изменяем цвет на синий при начале редактирования
+                    imageView.tintColor = Resources.Colors.greyPrimary
                 }
             }
         }
