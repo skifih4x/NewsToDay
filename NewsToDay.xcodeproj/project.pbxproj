@@ -33,6 +33,7 @@
 		8482018D2A08FD7700C8C20A /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8482018C2A08FD7700C8C20A /* RegistrationView.swift */; };
 		848201912A08FE7000C8C20A /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8482018F2A08FE7000C8C20A /* CustomView.swift */; };
 		848201922A08FE7000C8C20A /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848201902A08FE7000C8C20A /* CustomViewController.swift */; };
+		C70C51E02A0A9DF3006E27D7 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70C51DF2A0A9DF3006E27D7 /* CustomCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -74,6 +75,7 @@
 		8482018C2A08FD7700C8C20A /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		8482018F2A08FE7000C8C20A /* CustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		848201902A08FE7000C8C20A /* CustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
+		C70C51DF2A0A9DF3006E27D7 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				0039BD8E2A07D53B002F8F71 /* BookMarksViewController.swift */,
+				C70C51DF2A0A9DF3006E27D7 /* CustomCell.swift */,
 			);
 			path = BookmarksVC;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				0039BDA62A07D703002F8F71 /* NewsModel.swift in Sources */,
 				0039BD992A07D616002F8F71 /* DetailNewsViewController.swift in Sources */,
 				8482018D2A08FD7700C8C20A /* RegistrationView.swift in Sources */,
+				C70C51E02A0A9DF3006E27D7 /* CustomCell.swift in Sources */,
 				0039BD922A07D580002F8F71 /* ProfileVC.swift in Sources */,
 				0039BDA12A07D6E8002F8F71 /* StorageManager.swift in Sources */,
 				0039BD9F2A07D68B002F8F71 /* NetworkManager.swift in Sources */,
