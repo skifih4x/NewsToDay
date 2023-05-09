@@ -45,42 +45,6 @@ final class NetworkManager {
         task.resume()
     }
 
-    //MARK: Метод для получения списка топовых новостей, выкидывает объект типа NewsModel
-    func fetchTopHeadlines(
-        category: Category,
-        country: Country,
-        completion: @escaping (Result<NewsModel, Error>) -> Void
-    ) {
-        let topHeadlinesURL = urlMaker.getURL(
-            withPath: API.topHeadlinesPath,
-            baseURL: API.baseURL
-        )
-
-        let queryParam = [
-            URLQueryItem(name: "country", value: country.rawValue),
-            URLQueryItem(name: "category", value: category.rawValue)
-        ]
-        let topHeadlinesURLWithCategory = urlMaker.getURL(
-            queryParams: queryParam,
-            baseURL: topHeadlinesURL
-        )
-
-        let request = requestMaker.makeGETRequest(
-            url: topHeadlinesURLWithCategory
-        )
-
-        let task = session.objectTask(for: request) { (result:
-            Result<NewsModel, Error>) in
-            switch result {
-            case .success(let success):
-                completion(.success(success))
-            case .failure(let failure):
-                completion(.failure(failure))
-            }
-        }
-        task.resume()
-    }
-
     //MARK: Метод для получения превью топовых новостей, выкидывает объект типа HeadlineSources
     //если category == nil, то придут карточки по всем категориям
     func fetchHeadlinesSources(
@@ -125,5 +89,86 @@ final class NetworkManager {
             }
         }
         task.resume()
+    }
+}
+
+//MARK: Метод для получения списка топовых новостей, выкидывает объект типа NewsModel
+extension NetworkManager {
+    private enum FetchError: Error {
+        case codeError
+    }
+    func fetchTopHeadlines(
+        categories: [Category],
+        country: Country,
+        completion: @escaping (Result<NewsModel, Error>) -> Void
+    ) {
+        let dispatchGroup = DispatchGroup()
+        var allNews = [NewsModel]()
+
+        for category in categories {
+            dispatchGroup.enter()
+
+            let topHeadlinesURL = urlMaker.getURL(
+                withPath: API.topHeadlinesPath,
+                baseURL: API.baseURL
+            )
+
+            let queryParams: [URLQueryItem] = [
+                URLQueryItem(name: "category", value: category.rawValue),
+                URLQueryItem(name: "country", value: country.rawValue)
+            ]
+            let topHeadlinesURLWithCategory = urlMaker.getURL(
+                queryParams: queryParams,
+                baseURL: topHeadlinesURL
+            )
+
+            let request = requestMaker.makeGETRequest(
+                url: topHeadlinesURLWithCategory
+            )
+
+            let task = session.dataTask(with: request) {
+                data, response, error in
+                if let error = error {
+                    completion(.failure(error))
+                    dispatchGroup.leave()
+                }
+
+                if let response = response as? HTTPURLResponse,
+                   response.statusCode < 200 || response.statusCode > 299 {
+                    completion(.failure(FetchError.codeError))
+                    dispatchGroup.leave()
+                }
+
+                guard let data = data else {
+                    completion(.failure(FetchError.codeError))
+                    dispatchGroup.leave()
+                    return
+                }
+
+                do {
+                    let newsModel = try JSONDecoder().decode(NewsModel.self, from: data)
+                    allNews.append(newsModel)
+                }
+                catch {
+                    completion(.failure(FetchError.codeError))
+                }
+                dispatchGroup.leave()
+            }
+            task.resume()
+        }
+
+        dispatchGroup.notify(queue: .main) {
+            if !allNews.isEmpty {
+                let allArticles = allNews.flatMap( {$0.articles} )
+                let combinedNewsModel = NewsModel(
+                    status: "ok",
+                    totalResults: allArticles.count,
+                    articles: allArticles
+                )
+                completion(.success(combinedNewsModel))
+            } else {
+                completion(.failure(FetchError.codeError))
+            }
+        }
     }
 }

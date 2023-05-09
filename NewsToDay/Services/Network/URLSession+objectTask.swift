@@ -5,7 +5,7 @@
 //  Created by Ramil Yanberdin on 09.05.2023.
 //
 
-import UIKit
+import Foundation
 
 extension URLSession {
     private enum FetchError: Error {
