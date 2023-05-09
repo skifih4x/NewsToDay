@@ -16,13 +16,14 @@ final class NetworkManager {
 
     //MARK: Метод для поиска, выкидывает объект типа NewsModel
     func fetchSearch(
-        queryParams: [URLQueryItem],
+        searchText: String,
         completion: @escaping (Result<NewsModel, Error>) -> Void
     ) {
         let searchURL = urlMaker.getURL(
             withPath: API.searchPath,
             baseURL: API.baseURL
         )
+        let queryParams = [URLQueryItem(name: "q", value: searchText)]
         let urlWithQueryParam = urlMaker.getURL(
             queryParams: queryParams,
             baseURL: searchURL
