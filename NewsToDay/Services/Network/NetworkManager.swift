@@ -18,9 +18,9 @@ final class NetworkManager {
         completion: @escaping (Result<NewsModel, Error>) -> Void
     ) {
         let searchURL = urlMaker.getURL(withPath: API.searchPath, baseURL: API.baseURL)
-        let url = urlMaker.getURL(queryParams: queryParams, baseURL: searchURL)
+        let urlWithQueryParam = urlMaker.getURL(queryParams: queryParams, baseURL: searchURL)
 
-        var request = URLRequest(url: url)
+        var request = URLRequest(url: urlWithQueryParam)
         request.setValue(API.apiKey, forHTTPHeaderField: "x-api-key")
 
         let task = session.objectTask(for: request) { (result:
