@@ -46,7 +46,7 @@ final class TabBarController: UITabBarController {
         let bookmarksNavigation = UINavigationController(rootViewController: bookmarksController)
         let profileNavigation = UINavigationController(rootViewController: profileController)
         
-        homeController.tabBarItem = UITabBarItem(title: nil,
+        homeNavigation.tabBarItem = UITabBarItem(title: nil,
                                                  image: Resources.Icons.TabBar.home,
                                                  tag: Tabs.home.rawValue)
         categoriesController.tabBarItem = UITabBarItem(title: nil,
@@ -60,10 +60,12 @@ final class TabBarController: UITabBarController {
                                                  tag: Tabs.profile.rawValue)
         
         setViewControllers([
-            homeController,
+            homeNavigation,
             categoriesController,
             bookmarksController,
             profileController,
         ], animated: false)
+        
+        
     }
 }
