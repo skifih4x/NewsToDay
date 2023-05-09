@@ -8,30 +8,30 @@
 import Foundation
 
 final class NetworkManager {
-    
     static let shared = NetworkManager()
+
+    private let urlMaker = URLMaker.shared
+    private let session = URLSession.shared
     
-    let apikey = "ae7ec2d4e3664bf3bd4d73ebca4f516f"
-    let baseUrl = "https://newsapi.org/v2/"
-    
-    func fetchSearch(query: String, completion: @escaping (Result<Welcome, Error> ) -> Void) {
-        let url = "\(baseUrl)everything?q=\(query)&sortBy=popularity&apiKey=\(apikey)"
-        
-        guard let urlString = URL(string: url) else { return }
-        print(urlString)
-        URLSession.shared.dataTask(with: urlString) { data, _, error in
-            guard let data = data else {
-                completion(.failure(error ?? NSError(domain: "Unknown error", code: 0, userInfo: nil)))
-                return
+    func fetchSearch(
+        queryParams: [URLQueryItem],
+        completion: @escaping (Result<NewsModel, Error>) -> Void
+    ) {
+        let searchURL = urlMaker.getURL(withPath: API.searchPath, baseURL: API.baseURL)
+        let url = urlMaker.getURL(queryParams: queryParams, baseURL: searchURL)
+
+        var request = URLRequest(url: url)
+        request.setValue(API.apiKey, forHTTPHeaderField: "x-api-key")
+
+        let task = session.objectTask(for: request) { (result:
+            Result<NewsModel, Error>) in
+            switch result {
+            case .success(let newsModel):
+                completion(.success(newsModel))
+            case .failure(let error):
+                completion(.failure(error))
             }
-            
-            do {
-                let result = try JSONDecoder().decode(Welcome.self, from: data)
-                completion(.success(result))
-                print(result)
-            } catch {
-                print(error)
-            }
-        }.resume()
+        }
+        task.resume()
     }
 }
