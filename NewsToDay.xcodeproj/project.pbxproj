@@ -36,7 +36,10 @@
 		E4E7EF282A0A816F007DC5F2 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E7EF272A0A816F007DC5F2 /* API.swift */; };
 		E4E7EF2A2A0A83FC007DC5F2 /* URLSession+objectTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E7EF292A0A83FC007DC5F2 /* URLSession+objectTask.swift */; };
 		E4E7EF2C2A0A8538007DC5F2 /* URLMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E7EF2B2A0A8538007DC5F2 /* URLMaker.swift */; };
-		E4E7EF2E2A0A90CC007DC5F2 /* TopHeadlines.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E7EF2D2A0A90CC007DC5F2 /* TopHeadlines.swift */; };
+		E4E7EF2E2A0A90CC007DC5F2 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E7EF2D2A0A90CC007DC5F2 /* Category.swift */; };
+		E4E7EF302A0AA1D3007DC5F2 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E7EF2F2A0AA1D3007DC5F2 /* Country.swift */; };
+		E4E7EF322A0AA234007DC5F2 /* HeadlineSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E7EF312A0AA234007DC5F2 /* HeadlineSources.swift */; };
+		E4E7EF342A0AAB70007DC5F2 /* RequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E7EF332A0AAB70007DC5F2 /* RequestMaker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -81,7 +84,10 @@
 		E4E7EF272A0A816F007DC5F2 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		E4E7EF292A0A83FC007DC5F2 /* URLSession+objectTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+objectTask.swift"; sourceTree = "<group>"; };
 		E4E7EF2B2A0A8538007DC5F2 /* URLMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLMaker.swift; sourceTree = "<group>"; };
-		E4E7EF2D2A0A90CC007DC5F2 /* TopHeadlines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopHeadlines.swift; sourceTree = "<group>"; };
+		E4E7EF2D2A0A90CC007DC5F2 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		E4E7EF2F2A0AA1D3007DC5F2 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		E4E7EF312A0AA234007DC5F2 /* HeadlineSources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadlineSources.swift; sourceTree = "<group>"; };
+		E4E7EF332A0AAB70007DC5F2 /* RequestMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestMaker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +251,7 @@
 				E4E7EF272A0A816F007DC5F2 /* API.swift */,
 				E4E7EF292A0A83FC007DC5F2 /* URLSession+objectTask.swift */,
 				E4E7EF2B2A0A8538007DC5F2 /* URLMaker.swift */,
+				E4E7EF332A0AAB70007DC5F2 /* RequestMaker.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -253,7 +260,9 @@
 			isa = PBXGroup;
 			children = (
 				0039BDA52A07D703002F8F71 /* NewsModel.swift */,
-				E4E7EF2D2A0A90CC007DC5F2 /* TopHeadlines.swift */,
+				E4E7EF2D2A0A90CC007DC5F2 /* Category.swift */,
+				E4E7EF2F2A0AA1D3007DC5F2 /* Country.swift */,
+				E4E7EF312A0AA234007DC5F2 /* HeadlineSources.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -371,9 +380,10 @@
 				E4E7EF2A2A0A83FC007DC5F2 /* URLSession+objectTask.swift in Sources */,
 				0039BD992A07D616002F8F71 /* DetailNewsViewController.swift in Sources */,
 				8482018D2A08FD7700C8C20A /* RegistrationView.swift in Sources */,
-				E4E7EF2E2A0A90CC007DC5F2 /* TopHeadlines.swift in Sources */,
+				E4E7EF2E2A0A90CC007DC5F2 /* Category.swift in Sources */,
 				0039BD922A07D580002F8F71 /* ProfileVC.swift in Sources */,
 				0039BDA12A07D6E8002F8F71 /* StorageManager.swift in Sources */,
+				E4E7EF302A0AA1D3007DC5F2 /* Country.swift in Sources */,
 				0039BD9F2A07D68B002F8F71 /* NetworkManager.swift in Sources */,
 				848201922A08FE7000C8C20A /* CustomViewController.swift in Sources */,
 				848201912A08FE7000C8C20A /* CustomView.swift in Sources */,
@@ -384,11 +394,13 @@
 				0039BD782A07D241002F8F71 /* HomeViewController.swift in Sources */,
 				E4E7EF282A0A816F007DC5F2 /* API.swift in Sources */,
 				0039BD8C2A07D4EE002F8F71 /* TabBarController.swift in Sources */,
+				E4E7EF342A0AAB70007DC5F2 /* RequestMaker.swift in Sources */,
 				848201892A08FD2000C8C20A /* RegistrationVC.swift in Sources */,
 				0039BD742A07D241002F8F71 /* AppDelegate.swift in Sources */,
 				0039BD952A07D5B2002F8F71 /* OnboardingViewController.swift in Sources */,
 				0039BD8F2A07D53B002F8F71 /* BookMarksViewController.swift in Sources */,
 				0039BD762A07D241002F8F71 /* SceneDelegate.swift in Sources */,
+				E4E7EF322A0AA234007DC5F2 /* HeadlineSources.swift in Sources */,
 				8474A16E2A083AA000D6EE4E /* Resources.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

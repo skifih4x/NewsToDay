@@ -10,7 +10,7 @@ import Foundation
 struct API {
     static let baseURL: URL = {
         guard let url = URL(string: "https://newsapi.org") else {
-            preconditionFailure("NEWS API is unavailable")
+            preconditionFailure("News API is unavailable")
         }
         return url
     }()
@@ -18,4 +18,5 @@ struct API {
 
     static let searchPath = "/v2/everything"
     static let topHeadlinesPath = "/v2/top-headlines"
+    static let headlineSourcesPath = "/v2/top-headlines/sources"
 }

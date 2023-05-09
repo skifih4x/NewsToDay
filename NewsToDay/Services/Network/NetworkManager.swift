@@ -11,16 +11,26 @@ final class NetworkManager {
     static let shared = NetworkManager()
 
     private let urlMaker = URLMaker.shared
+    private let requestMaker = RequestMaker.shared
     private let session = URLSession.shared
-    
+
+    //MARK: Метод для поиска, выкидывает объект типа NewsModel
     func fetchSearch(
         queryParams: [URLQueryItem],
         completion: @escaping (Result<NewsModel, Error>) -> Void
     ) {
-        let searchURL = urlMaker.getURL(withPath: API.searchPath, baseURL: API.baseURL)
-        let urlWithQueryParam = urlMaker.getURL(queryParams: queryParams, baseURL: searchURL)
+        let searchURL = urlMaker.getURL(
+            withPath: API.searchPath,
+            baseURL: API.baseURL
+        )
+        let urlWithQueryParam = urlMaker.getURL(
+            queryParams: queryParams,
+            baseURL: searchURL
+        )
 
-        let request = makeRequest(url: urlWithQueryParam)
+        let request = requestMaker.makeGETRequest(
+            url: urlWithQueryParam
+        )
 
         let task = session.objectTask(for: request) { (result:
             Result<NewsModel, Error>) in
@@ -34,8 +44,9 @@ final class NetworkManager {
         task.resume()
     }
 
+    //MARK: Метод для получения списка топовых новостей, выкидывает объект типа NewsModel
     func fetchTopHeadlines(
-        category: TopHeadlines,
+        category: Category,
         country: Country,
         completion: @escaping (Result<NewsModel, Error>) -> Void
     ) {
@@ -53,7 +64,9 @@ final class NetworkManager {
             baseURL: topHeadlinesURL
         )
 
-        let request = makeRequest(url: topHeadlinesURLWithCategory)
+        let request = requestMaker.makeGETRequest(
+            url: topHeadlinesURLWithCategory
+        )
 
         let task = session.objectTask(for: request) { (result:
             Result<NewsModel, Error>) in
@@ -67,9 +80,49 @@ final class NetworkManager {
         task.resume()
     }
 
-    private func makeRequest(url: URL) -> URLRequest {
-        var request = URLRequest(url: url)
-        request.setValue(API.apiKey, forHTTPHeaderField: "x-api-key")
-        return request
+    //MARK: Метод для получения превью топовых новостей, выкидывает объект типа HeadlineSources
+    //если category == nil, то придут карточки по всем категориям
+    func fetchHeadlinesSources(
+        category: Category?,
+        country: Country,
+        completion: @escaping (Result<HeadlineSources, Error>) -> Void
+    ) {
+        let headlinesSourcesURL = urlMaker.getURL(
+            withPath: API.headlineSourcesPath,
+            baseURL: API.baseURL
+        )
+
+        var queryParams = [URLQueryItem]()
+        queryParams.append(URLQueryItem(
+            name: "country",
+            value: country.rawValue
+        ))
+        if let category = category {
+            queryParams.append(
+                URLQueryItem(name: "category",
+                             value: category.rawValue
+                            )
+            )
+        }
+
+        let headlinesSourceURLWithQueryParams = urlMaker.getURL(
+            queryParams: queryParams,
+            baseURL: headlinesSourcesURL
+        )
+
+        let request = requestMaker.makeGETRequest(
+            url: headlinesSourceURLWithQueryParams
+        )
+
+        let task = session.objectTask(for: request) { (result:
+            Result<HeadlineSources, Error>) in
+            switch result {
+            case .success(let success):
+                completion(.success(success))
+            case .failure(let failure):
+                completion(.failure(failure))
+            }
+        }
+        task.resume()
     }
 }

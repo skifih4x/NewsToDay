@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum TopHeadlines: String {
+enum Category: String {
     case business
     case entertainment
     case general
@@ -15,9 +15,4 @@ enum TopHeadlines: String {
     case science
     case sports
     case technology
-}
-
-enum Country: String {
-    case ru
-    case us
 }
