@@ -24,7 +24,9 @@ extension AuthorizationViewController: AuthorizationViewDelegate {
     }
     
     func AuthorizationView(_ view: AuthorizationView, didTapCreateAccountButton button: UIButton) {
-        
+        let registrationVC = RegistrationViewController()
+        registrationVC.modalPresentationStyle = .fullScreen
+        self.present(registrationVC, animated: true)
     }
 }
 

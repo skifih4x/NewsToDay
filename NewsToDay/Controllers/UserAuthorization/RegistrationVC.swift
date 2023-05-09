@@ -26,7 +26,7 @@ extension RegistrationViewController: RegistrationViewDelegate {
     }
     
     func RegistrationView(_ view: RegistrationView, didTapOpenSignInButton button: UIButton) {
-        
+        self.dismiss(animated: true)
     }
 }
 
