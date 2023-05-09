@@ -42,9 +42,7 @@ final class TabBarController: UITabBarController {
         let profileController = ProfileViewController()
         
         let homeNavigation = UINavigationController(rootViewController: homeController)
-        let categoriesNavigation = UINavigationController(rootViewController: categoriesController)
-        let bookmarksNavigation = UINavigationController(rootViewController: bookmarksController)
-        let profileNavigation = UINavigationController(rootViewController: profileController)
+
         
         homeNavigation.tabBarItem = UITabBarItem(title: nil,
                                                  image: Resources.Icons.TabBar.home,
