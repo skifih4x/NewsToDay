@@ -166,8 +166,8 @@
 			children = (
 				0039BD772A07D241002F8F71 /* HomeViewController.swift */,
 				04C562B82A090303009F94B4 /* ExtentionHomeVC.swift */,
-				04C562C32A0A5A42009F94B4 /* Model */,
 				04C562C12A0A22DC009F94B4 /* HeaderReusableView.swift */,
+				04C562C32A0A5A42009F94B4 /* Model */,
 				04C562BE2A0A1D43009F94B4 /* Cells */,
 			);
 			path = HomeVC;

@@ -14,6 +14,7 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
     var collectionView: UICollectionView!
     let sections = SectionData.shared.page
     
+    
     // MARK: - UI Properties
     
     private let titleLabel: UILabel = {
