@@ -126,6 +126,14 @@ class AuthorizationView: CustomView {
         return element
     }()
     
+    var emailText: String? {
+        return emailTextField.text
+    }
+    
+    var passwordText: String? {
+        return passwordTextField.text
+    }
+    
     //MARK: - setViews
     override func setViews() {
         super.setViews()

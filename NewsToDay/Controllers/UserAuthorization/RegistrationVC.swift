@@ -44,6 +44,7 @@ extension RegistrationViewController: RegistrationViewDelegate {
                         if let result = result {
                             let ref = Database.database().reference().child("users")
                             ref.child(result.user.uid).updateChildValues(["name" : username!])
+                            self.dismiss(animated: true)
                         }
                     } else {
                         let errString = String(error!.localizedDescription)
