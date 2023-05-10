@@ -10,13 +10,17 @@ import SnapKit
 
 class CategoriesViewCell: UICollectionViewCell {
     
+    // MARK: - Properties
+    
     private let titleLabel: UILabel = {
        let label = UILabel()
-        label.textColor = .black
+        label.textColor = Resources.Colors.greyPrimary
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.boldSystemFont(ofSize: 14)
         return label
     }()
+    
+    // MARK: - init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,8 +32,10 @@ class CategoriesViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Methods
+    
     func setupView() {
-        backgroundColor = .gray
+        backgroundColor = Resources.Colors.greyLighter
         layer.cornerRadius = 16
         addSubview(titleLabel)
     }

@@ -13,16 +13,15 @@ class HeaderReusableView: UICollectionReusableView {
     private let headerLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = .black
-        label.backgroundColor = .blue
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = Resources.Colors.blackPrimary
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
-        
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -36,9 +35,11 @@ class HeaderReusableView: UICollectionReusableView {
     func setConstraints() {
         addSubview(headerLabel)
         headerLabel.snp.makeConstraints { make in
-            //make.leading.equalToSuperview().offset(20)
-            make.centerY.equalToSuperview()
-            make.centerX.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.top.equalToSuperview().offset(50)
+            make.bottom.equalToSuperview().offset(10)
+           // make.centerY.equalToSuperview()
+           // make.centerX.equalToSuperview()
         }
     }
     

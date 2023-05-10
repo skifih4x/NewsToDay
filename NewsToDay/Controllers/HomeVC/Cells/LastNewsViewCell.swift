@@ -10,6 +10,8 @@ import SnapKit
 
 class LastNewsViewCell: UICollectionViewCell {
     
+    // MARK: - Properties
+    
     private let categoryLabel: UILabel = {
         let label = UILabel()
         label.text = "ART"
@@ -32,9 +34,12 @@ class LastNewsViewCell: UICollectionViewCell {
     
     private let imageBookmark: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(systemName: "")
+        image.image = UIImage(systemName: "bookmark")
+        image.tintColor = Resources.Colors.blackDark
         return image
     }()
+    
+    // MARK: - init
     
     
     override init(frame: CGRect) {
@@ -47,8 +52,10 @@ class LastNewsViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Methods
+    
     func setupView() {
-        backgroundColor = .gray
+        backgroundColor = .systemGray
         layer.cornerRadius = 16
     }
     
@@ -57,6 +64,8 @@ class LastNewsViewCell: UICollectionViewCell {
     }
     
 }
+
+// MARK: - Extention, setup constraints
 
 extension LastNewsViewCell {
     
@@ -74,6 +83,12 @@ extension LastNewsViewCell {
             make.centerX.equalToSuperview()
             make.top.equalTo(categoryLabel.snp.bottom).offset(30)
             make.leading.equalToSuperview().offset(20)
+        }
+        
+        addSubview(imageBookmark)
+        imageBookmark.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
         }
     }
 }

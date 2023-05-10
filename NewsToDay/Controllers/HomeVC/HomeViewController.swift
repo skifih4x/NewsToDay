@@ -43,6 +43,7 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
     }()
     
 // MARK: - View's lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -76,6 +77,8 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
     }
     
 }
+
+// MARK: - Extention, setup constraints
 
 extension HomeViewController {
     private func configure() {

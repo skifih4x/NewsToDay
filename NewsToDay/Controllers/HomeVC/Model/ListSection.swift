@@ -32,7 +32,7 @@ enum Section {
         case .new:
             return ""
         case .recommended:
-            return "RECOMMENDED FOR YOU"
+            return "Recommended For You"
         }
     }
 }

@@ -51,7 +51,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
     }
     
-    // MARK: - Header
+    // MARK: - Configure for header
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
@@ -127,8 +127,8 @@ extension HomeViewController {
         let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),heightDimension: .fractionalHeight(1)))
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(
-            widthDimension: .fractionalWidth(0.9),
-            heightDimension: .fractionalHeight(0.45)),
+            widthDimension: .absolute(256),
+            heightDimension: .absolute(256)),
                                                        subitems: [item])
         
         let section = createLayoutSection(group: group,
@@ -149,16 +149,18 @@ extension HomeViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .absolute(94))
+            heightDimension: .absolute(96))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 8, trailing: 0)
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0)
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 10, leading: 16, bottom: 0, trailing: 16)
+        section.contentInsets = .init(top: 40, leading: 16, bottom: 0, trailing: 16)
         section.boundarySupplementaryItems = [supplementaryHeaderItem()]
         return section
         
     }
+    
+    // MARK: - Method for header for recommended section
     
     func supplementaryHeaderItem() -> NSCollectionLayoutBoundarySupplementaryItem {
         .init(layoutSize: .init(
