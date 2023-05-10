@@ -51,6 +51,7 @@ class AuthorizationView: CustomView {
 
         element.placeholder = "Email Address"
         element.keyboardType = .emailAddress
+        element.autocorrectionType = .no
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -81,6 +82,7 @@ class AuthorizationView: CustomView {
         element.rightViewMode = .always
         
         element.placeholder = "Password"
+        element.autocorrectionType = .no
         element.isSecureTextEntry = true
         element.translatesAutoresizingMaskIntoConstraints = false
         return element

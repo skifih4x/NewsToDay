@@ -51,6 +51,7 @@ class RegistrationView: CustomView {
 
         element.placeholder = "Username"
         element.keyboardType = .default
+        element.autocorrectionType = .no
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -70,6 +71,7 @@ class RegistrationView: CustomView {
 
         element.placeholder = "Email Address"
         element.keyboardType = .emailAddress
+        element.autocorrectionType = .no
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -101,6 +103,7 @@ class RegistrationView: CustomView {
         
         element.placeholder = "Password"
         element.isSecureTextEntry = true
+        element.autocorrectionType = .no
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -132,6 +135,7 @@ class RegistrationView: CustomView {
         
         element.placeholder = "Repeat Password"
         element.isSecureTextEntry = true
+        element.autocorrectionType = .no
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
