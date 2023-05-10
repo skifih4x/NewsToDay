@@ -43,6 +43,7 @@
 		E4E7EF382A0BD00A007DC5F2 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E7EF372A0BD00A007DC5F2 /* ButtonCell.swift */; };
 		E4E7EF3A2A0C08AC007DC5F2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E7EF392A0C08AC007DC5F2 /* Constants.swift */; };
 		E4E7EF3C2A0C19FC007DC5F2 /* CategoriesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E7EF3B2A0C19FC007DC5F2 /* CategoriesStorage.swift */; };
+		E4E7EF3E2A0C4854007DC5F2 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E7EF3D2A0C4854007DC5F2 /* CategoriesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -94,6 +95,7 @@
 		E4E7EF372A0BD00A007DC5F2 /* ButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
 		E4E7EF392A0C08AC007DC5F2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E4E7EF3B2A0C19FC007DC5F2 /* CategoriesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesStorage.swift; sourceTree = "<group>"; };
+		E4E7EF3D2A0C4854007DC5F2 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				0039BD9B2A07D65C002F8F71 /* CategoriesViewController.swift */,
+				E4E7EF3D2A0C4854007DC5F2 /* CategoriesView.swift */,
 				E4E7EF372A0BD00A007DC5F2 /* ButtonCell.swift */,
 				E4E7EF392A0C08AC007DC5F2 /* Constants.swift */,
 				E4E7EF3B2A0C19FC007DC5F2 /* CategoriesStorage.swift */,
@@ -404,6 +407,7 @@
 				8474A16C2A0839EE00D6EE4E /* UIColorExtension.swift in Sources */,
 				0039BD782A07D241002F8F71 /* HomeViewController.swift in Sources */,
 				E4E7EF282A0A816F007DC5F2 /* API.swift in Sources */,
+				E4E7EF3E2A0C4854007DC5F2 /* CategoriesView.swift in Sources */,
 				0039BD8C2A07D4EE002F8F71 /* TabBarController.swift in Sources */,
 				E4E7EF342A0AAB70007DC5F2 /* RequestMaker.swift in Sources */,
 				848201892A08FD2000C8C20A /* RegistrationVC.swift in Sources */,
