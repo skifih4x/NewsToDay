@@ -6,9 +6,10 @@
 //
 
 import UIKit
-import Firebase
 
 class AuthorizationViewController: CustomViewController<AuthorizationView> {
+    
+    var fbManager = FirebaseManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,25 +41,7 @@ extension AuthorizationViewController: AuthorizationViewDelegate {
         let password = customView.passwordText
         
         if !email!.isEmpty && !password!.isEmpty {
-            Auth.auth().signIn(withEmail: email!, password: password!)
-            { result, error in
-                if error == nil {
-                    if let result = result {
-                        let name = Database.database().reference(withPath: "users")
-                        name.child(result.user.uid).child("name").getData { error, data in
-                            if error == nil {
-                                if let data = data {
-                                    let name = data.value as? String ?? "NoName"
-                                    self.showAlert(title: "Sign In success!", message: "Hi, \(name)", closeScreen: true)
-                                }
-                            }
-                        }
-                    }
-                } else {
-                    let errString = String(error!.localizedDescription)
-                    self.showAlert(title: "Error", message: errString)
-                }
-            }
+            fbManager.signIn(email: email!, password: password!)
         } else {
             showAlert(title: "Please fill out all fields", message: nil)
         }

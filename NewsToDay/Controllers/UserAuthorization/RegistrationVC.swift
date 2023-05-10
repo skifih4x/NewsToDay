@@ -6,9 +6,10 @@
 //
 
 import UIKit
-import Firebase
 
 class RegistrationViewController: CustomViewController<RegistrationView> {
+    
+    var fbManager = FirebaseManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,18 +40,7 @@ extension RegistrationViewController: RegistrationViewDelegate {
         
         if !username!.isEmpty && !email!.isEmpty && !password!.isEmpty {
             if password == confirmPassword {
-                Auth.auth().createUser(withEmail: email!, password: password!) { result, error in
-                    if error == nil {
-                        if let result = result {
-                            let ref = Database.database().reference().child("users")
-                            ref.child(result.user.uid).updateChildValues(["name" : username!])
-                            self.dismiss(animated: true)
-                        }
-                    } else {
-                        let errString = String(error!.localizedDescription)
-                        self.showAlert(title: "Error", message: errString)
-                    }
-                }
+                fbManager.createAccount(email: email!, password: password!, username: username!)
             } else {
                 showAlert(title: "Passwords don't match, please try again", message: nil)
             }
