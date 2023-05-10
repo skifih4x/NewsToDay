@@ -12,8 +12,7 @@ class HeaderReusableView: UICollectionReusableView {
         
     private let headerLabel: UILabel = {
         let label = UILabel()
-        label.text = "header"
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .gray
         return label

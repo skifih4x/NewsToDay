@@ -86,39 +86,22 @@ class HomeViewController: UIViewController {
     
     private func createCaregorySection() -> NSCollectionLayoutSection {
         
-        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.8),heightDimension: .fractionalHeight(0.2)))
-        item.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 10)
+        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),heightDimension: .fractionalHeight(1)))
+        item.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 5)
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(
-            widthDimension: .fractionalWidth(0.4),
-            heightDimension: .fractionalHeight(0.2)),
-                                                       subitems: [item])
+            widthDimension: .absolute(90),
+            heightDimension: .absolute(32)),subitems: [item])
         
         let section = createLayoutSection(group: group,
                                           behavior: .continuous,
-                                          interGroupSpacing: 5,
+                                          interGroupSpacing: 16,
                                           supplementaryItems: [],
                                           contentInsets: false)
-        section.contentInsets = .init(top: 0, leading: 16, bottom: 5 , trailing: 0)
+        section.contentInsets = .init(top: 15, leading: 16, bottom: 24 , trailing: 0)
         
         return section
         
-        /*
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .fractionalHeight(1))
-        
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .absolute(94))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 8, trailing: 0)
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 20)
-        return section
-         */
     }
     
     private func createLastNewsSection() -> NSCollectionLayoutSection {
@@ -160,7 +143,11 @@ class HomeViewController: UIViewController {
     }
     
     private func supplementaryHeaderItem() -> NSCollectionLayoutBoundarySupplementaryItem {
-        .init(layoutSize: .init(widthDimension: .fractionalWidth(1), heightDimension: .estimated(30)), elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        .init(layoutSize: .init(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .estimated(30)),
+              elementKind: UICollectionView.elementKindSectionHeader,
+              alignment: .top)
     }
 }
 
