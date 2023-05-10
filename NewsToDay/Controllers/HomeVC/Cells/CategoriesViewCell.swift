@@ -20,6 +20,18 @@ class CategoriesViewCell: UICollectionViewCell {
         return label
     }()
     
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                layer.backgroundColor = Resources.Colors.purpleLight.cgColor
+                titleLabel.textColor = .white
+            } else {
+                titleLabel.textColor = Resources.Colors.greyPrimary
+                layer.backgroundColor = Resources.Colors.greyLighter.cgColor
+            }
+        }
+    }
+    
     // MARK: - init
     
     override init(frame: CGRect) {
