@@ -176,6 +176,22 @@ class RegistrationView: CustomView {
         return element
     }()
     
+    var usernameText: String? {
+        return userNameTextField.text
+    }
+    
+    var emailText: String? {
+        return emailTextField.text
+    }
+    
+    var passwordText: String? {
+        return passwordTextField.text
+    }
+    
+    var cofirmPasswordText: String? {
+        return confirmPasswordTextField.text
+    }
+    
     //MARK: - setViews
     override func setViews() {
         super.setViews()
