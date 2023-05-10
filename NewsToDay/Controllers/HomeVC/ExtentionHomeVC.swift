@@ -12,17 +12,24 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     // MARK: - Data Source
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        sections.count
+        3
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        sections[section].count
+        //sections[section].count
     }
     
     // MARK: - Delegate
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath) as? CategoriesViewCell else {
+            fatalError()
+        }
+        cell.configureCell(text: newsModel[indexPath.item])
+              
         
+        
+        /*
         switch sections[indexPath.section] {
             
         case .categories(let category):
@@ -48,6 +55,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.configureCell(text: recommended[indexPath.row].title)
             return cell
         }
+         */
         
         
         

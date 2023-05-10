@@ -52,8 +52,8 @@ class CategoriesViewCell: UICollectionViewCell {
         addSubview(titleLabel)
     }
     
-    func configureCell(text: String) {
-        titleLabel.text = text
+    func configureCell(text: Article) {
+        titleLabel.text = text.content
     }
     
     func setupConstraints() {

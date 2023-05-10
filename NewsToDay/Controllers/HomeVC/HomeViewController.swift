@@ -12,7 +12,8 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
     
     var searchController  = UISearchController()
     var collectionView: UICollectionView!
-    let sections = SectionData.shared.page
+    var networkManadger = NetworkManager.shared
+    var newsModel = [Article]()
     
     
     // MARK: - UI Properties

@@ -27,8 +27,9 @@ class LastNewsViewCell: UICollectionViewCell {
         return label
     }()
     
-    private let imageView: UIImageView = {
+    lazy var imageView: UIImageView = {
         let image = UIImageView()
+        image.contentMode = .scaleAspectFill
         return image
     }()
     
@@ -59,8 +60,10 @@ class LastNewsViewCell: UICollectionViewCell {
         layer.cornerRadius = 16
     }
     
-    func configureCell(text: String) {
-        titleLabel.text = text
+    func configureCell(article: Article) {
+        titleLabel.text = article.title
+        categoryLabel.text = article.content
+        imageView.image = UIImage(named: article.urlToImage ?? "")
     }
     
 }
@@ -89,6 +92,11 @@ extension LastNewsViewCell {
         imageBookmark.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
+        }
+        
+        addSubview(imageView)
+        imageView.snp.makeConstraints { make in
+            make.top.leading.trailing.bottom.equalToSuperview()
         }
     }
 }

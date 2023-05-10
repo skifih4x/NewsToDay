@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 
 class HeaderReusableView: UICollectionReusableView {
+    
+    // MARK: - UI Properties
         
     private let headerLabel: UILabel = {
         let label = UILabel()
@@ -17,6 +19,8 @@ class HeaderReusableView: UICollectionReusableView {
         label.textColor = Resources.Colors.blackPrimary
         return label
     }()
+    
+    // MARK: - init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,6 +32,8 @@ class HeaderReusableView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Methods
+    
     func confugure(name: String) {
         headerLabel.text = name
     }
@@ -38,8 +44,6 @@ class HeaderReusableView: UICollectionReusableView {
             make.leading.equalToSuperview()
             make.top.equalToSuperview().offset(50)
             make.bottom.equalToSuperview().offset(10)
-           // make.centerY.equalToSuperview()
-           // make.centerX.equalToSuperview()
         }
     }
     

@@ -55,8 +55,10 @@ class RecommendedViewCell: UICollectionViewCell {
     
     // MARK: - Method for cell
     
-    func configureCell(text: String) {
-        titleLabel.text = text
+    func configureCell(article: Article) {
+        titleLabel.text = article.title
+        categoryLabel.text = article.content
+        imageView.image = UIImage(named: article.urlToImage ?? "")
     }
     
 }
