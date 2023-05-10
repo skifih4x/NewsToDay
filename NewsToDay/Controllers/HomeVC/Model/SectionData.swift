@@ -30,6 +30,8 @@ struct SectionData {
     
     private let recommended: Section = {
         .recommended([
+            .init(title: "A simple Trick For Creating", category: "UI/UX Design", image: ""),
+            .init(title: "A simple Trick For Creating", category: "UI/UX Design", image: ""),
             .init(title: "A simple Trick For Creating", category: "UI/UX Design", image: "")
         ])
     }()

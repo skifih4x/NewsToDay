@@ -14,6 +14,7 @@ class CategoriesViewCell: UICollectionViewCell {
        let label = UILabel()
         label.textColor = .black
         label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     

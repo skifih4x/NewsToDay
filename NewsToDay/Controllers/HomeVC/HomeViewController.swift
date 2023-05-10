@@ -6,41 +6,68 @@
 //
 
 import UIKit
+import SnapKit
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController, UISearchBarDelegate {
     
     var searchController  = UISearchController()
     var collectionView: UICollectionView!
     let sections = SectionData.shared.page
     
-
+    // MARK: - UI Properties
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Browse"
+        label.textColor = Resources.Colors.blackPrimary
+        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.textAlignment = .left
+        return label
+    }()
+    
+    private let subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Discover things of this world"
+        label.textColor = Resources.Colors.greyPrimary
+        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.textAlignment = .left
+        return label
+    }()
+    
+    lazy var searchBar: UISearchBar = {
+        let sbar = UISearchBar()
+        sbar.placeholder = "Search"
+        sbar.searchBarStyle = .minimal
+        sbar.delegate = self
+        return sbar
+    }()
+    
+// MARK: - View's lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setupSearcBar()
         setupCollectionView()
+        configure()
         
     }
     
-    private func setupSearcBar() {
-        searchController = UISearchController(searchResultsController: nil)
-        self.navigationItem.searchController = searchController
-        
-        navigationItem.title = "Browse"
-        navigationController?.navigationBar.tintColor = #colorLiteral(red: 0.2602798343, green: 0.2769114971, blue: 0.3496084809, alpha: 1)
-        navigationController?.navigationBar.prefersLargeTitles = true
-    }
+    // MARK: - setup Collection View
     
     private func setupCollectionView() {
+        
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .white
-        view.addSubview(collectionView)
         
+        // Cells
         collectionView.register(CategoriesViewCell.self, forCellWithReuseIdentifier: "cell1")
         collectionView.register(LastNewsViewCell.self, forCellWithReuseIdentifier: "cell2")
         collectionView.register(RecommendedViewCell.self, forCellWithReuseIdentifier: "cell3")
+        
+        // Header
         collectionView.register(HeaderReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
+        
+        // CompositionLayout
         collectionView.collectionViewLayout = creatCompositionalLayout()
     
         collectionView.delegate = self
@@ -48,106 +75,41 @@ class HomeViewController: UIViewController {
         
     }
     
-    
-    
-    // MARK: - CompositionLayout
-    
-    private func creatCompositionalLayout() -> UICollectionViewCompositionalLayout {
+}
+
+extension HomeViewController {
+    private func configure() {
+        view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.leading.equalToSuperview().offset(20)
+            make.top.equalToSuperview().offset(100)
+            
+        }
         
-        UICollectionViewCompositionalLayout { [weak self] sectionIndex, _ in
-            guard let self = self else { return nil }
-            let section = self.sections[sectionIndex]
-            switch section {
-                
-            case .categories(_):
-                return self.createCaregorySection()
-            case .new(_):
-                return self.createLastNewsSection()
-            case .recommended(_):
-                return self.createRecommendedSection()
-            }
+        view.addSubview(subtitleLabel)
+        subtitleLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(titleLabel.snp.bottom).offset(15)
+            make.leading.equalToSuperview().offset(20)
+        }
+        
+        view.addSubview(searchBar)
+        searchBar.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(subtitleLabel.snp.bottom).offset(25)
+            make.leading.trailing.equalToSuperview().inset(10)
+            make.height.equalTo(70)
+        }
+        
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(searchBar.snp.bottom).offset(5)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
     }
-    
-    // MARK: - Create sections
-    
-    private func createLayoutSection(group: NSCollectionLayoutGroup,
-                                     behavior: UICollectionLayoutSectionOrthogonalScrollingBehavior,
-                                     interGroupSpacing: CGFloat,
-                                     supplementaryItems: [NSCollectionLayoutBoundarySupplementaryItem],
-                                     contentInsets: Bool) -> NSCollectionLayoutSection {
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = behavior
-        section.interGroupSpacing = interGroupSpacing
-        section.boundarySupplementaryItems = supplementaryItems
-        section.supplementariesFollowContentInsets = contentInsets
-        return section
-    }
-    
-    private func createCaregorySection() -> NSCollectionLayoutSection {
-        
-        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),heightDimension: .fractionalHeight(1)))
-        item.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 5)
-        
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(
-            widthDimension: .absolute(90),
-            heightDimension: .absolute(32)),subitems: [item])
-        
-        let section = createLayoutSection(group: group,
-                                          behavior: .continuous,
-                                          interGroupSpacing: 16,
-                                          supplementaryItems: [],
-                                          contentInsets: false)
-        section.contentInsets = .init(top: 15, leading: 16, bottom: 24 , trailing: 0)
-        
-        return section
-        
-    }
-    
-    private func createLastNewsSection() -> NSCollectionLayoutSection {
-        
-        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),heightDimension: .fractionalHeight(1)))
-        
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(
-            widthDimension: .fractionalWidth(0.9),
-            heightDimension: .fractionalHeight(0.45)),
-                                                       subitems: [item])
-        
-        let section = createLayoutSection(group: group,
-                                          behavior: .continuous,
-                                          interGroupSpacing: 10,
-                                          supplementaryItems: [],
-                                          contentInsets: false)
-        section.contentInsets = .init(top: 0, leading: 16, bottom: 0, trailing: -10)
-        return section
-        
-    }
-    
-    private func createRecommendedSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .fractionalHeight(1))
-        
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .absolute(94))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 8, trailing: 0)
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 10, leading: 16, bottom: 0, trailing: 16)
-        section.boundarySupplementaryItems = [supplementaryHeaderItem()]
-        return section
-        
-    }
-    
-    private func supplementaryHeaderItem() -> NSCollectionLayoutBoundarySupplementaryItem {
-        .init(layoutSize: .init(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .estimated(30)),
-              elementKind: UICollectionView.elementKindSectionHeader,
-              alignment: .top)
-    }
 }
+
 
