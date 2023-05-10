@@ -42,8 +42,8 @@ extension RegistrationViewController: RegistrationViewDelegate {
                 Auth.auth().createUser(withEmail: email!, password: password!) { result, error in
                     if error == nil {
                         if let result = result {
-                            // Действия после регистрации
-                            print(result.user.uid)
+                            let ref = Database.database().reference().child("users")
+                            ref.child(result.user.uid).updateChildValues(["name" : username!])
                         }
                     } else {
                         let errString = String(error!.localizedDescription)
