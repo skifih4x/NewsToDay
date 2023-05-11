@@ -12,8 +12,12 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
     
     var searchController  = UISearchController()
     var collectionView: UICollectionView!
+    
     var networkManadger = NetworkManager.shared
-    var newsModel = [Article]()
+    
+    var sections: [Section] = [.categories([]), .news([]), .recommended([])]
+    var news = [Article]()
+    var soureces = [HeadlineSources]()
     
     
     // MARK: - UI Properties
@@ -53,6 +57,7 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
         configure()
         
     }
+    
     
     // MARK: - setup Collection View
     

@@ -12,24 +12,24 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     // MARK: - Data Source
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        3
+        return sections.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //sections[section].count
+        switch sections[section] {
+        case .categories:
+            return 4
+        case .news:
+            return 5
+        case .recommended:
+            return 10
+        }
     }
     
     // MARK: - Delegate
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell1", for: indexPath) as? CategoriesViewCell else {
-            fatalError()
-        }
-        cell.configureCell(text: newsModel[indexPath.item])
-              
         
-        
-        /*
         switch sections[indexPath.section] {
             
         case .categories(let category):
@@ -37,27 +37,24 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             else {
                 return UICollectionViewCell()
             }
-            cell.configureCell(text: category[indexPath.row].title)
+            cell.configureCell(text: "Art")
             return cell
             
-        case .new(let new):
+        case .news(let news):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as? LastNewsViewCell
             else {
                 return UICollectionViewCell()
             }
-            cell.configureCell(text: new[indexPath.row].title)
+            cell.configureCell(article: news[indexPath.item])
             return cell
-        case .recommended(let recommended):
+        case .recommended(let source):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell3", for: indexPath) as? RecommendedViewCell
             else {
                 return UICollectionViewCell()
             }
-            cell.configureCell(text: recommended[indexPath.row].title)
+            cell.configureCell(article: source[indexPath.item])
             return cell
         }
-         */
-        
-        
         
     }
     
@@ -87,11 +84,11 @@ extension HomeViewController {
             let section = self.sections[sectionIndex]
             switch section {
                 
-            case .categories(_):
+            case .categories:
                 return self.createCaregorySection()
-            case .new(_):
+            case .news:
                 return self.createLastNewsSection()
-            case .recommended(_):
+            case .recommended:
                 return self.createRecommendedSection()
             }
         }
