@@ -33,7 +33,7 @@ extension ForgetPasswordViewController: ForgetPasswordViewDelegate {
         let email = customView.emailText
         
         if !email!.isEmpty {
-            
+            fbManager.resetPassword(email: email!)
         } else {
             showAlert(title: "Please fill out all fields", message: nil)
         }
