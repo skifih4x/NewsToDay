@@ -25,6 +25,7 @@ final class FirebaseManager {
                 if let result = result {
                     let ref = Database.database().reference().child("users")
                     ref.child(result.user.uid).updateChildValues(["name" : username])
+                    ref.child(result.user.uid).updateChildValues(["email" : email])
                     print("Create account complete. Name \(username) saved.")
                 }
             } else {
