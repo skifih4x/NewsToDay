@@ -7,30 +7,44 @@
 
 import UIKit
 
-class RegistrationViewController: CustomViewController<RegistrationView> {
+class ForgetPasswordViewController: CustomViewController<ForgetPasswordView> {
+    
+    var fbManager = FirebaseManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         customView.delegate = self
-        customView.userNameTextField.delegate = self
         customView.emailTextField.delegate = self
-        customView.passwordTextField.delegate = self
-        customView.confirmPasswordTextField.delegate = self
+    }
+    
+    func showAlert(title: String, message: String?) {
+        
+        let alertController = UIAlertController(title: title,
+                                                message: message,
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
+        present(alertController, animated: true)
     }
 }
 
-extension RegistrationViewController: RegistrationViewDelegate {
-    func RegistrationView(_ view: RegistrationView, didTapSignUpButton button: UIButton) {
+extension ForgetPasswordViewController: ForgetPasswordViewDelegate {
+    func ForgetPasswordView(_ view: ForgetPasswordView, didTapResetPasswordButton button: UIButton) {
+        let email = customView.emailText
         
+        if !email!.isEmpty {
+            fbManager.resetPassword(email: email!)
+        } else {
+            showAlert(title: "Please fill out all fields", message: nil)
+        }
     }
     
-    func RegistrationView(_ view: RegistrationView, didTapOpenSignInButton button: UIButton) {
+    func ForgetPasswordView(_ view: ForgetPasswordView, didTapGoBackButton button: UIButton) {
         self.dismiss(animated: true)
     }
 }
 
-extension RegistrationViewController: UITextFieldDelegate {
+extension ForgetPasswordViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
