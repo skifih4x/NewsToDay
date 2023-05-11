@@ -12,7 +12,7 @@ import Firebase
 final class FirebaseManager {
     static let shared = FirebaseManager()
     
-//    var userInfo = UserInfo()
+    var userInfo = UserInfo()
     
     func createAccount(email: String,
                        password: String,
@@ -80,16 +80,31 @@ final class FirebaseManager {
         }
     }
     
-//    func getUserName(userUid: String) -> UserInfo {
-//        let name = Database.database().reference(withPath: "users")
-//        name.child(user.uid).child("name").getData { error, data in
-//            if error == nil {
-//                if let data = data {
-//                    let name = data.value as? String ?? "NoName"
-//                                self.showAlert(title: "Sign In success!", message: "Hi, \(name)", closeScreen: true)
-//                    print("Hello, \(name)")
-//                }
-//            }
-//        }
-//    }
+    func getUserInfo(userUid: String) -> UserInfo {
+        let data = Database.database().reference(withPath: "users")
+        var userInfo = UserInfo()
+        data.child(userUid).child("name").getData { error, data in
+            if error == nil {
+                if let data = data {
+                    let name = data.value as? String ?? "NoName"
+                    userInfo.name = name
+                    print("Hello, \(name)")
+                }
+            } else {
+                print("Oooops from getUserInfo")
+            }
+        }
+        data.child(userUid).child("email").getData { error, data in
+            if error == nil {
+                if let data = data {
+                    let email = data.value as? String ?? "NoName"
+                    userInfo.email = email
+                    print("Your email, \(email)")
+                }
+            } else {
+                print("Oooops from getUserInfo")
+            }
+        }
+        return userInfo
+    }
 }
