@@ -72,6 +72,7 @@ extension AuthorizationViewController: AuthorizationViewDelegate {
             if !username!.isEmpty && !email!.isEmpty && !password!.isEmpty {
                 if password == confirmPassword {
                     fbManager.createAccount(email: email!, password: password!, username: username!)
+                    self.dismiss(animated: true)
                 } else {
                     showAlert(title: "Passwords don't match, please try again", message: nil)
                 }
@@ -81,6 +82,7 @@ extension AuthorizationViewController: AuthorizationViewDelegate {
         } else {
             if !email!.isEmpty && !password!.isEmpty {
                 fbManager.signIn(email: email!, password: password!)
+                self.dismiss(animated: true)
             } else {
                 showAlert(title: "Please fill out all fields", message: nil)
             }
