@@ -9,28 +9,35 @@ import UIKit
 import Foundation
 import Firebase
 
+@objc protocol FirebaseManagerDelegate: AnyObject {
+    @objc optional func didCreateUser()
+    @objc optional func didSignIn()
+//    func didSignOut()
+    @objc optional func didResetPassword()
+    func didFailError(error: Error)
+}
+
 final class FirebaseManager {
     static let shared = FirebaseManager()
-    
-    var userInfo = UserInfo()
+    var delegate: FirebaseManagerDelegate?
     
     func createAccount(email: String,
                        password: String,
                        username: String
-//                       completion: @escaping (AuthDataResult?, Error?) -> Void
     ) {
         Auth.auth().createUser(withEmail: email, password: password) { result, error in
-            
             if error == nil {
                 if let result = result {
                     let ref = Database.database().reference().child("users")
                     ref.child(result.user.uid).updateChildValues(["name" : username])
                     ref.child(result.user.uid).updateChildValues(["email" : email])
                     print("Create account complete. Name \(username) saved.")
+                    if let createUserMethod = self.delegate?.didCreateUser {
+                        createUserMethod()
+                    }
                 }
             } else {
-                let errString = String(error!.localizedDescription)
-                print(errString)
+                self.delegate?.didFailError(error: error!)
             }
         }
     }
@@ -38,22 +45,11 @@ final class FirebaseManager {
     func signIn(email: String, password: String) {
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if error == nil {
-                if let result = result {
-                    let name = Database.database().reference(withPath: "users")
-                    name.child(result.user.uid).child("name").getData { error, data in
-                        if error == nil {
-                            if let data = data {
-                                let name = data.value as? String ?? "NoName"
-//                                self.showAlert(title: "Sign In success!", message: "Hi, \(name)", closeScreen: true)
-                                print("Hello, \(name)")
-                            }
-                        }
-                    }
+                if let signInMethod = self.delegate?.didSignIn {
+                    signInMethod()
                 }
             } else {
-                let errString = String(error!.localizedDescription)
-//                self.showAlert(title: "Error", message: errString)
-                print(errString)
+                self.delegate?.didFailError(error: error!)
             }
         }
     }
@@ -61,10 +57,11 @@ final class FirebaseManager {
     func resetPassword(email: String) {
         Auth.auth().sendPasswordReset(withEmail: email) {error in
             if error == nil {
-                print("Reset password completed")
+                if let resetPassword = self.delegate?.didResetPassword {
+                    resetPassword()
+                }
             } else {
-                let errString = String(error!.localizedDescription)
-                print(errString)
+                self.delegate?.didFailError(error: error!)
             }
         }
     }
