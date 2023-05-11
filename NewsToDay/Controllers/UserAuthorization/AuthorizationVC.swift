@@ -18,6 +18,7 @@ class AuthorizationViewController: CustomViewController<AuthorizationView> {
                 customView.greetingLabel.text = "Hello, I guess you are new around here. You can start using the application after sign up."
                 customView.userNameTextField.isHidden = false
                 customView.confirmPasswordTextField.isHidden = false
+                customView.forgotPasswordButton.isHidden = true
                 customView.signInButton.setTitle("Sign Up", for: .normal)
                 customView.createAccountLabel.text = "Already have an account?"
                 customView.createAccountButton.setTitle("Sign In", for: .normal)
@@ -26,6 +27,7 @@ class AuthorizationViewController: CustomViewController<AuthorizationView> {
                 customView.greetingLabel.text = "I am happy to see you again. You can continue where you left off by logging in"
                 customView.userNameTextField.isHidden = true
                 customView.confirmPasswordTextField.isHidden = true
+                customView.forgotPasswordButton.isHidden = false
                 customView.signInButton.setTitle("Sign In", for: .normal)
                 customView.createAccountLabel.text = "Don't have an account?"
                 customView.createAccountButton.setTitle("Sign Up", for: .normal)
@@ -83,6 +85,10 @@ extension AuthorizationViewController: AuthorizationViewDelegate {
                 showAlert(title: "Please fill out all fields", message: nil)
             }
         }
+    }
+    
+    func AuthorizationView(_ view: AuthorizationView, didTapForgotPasswordButton button: UIButton) {
+        
     }
     
     func AuthorizationView(_ view: AuthorizationView, didTapCreateAccountButton button: UIButton) {

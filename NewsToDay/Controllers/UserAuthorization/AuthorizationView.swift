@@ -9,6 +9,7 @@ import UIKit
 
 protocol AuthorizationViewDelegate: AnyObject {
     func AuthorizationView(_ view: AuthorizationView, didTapSignInButton button: UIButton)
+    func AuthorizationView(_ view: AuthorizationView, didTapForgotPasswordButton button: UIButton)
     func AuthorizationView(_ view: AuthorizationView, didTapCreateAccountButton button: UIButton)
 }
 
@@ -149,6 +150,18 @@ class AuthorizationView: CustomView {
         return element
     }()
     
+    lazy var forgotPasswordButton: UIButton = {
+        let element = UIButton()
+        element.backgroundColor = nil
+        element.setTitle("Forgot your password?", for: .normal)
+        element.setTitleColor(Resources.Colors.blackPrimary, for: .normal)
+        element.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        element.translatesAutoresizingMaskIntoConstraints = false
+        element.addTarget(self, action: #selector(didTapForgotPasswordButton(_:)), for: .touchUpInside)
+        element.isHidden = true
+        return element
+    }()
+    
     lazy var signInButton: UIButton = {
         let element = UIButton()
         element.backgroundColor = Resources.Colors.purplePrimary
@@ -212,6 +225,7 @@ class AuthorizationView: CustomView {
         self.addSubview(topLabel)
         self.addSubview(greetingLabel)
         self.addSubview(textFieldsVStack)
+        self.addSubview(forgotPasswordButton)
         self.addSubview(signInButton)
         self.addSubview(createAccountHStack)
         
@@ -245,7 +259,10 @@ class AuthorizationView: CustomView {
             passwordTextField.heightAnchor.constraint(equalToConstant: 56),
             confirmPasswordTextField.heightAnchor.constraint(equalToConstant: 56),
             
-            signInButton.topAnchor.constraint(equalTo: textFieldsVStack.bottomAnchor, constant: 64),
+            forgotPasswordButton.topAnchor.constraint(equalTo: textFieldsVStack.bottomAnchor, constant: 16),
+            forgotPasswordButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            
+            signInButton.topAnchor.constraint(equalTo: forgotPasswordButton.bottomAnchor, constant: 20),
             signInButton.heightAnchor.constraint(equalToConstant: 56),
             signInButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             signInButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
@@ -260,6 +277,10 @@ class AuthorizationView: CustomView {
 private extension AuthorizationView {
     @objc func didTapSignInButton(_ button: UIButton) {
         delegate?.AuthorizationView(self, didTapSignInButton: button)
+    }
+    
+    @objc func didTapForgotPasswordButton(_ button: UIButton) {
+        delegate?.AuthorizationView(self, didTapForgotPasswordButton: button)
     }
     
     @objc func didTapCreateAccountButton(_ button: UIButton) {
