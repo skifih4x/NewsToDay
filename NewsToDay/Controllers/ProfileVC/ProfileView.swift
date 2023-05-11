@@ -8,7 +8,15 @@
 import UIKit
 import SnapKit
 
+protocol ProfileViewDelegate: AnyObject {
+    func ProfileView(_ view: ProfileView, languageButtonPressed button: UIButton)
+    func ProfileView(_ view: ProfileView, termsAndConditionsButtonPressed button: UIButton)
+    func ProfileView(_ view: ProfileView, signOutButtonPressed button: UIButton)
+}
+
 class ProfileView: UIView {
+    
+    weak var delegate: ProfileViewDelegate?
     
     private let profileLabel: UILabel = {
         let label = UILabel()
@@ -98,18 +106,6 @@ class ProfileView: UIView {
         return button
     }()
     
-    @objc func languageButtonPressed() {
-        print("languageButtonPressed")        
-    }
-    
-    @objc func termsAndConditionsButtonPressed() {
-        print("termsAndConditionsButtonPressed")
-    }
-    
-    @objc func signOutButtonPressed() {
-        print("signOutButtonPressed")
-    }
-    
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -180,5 +176,21 @@ class ProfileView: UIView {
             make.trailing.equalToSuperview().inset(19)
             make.height.equalTo(56)
         }
+    }
+}
+
+// MARK: - Target Actions
+private extension ProfileView {
+    
+    @objc func languageButtonPressed(_ button: UIButton) {
+        delegate?.ProfileView(self, languageButtonPressed: button)
+    }
+    
+    @objc func termsAndConditionsButtonPressed(_ button: UIButton) {
+        delegate?.ProfileView(self, termsAndConditionsButtonPressed: button)
+    }
+    
+    @objc func signOutButtonPressed(_ button: UIButton) {
+        delegate?.ProfileView(self, signOutButtonPressed: button)
     }
 }

@@ -11,11 +11,12 @@ import SnapKit
 class LanguageViewController: UIViewController {
     
     // MARK: - Private Properties
-    private let languageView = LanguageView()
+    private let languageView = NewsToDay.LanguageView()
     
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        languageView.delegate = self
         addViews()
         addConstraints()
     }
@@ -31,5 +32,13 @@ class LanguageViewController: UIViewController {
             make.top.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview()
         }
+    }
+}
+
+// MARK: - LanguageViewDelegate
+extension LanguageViewController: LanguageViewDelegate {
+    
+    func LanguageView(_ view: LanguageView, backButtonPressed button: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
 }

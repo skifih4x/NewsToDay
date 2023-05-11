@@ -8,7 +8,13 @@
 import UIKit
 import SnapKit
 
+protocol LanguageViewDelegate: AnyObject {
+    func LanguageView(_ view: LanguageView, backButtonPressed button: UIButton)
+}
+
 class LanguageView: UIView {
+    
+    weak var delegate: LanguageViewDelegate?
     
     private let backButton: UIButton = {
         let button = UIButton(type: .system)
@@ -61,10 +67,6 @@ class LanguageView: UIView {
         return button
     }()
     
-    @objc func backButtonPressed() {
-        print("back")
-    }
-    
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -112,4 +114,12 @@ class LanguageView: UIView {
             make.height.equalTo(56)
         }
     }    
+}
+
+// MARK: - Target Actions
+private extension LanguageView {
+    
+    @objc func backButtonPressed(_ button: UIButton) {
+        delegate?.LanguageView(self, backButtonPressed: button)
+    }
 }

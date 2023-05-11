@@ -11,11 +11,12 @@ import SnapKit
 class TermsAndConditionsViewController: UIViewController {
     
     // MARK: - Private Properties
-    private let termsAndConditionsView = TermsAndConditionsView()
+    private let termsAndConditionsView = NewsToDay.TermsAndConditionsView()
     
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        termsAndConditionsView.delegate = self
         addViews()
         addConstraints()
     }
@@ -31,5 +32,13 @@ class TermsAndConditionsViewController: UIViewController {
             make.top.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview()
         }
+    }
+}
+
+// MARK: - ProfileViewDelegate
+extension TermsAndConditionsViewController: TermsAndConditionsViewDelegate {
+    
+    func TermsAndConditionsView(_ view: TermsAndConditionsView, backButtonPressed button: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
