@@ -8,41 +8,31 @@
 import Foundation
 
 enum Section {
-    case categories([ListItem])
-    case new([ListItem])
-    case recommended([ListItem])
+    case categories([Category])
+    case news([Article])
+    case recommended([Article])
     
-    var items: [ListItem] {
+    var itemCount: Int {
         switch self {
-        case .categories(let items),
-        .new(let items),
-        .recommended(let items):
-        return items
+        case .categories(let category):
+            return category.count
+        case .news(let news):
+            return news.count
+        case .recommended(let source):
+            return source.count
         }
     }
-    
-    var count: Int {
-        return items.count
-    }
-    
+
     var title: String {
         switch self {
         case .categories:
             return ""
-        case .new:
+        case .news:
             return ""
         case .recommended:
             return "Recommended For You"
         }
     }
-}
-
-
-
-struct ListItem {
-    let title: String
-    let category: String
-    let image: String
 }
 
 
