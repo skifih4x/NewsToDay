@@ -88,7 +88,9 @@ extension AuthorizationViewController: AuthorizationViewDelegate {
     }
     
     func AuthorizationView(_ view: AuthorizationView, didTapForgotPasswordButton button: UIButton) {
-        
+        let forgetPasswordVC = ForgetPasswordViewController()
+        forgetPasswordVC.modalPresentationStyle = .fullScreen
+        self.present(forgetPasswordVC, animated: true)
     }
     
     func AuthorizationView(_ view: AuthorizationView, didTapCreateAccountButton button: UIButton) {

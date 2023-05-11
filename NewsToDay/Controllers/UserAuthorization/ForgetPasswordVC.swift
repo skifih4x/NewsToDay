@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RegistrationViewController: CustomViewController<RegistrationView> {
+class ForgetPasswordViewController: CustomViewController<ForgetPasswordView> {
     
     var fbManager = FirebaseManager.shared
     
@@ -15,10 +15,7 @@ class RegistrationViewController: CustomViewController<RegistrationView> {
         super.viewDidLoad()
         
         customView.delegate = self
-        customView.userNameTextField.delegate = self
         customView.emailTextField.delegate = self
-        customView.passwordTextField.delegate = self
-        customView.confirmPasswordTextField.delegate = self
     }
     
     func showAlert(title: String, message: String?) {
@@ -31,30 +28,23 @@ class RegistrationViewController: CustomViewController<RegistrationView> {
     }
 }
 
-extension RegistrationViewController: RegistrationViewDelegate {
-    func RegistrationView(_ view: RegistrationView, didTapSignUpButton button: UIButton) {
-        let username = customView.usernameText
+extension ForgetPasswordViewController: ForgetPasswordViewDelegate {
+    func ForgetPasswordView(_ view: ForgetPasswordView, didTapResetPasswordButton button: UIButton) {
         let email = customView.emailText
-        let password = customView.passwordText
-        let confirmPassword = customView.cofirmPasswordText
         
-        if !username!.isEmpty && !email!.isEmpty && !password!.isEmpty {
-            if password == confirmPassword {
-                fbManager.createAccount(email: email!, password: password!, username: username!)
-            } else {
-                showAlert(title: "Passwords don't match, please try again", message: nil)
-            }
+        if !email!.isEmpty {
+            
         } else {
             showAlert(title: "Please fill out all fields", message: nil)
         }
     }
     
-    func RegistrationView(_ view: RegistrationView, didTapOpenSignInButton button: UIButton) {
+    func ForgetPasswordView(_ view: ForgetPasswordView, didTapGoBackButton button: UIButton) {
         self.dismiss(animated: true)
     }
 }
 
-extension RegistrationViewController: UITextFieldDelegate {
+extension ForgetPasswordViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
