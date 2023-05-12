@@ -21,10 +21,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         switch sections[section] {
         case .categories:
             return categoryStorage.categories.count
-        case .lastNews(_):
-            return 5
-        case .recommended(let sources):
-            return sources.count
+        case .lastNews:
+            return soureces.count//news.count
+        case .recommended:
+            return news.count
         }
          
     }
@@ -44,24 +44,23 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.configureCell(text: categoryStorage.categories[indexPath.row])
             return cell
             
-        case .lastNews(_):
+        case .lastNews:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell2", for: indexPath) as? LastNewsViewCell
             else {
                 return UICollectionViewCell()
             }
-            loadData()
-            print(news)
-            let article = news[1]
+        
+            let article = soureces[indexPath.item]
             cell.configureCell(article: article)
             return cell
             
-        case .recommended(let sources):
+        case .recommended:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell3", for: indexPath) as? RecommendedViewCell
             else {
                 return UICollectionViewCell()
             }
             
-            cell.configureCell(article: sources[indexPath.row])
+            cell.configureCell(article: news[indexPath.row])
             return cell
         }
         

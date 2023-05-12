@@ -9,11 +9,9 @@ import Foundation
 
 enum Section {
     case categories
-    case lastNews(news: [Article])
-    case recommended(sources: [Source])
+    case lastNews
+    case recommended
     
-    
-
     var title: String {
         switch self {
         case .categories:

@@ -23,7 +23,7 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
     
     var headline: HeadlineSources?
     
-   lazy var sections: [Section] = [.categories, .lastNews(news: news), .recommended(sources: soureces)]
+   lazy var sections: [Section] = [.categories, .lastNews, .recommended]
     
     // MARK: - UI Properties
     
@@ -88,8 +88,8 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
         
         networkManadger.fetchHeadlinesSources(category: categories, country: Country.ru) { [weak self] result in
             switch result {
-            case .success(let source):
-                self?.headline = source
+            case .success(let soureces):
+                self?.soureces = soureces.sources
                 DispatchQueue.main.async {
                     self?.collectionView.reloadData()
                 }
