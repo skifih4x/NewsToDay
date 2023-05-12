@@ -60,10 +60,10 @@ class LastNewsViewCell: UICollectionViewCell {
         layer.cornerRadius = 16
     }
     
-    func configureCell(article: Article?) {
-        titleLabel.text = article?.title
-        categoryLabel.text = article?.content
-        imageView.image = UIImage(named: article?.urlToImage ?? "")
+    func configureCell(article: Article) {
+        titleLabel.text = article.title
+        categoryLabel.text = article.content
+        imageView.image = UIImage(named: article.urlToImage ?? "")
         
     }
     
