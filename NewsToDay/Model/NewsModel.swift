@@ -15,7 +15,8 @@ struct NewsModel: Codable {
 
 struct Article: Codable {
     let author: String?
-    let title, description: String?
+    let title: String?
+    let description: String?
     let url: String
     let urlToImage: String?
     let publishedAt: String

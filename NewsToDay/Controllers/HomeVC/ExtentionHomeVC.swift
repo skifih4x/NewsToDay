@@ -52,6 +52,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
             let article = soureces[indexPath.item]
             cell.configureCell(article: article)
+    
             return cell
             
         case .recommended:
@@ -164,7 +165,7 @@ extension HomeViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .absolute(96))
+            heightDimension: .absolute(110))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0)
         
