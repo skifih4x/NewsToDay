@@ -10,7 +10,7 @@ import SnapKit
 
 class RecommendedViewCell: UICollectionViewCell {
     
-    let imageForCell = UIImage(named: "music")
+    var networkManadger = NetworkManager.shared
     
     // MARK: - UI Properties
     
@@ -35,8 +35,9 @@ class RecommendedViewCell: UICollectionViewCell {
     
     lazy var imageView: UIImageView = {
         let image = UIImageView()
-        image.image = imageForCell
-        image.layer.cornerRadius = 16
+        image.clipsToBounds = true
+        image.layer.cornerRadius = 10
+        image.contentMode = .scaleAspectFill
         return image
     }()
     
@@ -58,7 +59,18 @@ class RecommendedViewCell: UICollectionViewCell {
     func configureCell(article: Article) {
         titleLabel.text = article.title
         categoryLabel.text = article.content
-        imageView.image = UIImage(named: article.urlToImage ?? "")
+        
+        DispatchQueue.global().async {
+            guard let stringUrl = article.urlToImage else { return }
+            guard let imageUrl = URL(string: stringUrl) else { return }
+            guard let imageData = try? Data(contentsOf: imageUrl) else { return }
+            DispatchQueue.main.async {
+                self.imageView.image = UIImage(data: imageData)
+            }
+        }
+        
+        //networkManadger.fetchImage(url: article.urlToImage ?? "", imageView: imageView)
+        //imageView.image = UIImage(named: article.urlToImage ?? "")
     }
     
 }

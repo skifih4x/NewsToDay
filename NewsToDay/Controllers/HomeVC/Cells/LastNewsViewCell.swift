@@ -14,15 +14,17 @@ class LastNewsViewCell: UICollectionViewCell {
     
     private let categoryLabel: UILabel = {
         let label = UILabel()
-        label.text = "ART"
         label.textColor = Resources.Colors.blackPrimary
         label.textAlignment = .left
+        label.numberOfLines = 2
         return label
     }()
     
     private let titleLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.textColor = Resources.Colors.blackPrimary
+        label.numberOfLines = 3
+        label.lineBreakMode = .byWordWrapping
         label.textAlignment = .left
         return label
     }()
@@ -60,13 +62,23 @@ class LastNewsViewCell: UICollectionViewCell {
         layer.cornerRadius = 16
     }
     
-    func configureCell(article: Article?) {
-        titleLabel.text = article?.title
-        categoryLabel.text = article?.content
-        imageView.image = UIImage(named: article?.urlToImage ?? "")
+    func configureCell(article: Source) {
+        titleLabel.text = article.name
+        categoryLabel.text = article.category
         
     }
     
+    func fetchImage(image: Article) {
+        DispatchQueue.global().async {
+            guard let stringUrl = image.urlToImage else { return }
+            guard let imageUrl = URL(string: stringUrl) else { return }
+            guard let imageData = try? Data(contentsOf: imageUrl) else { return }
+            DispatchQueue.main.async {
+                self.imageView.image = UIImage(data: imageData)
+            }
+        }
+        
+    }
 }
 
 // MARK: - Extention, setup constraints

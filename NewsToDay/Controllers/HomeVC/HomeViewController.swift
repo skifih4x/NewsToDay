@@ -14,11 +14,16 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
     var collectionView: UICollectionView!
     
     var networkManadger = NetworkManager.shared
+    var categoryStorage = CategoriesStorage.shared
+
+    var categories: Category?
     
-    var sections: [Section] = [.categories([]), .news([]), .recommended([])]
-    var news = [Article]()
-    var soureces = [HeadlineSources]()
+    var news: [Article] = []
+    var soureces: [Source] = []
     
+    var headline: HeadlineSources?
+    
+   lazy var sections: [Section] = [.categories, .lastNews, .recommended]
     
     // MARK: - UI Properties
     
@@ -55,7 +60,43 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
         view.backgroundColor = .white
         setupCollectionView()
         configure()
+        loadData()
         
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
+    }
+    
+    
+    
+    // MARK: - Fetch data
+    
+    func loadData() {
+        networkManadger.fetchTopHeadlines(categories: [Category.business], country: Country.us) { [weak self] result in
+            switch result {
+            case .success(let news):
+               
+                self?.news = news.articles
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
+        networkManadger.fetchHeadlinesSources(category: categories, country: Country.ru) { [weak self] result in
+            switch result {
+            case .success(let soureces):
+                self?.soureces = soureces.sources
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     

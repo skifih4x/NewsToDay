@@ -5,7 +5,7 @@
 //  Created by Артем Орлов on 07.05.2023.
 //
 
-import Foundation
+import UIKit
 
 final class NetworkManager {
     static let shared = NetworkManager()
@@ -90,6 +90,27 @@ final class NetworkManager {
         }
         task.resume()
     }
+    
+    /*
+    func fetchImage(url: String, imageView: UIImageView) {
+        guard let url = URL(string: url) else {
+            preconditionFailure("Cannot implement URL from: (url) ")
+        }
+        let mainQueue = DispatchQueue.main
+        let globalQueue = DispatchQueue.global(qos: .utility)
+        var data: Data?
+        
+        let workItem = DispatchWorkItem {
+            data = try? Data(contentsOf: url)}
+            
+        workItem.notify(queue: mainQueue) {
+            if let imageData = data {
+                imageView.image = UIImage(data: imageData)
+            }
+        }
+    }
+     */
+    
 }
 
 //MARK: Метод для получения списка топовых новостей, выкидывает объект типа NewsModel
@@ -170,5 +191,18 @@ extension NetworkManager {
                 completion(.failure(FetchError.codeError))
             }
         }
+    }
+}
+
+class ImageManager {
+    static var shared = ImageManager()
+    
+    private init() {}
+    
+    
+    func fetchImage(from url: String?) -> Data? {
+        guard let stringURL = url else { return nil }
+        guard let imageURL = URL(string: stringURL) else { return nil }
+        return try? Data(contentsOf: imageURL)
     }
 }

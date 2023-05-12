@@ -10,7 +10,7 @@ import Foundation
 struct NewsModel: Codable {
     let status: String
     let totalResults: Int
-    let articles: [Article]
+    var articles: [Article]
 }
 
 struct Article: Codable {
