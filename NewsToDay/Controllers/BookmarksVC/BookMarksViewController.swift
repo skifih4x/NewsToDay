@@ -67,6 +67,31 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         setConstraints()
     }
     
+    var data = [1, 2, 3, 4]
+    
+    func edit(rowIndexPath indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .normal, title: "Delete") { [weak self] (_,_, completionHandler) in
+            let alert = UIAlertController(title: "Do You want to delete this bookmark?", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+                completionHandler(false)
+            }))
+            alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
+                self?.data.remove(at: indexPath.row)
+                self?.tableView.deleteRows(at: [indexPath], with: .automatic)
+                completionHandler(true)
+            }))
+            self?.present(alert, animated: true)
+        }
+        action.backgroundColor = .red
+        return action
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let edit = self.edit(rowIndexPath: indexPath)
+        let swipe = UISwipeActionsConfiguration(actions: [edit])
+        return swipe
+    }
+    
     func setupViews() {
         view.backgroundColor = .white
         view.addSubview(ellipseView)
@@ -77,25 +102,24 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let numberOfRows = 0
+        let numberOfRows = data.count
         tableView.isHidden = numberOfRows == 0
         return numberOfRows
-
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.identifier, for: indexPath) as? CustomCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.identifier, for: indexPath) as? CustomCell else {
             fatalError("Error")
         }
         cell.textLabel?.text = indexPath.row.description
-//        cell.configure(img: <#T##UIImage#>, category: <#T##String#>, news: <#T##String#>)
+        cell.delegate = self
+        cell.tag = indexPath.row
+        //        cell.configure(img: <#T##UIImage#>, category: <#T##String#>, news: <#T##String#>)  // сюда должны поступать данные по отмеченным новостям
         return cell
     }
-    
 }
     
     extension BookmarksViewController {
@@ -127,3 +151,15 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
 
+extension BookmarksViewController: CellDelegate {
+    func buttonPressed(_ cell: CustomCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let alert = UIAlertController(title: "Do You want to delete this bookmark?", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+            self.data.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+}
