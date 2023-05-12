@@ -14,7 +14,7 @@ import Firebase
     @objc optional func didSignIn()
     @objc optional func didSignOut()
     @objc optional func didResetPassword()
-    @objc optional func userInfoSaved()
+    @objc optional func didUserInfoSaved()
     func didFailError(error: Error)
 }
 
@@ -84,7 +84,7 @@ final class FirebaseManager {
         data.child(userUid).child("name").getData { error, data in
             if error == nil {
                 if let data = data {
-                    let name = data.value as? String ?? "NoName"
+                    let name = data.value as? String
                     self.userInfo.name = name
                 }
             } else {
@@ -94,9 +94,9 @@ final class FirebaseManager {
         data.child(userUid).child("email").getData { error, data in
             if error == nil {
                 if let data = data {
-                    let email = data.value as? String ?? "NoName"
+                    let email = data.value as? String
                     self.userInfo.email = email
-                    if let userInfoSavedMethod = self.delegate?.userInfoSaved {
+                    if let userInfoSavedMethod = self.delegate?.didUserInfoSaved {
                         userInfoSavedMethod()
                     }
                 }
