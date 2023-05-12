@@ -9,13 +9,12 @@ import UIKit
 
 class ForgetPasswordViewController: CustomViewController<ForgetPasswordView> {
     
-    var fbManager = FirebaseManager.shared
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         customView.delegate = self
         customView.emailTextField.delegate = self
+        FirebaseManager.shared.delegate = self
     }
     
     func showAlert(title: String, message: String?) {
@@ -33,7 +32,7 @@ extension ForgetPasswordViewController: ForgetPasswordViewDelegate {
         let email = customView.emailText
         
         if !email!.isEmpty {
-            fbManager.resetPassword(email: email!)
+            FirebaseManager.shared.resetPassword(email: email!)
         } else {
             showAlert(title: "Please fill out all fields", message: nil)
         }
@@ -68,5 +67,16 @@ extension ForgetPasswordViewController: UITextFieldDelegate {
         }
 
         return true
+    }
+}
+
+extension ForgetPasswordViewController: FirebaseManagerDelegate {
+    func didResetPassword() {
+        self.dismiss(animated: true)
+    }
+    
+    func didFailError(error: Error) {
+        let errString = String(error.localizedDescription)
+        showAlert(title: "Ooops!", message: errString)
     }
 }
