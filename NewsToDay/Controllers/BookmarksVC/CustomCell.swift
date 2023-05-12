@@ -7,9 +7,15 @@
 
 import UIKit
 
-class CustomCell: UITableViewCell {
+protocol CellDelegate: AnyObject {
+    func buttonPressed(_ cell: CustomCell)
+}
 
- static let identifier = "CustomCell"
+class CustomCell: UITableViewCell {
+    
+    weak var delegate: CellDelegate?
+    
+    static let identifier = "CustomCell"
     
     private let cellImageView: UIImageView = {
         let image = UIImageView()
@@ -37,7 +43,20 @@ class CustomCell: UITableViewCell {
         news.text = "We cant find your saved articles right now"
         return news
     }()
-
+    
+    private lazy var unmarkButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setBackgroundImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+        button.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        button.tintColor = .gray
+        button.addTarget(self, action: #selector(unmarkButtonPressed), for: .touchUpInside)
+        return button
+    }()
+  
+    @objc private func unmarkButtonPressed(_ sender: UIButton) {
+        delegate?.buttonPressed(self)
+    }
+        
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupUI()
@@ -57,10 +76,12 @@ class CustomCell: UITableViewCell {
         contentView.addSubview(cellImageView)
         contentView.addSubview(cellCategoryLabel)
         contentView.addSubview(cellNewsLabel)
+        contentView.addSubview(unmarkButton)
         
         cellImageView.translatesAutoresizingMaskIntoConstraints = false
         cellCategoryLabel.translatesAutoresizingMaskIntoConstraints = false
         cellNewsLabel.translatesAutoresizingMaskIntoConstraints = false
+        unmarkButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             cellImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
@@ -74,9 +95,10 @@ class CustomCell: UITableViewCell {
             
             cellNewsLabel.leadingAnchor.constraint(equalTo: cellImageView.trailingAnchor, constant: 16),
             cellNewsLabel.topAnchor.constraint(equalTo: cellCategoryLabel.bottomAnchor, constant: 8),
-            cellNewsLabel.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor)
+            cellNewsLabel.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
+            
+            unmarkButton.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
+            unmarkButton.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor)
         ])
-        
     }
-    
 }
