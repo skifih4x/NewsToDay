@@ -12,14 +12,16 @@ import Firebase
 @objc protocol FirebaseManagerDelegate: AnyObject {
     @objc optional func didCreateUser()
     @objc optional func didSignIn()
-//    func didSignOut()
+    @objc optional func didSignOut()
     @objc optional func didResetPassword()
+    @objc optional func userInfoSaved()
     func didFailError(error: Error)
 }
 
 final class FirebaseManager {
     static let shared = FirebaseManager()
     var delegate: FirebaseManagerDelegate?
+    var userInfo = UserInfo()
     
     func createAccount(email: String,
                        password: String,
@@ -57,8 +59,8 @@ final class FirebaseManager {
     func resetPassword(email: String) {
         Auth.auth().sendPasswordReset(withEmail: email) {error in
             if error == nil {
-                if let resetPassword = self.delegate?.didResetPassword {
-                    resetPassword()
+                if let resetPasswordMethod = self.delegate?.didResetPassword {
+                    resetPasswordMethod()
                 }
             } else {
                 self.delegate?.didFailError(error: error!)
@@ -66,42 +68,41 @@ final class FirebaseManager {
         }
     }
     
-    func signOut() -> Bool {
+    func signOut() {
         do {
             try Auth.auth().signOut()
-            print("SignOut succeed")
-            return true
+            if let signOutMethod = self.delegate?.didSignOut {
+                signOutMethod()
+            }
         } catch {
-            print("Oooops from signOut")
-            return false
+//            self.delegate?.didFailError(error: error!)
         }
     }
     
-    func getUserInfo(userUid: String) -> UserInfo {
+    func getUserInfo(userUid: String) {
         let data = Database.database().reference(withPath: "users")
-        var userInfo = UserInfo()
         data.child(userUid).child("name").getData { error, data in
             if error == nil {
                 if let data = data {
                     let name = data.value as? String ?? "NoName"
-                    userInfo.name = name
-                    print("Hello, \(name)")
+                    self.userInfo.name = name
                 }
             } else {
-                print("Oooops from getUserInfo")
+                self.delegate?.didFailError(error: error!)
             }
         }
         data.child(userUid).child("email").getData { error, data in
             if error == nil {
                 if let data = data {
                     let email = data.value as? String ?? "NoName"
-                    userInfo.email = email
-                    print("Your email, \(email)")
+                    self.userInfo.email = email
+                    if let userInfoSavedMethod = self.delegate?.userInfoSaved {
+                        userInfoSavedMethod()
+                    }
                 }
             } else {
-                print("Oooops from getUserInfo")
+                self.delegate?.didFailError(error: error!)
             }
         }
-        return userInfo
     }
 }
