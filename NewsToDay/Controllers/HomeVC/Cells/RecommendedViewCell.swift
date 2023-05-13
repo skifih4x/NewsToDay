@@ -18,7 +18,7 @@ class RecommendedViewCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "ART"
         label.textColor = Resources.Colors.greyPrimary
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 10, weight: .regular)
         label.textAlignment = .left
         return label
     }()
@@ -26,8 +26,8 @@ class RecommendedViewCell: UICollectionViewCell {
     private let titleLabel: UILabel = {
        let label = UILabel()
         label.textColor = Resources.Colors.blackPrimary
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.numberOfLines = 2
+        label.font = UIFont.boldSystemFont(ofSize: 15)
+        label.numberOfLines = 3
         label.lineBreakStrategy = .standard
         label.textAlignment = .left
         return label
@@ -58,19 +58,10 @@ class RecommendedViewCell: UICollectionViewCell {
     
     func configureCell(article: Article) {
         titleLabel.text = article.title
-        categoryLabel.text = article.content
-        
-        DispatchQueue.global().async {
-            guard let stringUrl = article.urlToImage else { return }
-            guard let imageUrl = URL(string: stringUrl) else { return }
-            guard let imageData = try? Data(contentsOf: imageUrl) else { return }
-            DispatchQueue.main.async {
-                self.imageView.image = UIImage(data: imageData)
-            }
-        }
-        
-        //networkManadger.fetchImage(url: article.urlToImage ?? "", imageView: imageView)
-        //imageView.image = UIImage(named: article.urlToImage ?? "")
+        categoryLabel.text = article.author
+
+        networkManadger.fetchImage(url: article.urlToImage ?? "", imageView: imageView)
+  
     }
     
 }
@@ -92,15 +83,16 @@ extension RecommendedViewCell {
         
         addSubview(categoryLabel)
         categoryLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
+            make.top.equalToSuperview().offset(6)
             make.leading.equalTo(imageView.snp.trailing).offset(20)
+            make.trailing.equalToSuperview().offset(-3)
         }
         
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(categoryLabel.snp.bottom).offset(10)
             make.leading.equalTo(imageView.snp.trailing).offset(20)
-            make.trailing.equalToSuperview().offset(-5)
+            make.trailing.equalToSuperview().offset(-3)
         }
     }
     
