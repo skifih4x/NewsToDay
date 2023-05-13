@@ -25,6 +25,8 @@ final class CategoriesViewController: UIViewController {
     private let categoriesStorage = CategoriesStorage.shared
     private let categories = Category.categories
 
+    var delegate: CategoriesDelegate?
+
     init(isFirstEnter: Bool) {
         super.init(nibName: nil, bundle: nil)
         configureView(isFirstEnter: isFirstEnter)
@@ -96,6 +98,7 @@ extension CategoriesViewController: UICollectionViewDelegate {
 
         categoriesStorage.set(category: categories[indexPath.row])
         cell.activate()
+        delegate?.loadData()
     }
 
     func collectionView(
@@ -108,6 +111,7 @@ extension CategoriesViewController: UICollectionViewDelegate {
 
         categoriesStorage.delete(category: categories[indexPath.row])
         cell.deactivate()
+        delegate?.loadData()
     }
 }
 
