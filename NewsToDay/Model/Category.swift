@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Category: String {
+enum Category: String, CaseIterable {
     case business
     case entertainment
     case general
@@ -15,4 +15,8 @@ enum Category: String {
     case science
     case sports
     case technology
+
+    static var categories: [String] {
+        return self.allCases.map { $0.rawValue }
+    }
 }

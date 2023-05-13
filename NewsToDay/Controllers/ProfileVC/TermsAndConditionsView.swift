@@ -8,7 +8,13 @@
 import UIKit
 import SnapKit
 
+protocol TermsAndConditionsViewDelegate: AnyObject {
+    func TermsAndConditionsView(_ view: TermsAndConditionsView, backButtonPressed button: UIButton)
+}
+
 class TermsAndConditionsView: UIView {
+    
+    weak var delegate: TermsAndConditionsViewDelegate?
     
     private let backButton: UIButton = {
         let button = UIButton(type: .system)
@@ -52,10 +58,6 @@ Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, ad
         return text
     }()
     
-    @objc func backButtonPressed() {
-        print("back")
-    }
-    
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -95,4 +97,12 @@ Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, ad
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
         }
     }    
+}
+
+// MARK: - Target Actions
+private extension TermsAndConditionsView {
+    
+    @objc func backButtonPressed(_ button: UIButton) {
+        delegate?.TermsAndConditionsView(self, backButtonPressed: button)
+    }
 }

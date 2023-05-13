@@ -22,7 +22,7 @@ extension URLSession {
         let task = dataTask(with: request) {
             data, response, error in
             globalQueue.async {
-                if let error {
+                if let error = error {
                     mainQueue.async {
                         completion(.failure(error))
                     }
@@ -35,7 +35,7 @@ extension URLSession {
                     }
                 }
 
-                guard let data else {
+                guard let data = data else {
                     mainQueue.async {
                         completion(.failure(FetchError.codeError))
                     }

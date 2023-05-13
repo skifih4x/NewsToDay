@@ -37,7 +37,10 @@ final class TabBarController: UITabBarController {
         tabBar.layer.masksToBounds = true
         
         let homeController = HomeViewController()
-        let categoriesController = CategoriesViewController()
+
+        let categoriesController = CategoriesViewController(isFirstEnter: false)
+        categoriesController.delegate = homeController
+
         let bookmarksController = BookmarksViewController()
         let profileController = ProfileViewController()
         

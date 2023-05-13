@@ -10,11 +10,12 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     // MARK: - Private Properties
-    private let profilelView = ProfileView()
+    private let profilelView = NewsToDay.ProfileView()
     
     // MARK: - Override Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        profilelView.delegate = self
         addViews()
         addConstraints()
     }
@@ -30,5 +31,30 @@ class ProfileViewController: UIViewController {
             make.top.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview()
         }
+    }
+}
+
+// MARK: - ProfileViewDelegate
+extension ProfileViewController: ProfileViewDelegate {
+    
+    func ProfileView(_ view: ProfileView, languageButtonPressed button: UIButton) {
+        let languageVC = LanguageViewController()
+        languageVC.modalPresentationStyle = .fullScreen
+        languageVC.modalTransitionStyle = .crossDissolve
+        self.present(languageVC, animated: true)
+    }
+    
+    func ProfileView(_ view: ProfileView, termsAndConditionsButtonPressed button: UIButton) {
+        let termsAndConditionsVC = TermsAndConditionsViewController()
+        termsAndConditionsVC.modalPresentationStyle = .fullScreen
+        termsAndConditionsVC.modalTransitionStyle = .crossDissolve
+        self.present(termsAndConditionsVC, animated: true)
+    }
+    
+    func ProfileView(_ view: ProfileView, signOutButtonPressed button: UIButton) {
+        let onboardingVC = OnboardingViewController()
+        onboardingVC.modalPresentationStyle = .fullScreen
+        onboardingVC.modalTransitionStyle = .crossDissolve
+        self.present(onboardingVC, animated: true)
     }
 }

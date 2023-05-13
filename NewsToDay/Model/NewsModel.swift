@@ -10,12 +10,13 @@ import Foundation
 struct NewsModel: Codable {
     let status: String
     let totalResults: Int
-    let articles: [Article]
+    var articles: [Article]
 }
 
 struct Article: Codable {
     let author: String?
-    let title, description: String?
+    let title: String?
+    let description: String?
     let url: String
     let urlToImage: String?
     let publishedAt: String
