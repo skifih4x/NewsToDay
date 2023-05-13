@@ -14,7 +14,6 @@ class ForgetPasswordViewController: CustomViewController<ForgetPasswordView> {
         
         customView.delegate = self
         customView.emailTextField.delegate = self
-        FirebaseManager.shared.delegate = self
     }
     
     func showAlert(title: String, message: String?) {
@@ -29,10 +28,18 @@ class ForgetPasswordViewController: CustomViewController<ForgetPasswordView> {
 
 extension ForgetPasswordViewController: ForgetPasswordViewDelegate {
     func ForgetPasswordView(_ view: ForgetPasswordView, didTapResetPasswordButton button: UIButton) {
-        let email = customView.emailText
+        guard let email = customView.emailText else { return }
         
-        if !email!.isEmpty {
-            FirebaseManager.shared.resetPassword(email: email!)
+        if !email.isEmpty {
+            FirebaseManager.shared.resetPassword(email: email) { [weak self] err in
+                if err == nil {
+                    self?.dismiss(animated: true)
+                } else {
+                    guard let error = err else {return}
+                    let errString = String(error.localizedDescription)
+                    self?.showAlert(title: "Ooops!", message: errString)
+                }
+            }
         } else {
             showAlert(title: "Please fill out all fields", message: nil)
         }
@@ -67,16 +74,5 @@ extension ForgetPasswordViewController: UITextFieldDelegate {
         }
 
         return true
-    }
-}
-
-extension ForgetPasswordViewController: FirebaseManagerDelegate {
-    func didResetPassword() {
-        self.dismiss(animated: true)
-    }
-    
-    func didFailError(error: Error) {
-        let errString = String(error.localizedDescription)
-        showAlert(title: "Ooops!", message: errString)
     }
 }

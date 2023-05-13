@@ -41,7 +41,6 @@ class AuthorizationViewController: CustomViewController<AuthorizationView> {
         customView.emailTextField.delegate = self
         customView.passwordTextField.delegate = self
         customView.confirmPasswordTextField.delegate = self
-        FirebaseManager.shared.delegate = self
     }
     
     func showAlert(title: String, message: String?) {
@@ -56,15 +55,23 @@ class AuthorizationViewController: CustomViewController<AuthorizationView> {
 
 extension AuthorizationViewController: AuthorizationViewDelegate {
     func AuthorizationView(_ view: AuthorizationView, didTapSignInButton button: UIButton) {
-        let username = customView.usernameText
-        let email = customView.emailText
-        let password = customView.passwordText
-        let confirmPassword = customView.cofirmPasswordText
+        guard let username = customView.usernameText else { return }
+        guard let email = customView.emailText else { return }
+        guard let password = customView.passwordText else { return }
+        guard let confirmPassword = customView.cofirmPasswordText else { return }
         
         if signUp {
-            if !username!.isEmpty && !email!.isEmpty && !password!.isEmpty {
+            if !username.isEmpty && !email.isEmpty && !password.isEmpty {
                 if password == confirmPassword {
-                    FirebaseManager.shared.createAccount(email: email!, password: password!, username: username!)
+                    FirebaseManager.shared.createAccount(email: email, password: password, username: username) { err in
+                        if err == nil {
+                            self.dismiss(animated: true)
+                        } else {
+                            guard let error = err else {return}
+                            let errString = String(error.localizedDescription)
+                            self.showAlert(title: "Ooops!", message: errString)
+                        }
+                    }
                 } else {
                     showAlert(title: "Passwords don't match, please try again", message: nil)
                 }
@@ -72,8 +79,16 @@ extension AuthorizationViewController: AuthorizationViewDelegate {
                 showAlert(title: "Please fill out all fields", message: nil)
             }
         } else {
-            if !email!.isEmpty && !password!.isEmpty {
-                FirebaseManager.shared.signIn(email: email!, password: password!)
+            if !email.isEmpty && !password.isEmpty {
+                FirebaseManager.shared.signIn(email: email, password: password) { error in
+                    if error == nil {
+                        self.dismiss(animated: true)
+                    } else {
+                        guard let error = error else {return}
+                        let errString = String(error.localizedDescription)
+                        self.showAlert(title: "Ooops!", message: errString)
+                    }
+                }
             } else {
                 showAlert(title: "Please fill out all fields", message: nil)
             }
@@ -116,26 +131,4 @@ extension AuthorizationViewController: UITextFieldDelegate {
 
         return true
     }
-}
-
-//MARK: - FirebaseManagerDelegate
-extension AuthorizationViewController: FirebaseManagerDelegate {
-    func didCreateUser() {
-        self.dismiss(animated: true)
-    }
-    
-    func didSignIn() {
-        self.dismiss(animated: true)
-    }
-    
-    func didResetPassword() {
-        self.dismiss(animated: true)
-    }
-    
-    func didFailError(error: Error) {
-        let errString = String(error.localizedDescription)
-        showAlert(title: "Ooops!", message: errString)
-    }
-    
-    
 }
