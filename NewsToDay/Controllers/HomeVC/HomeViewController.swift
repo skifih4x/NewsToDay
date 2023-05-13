@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class HomeViewController: UIViewController, UISearchBarDelegate {
+final class HomeViewController: UIViewController, UISearchBarDelegate, CategoriesDelegate {
     
     // MARK: - Variables and constants
     
@@ -62,12 +62,7 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
         view.backgroundColor = .white
         setupCollectionView()
         configure()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         loadData()
-        collectionView.reloadData()
     }
     
     
@@ -78,11 +73,8 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
         networkManadger.fetchTopHeadlines(categories: categoryStorage.categories, country: Country.us) { [weak self] result in
             switch result {
             case .success(let news):
-               
                 self?.news = news.articles
-                DispatchQueue.main.async {
-                    self?.collectionView.reloadData()
-                }
+                self?.collectionView.reloadData()
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -164,5 +156,4 @@ extension HomeViewController {
         }
     }
 }
-
 
