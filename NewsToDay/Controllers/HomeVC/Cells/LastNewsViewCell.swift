@@ -10,6 +10,7 @@ import SnapKit
 
 class LastNewsViewCell: UICollectionViewCell {
     
+    
     // MARK: - Properties
     
     private let categoryLabel: UILabel = {
@@ -65,20 +66,8 @@ class LastNewsViewCell: UICollectionViewCell {
     func configureCell(article: Source) {
         titleLabel.text = article.name
         categoryLabel.text = article.category
-        
     }
     
-    func fetchImage(image: Article) {
-        DispatchQueue.global().async {
-            guard let stringUrl = image.urlToImage else { return }
-            guard let imageUrl = URL(string: stringUrl) else { return }
-            guard let imageData = try? Data(contentsOf: imageUrl) else { return }
-            DispatchQueue.main.async {
-                self.imageView.image = UIImage(data: imageData)
-            }
-        }
-        
-    }
 }
 
 // MARK: - Extention, setup constraints

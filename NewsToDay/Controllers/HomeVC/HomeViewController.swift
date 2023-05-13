@@ -10,6 +10,8 @@ import SnapKit
 
 final class HomeViewController: UIViewController, UISearchBarDelegate {
     
+    // MARK: - Variables and constants
+    
     var searchController  = UISearchController()
     var collectionView: UICollectionView!
     
