@@ -62,11 +62,11 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
         view.backgroundColor = .white
         setupCollectionView()
         configure()
-        loadData()
-        
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        loadData()
         collectionView.reloadData()
     }
     
@@ -75,7 +75,7 @@ final class HomeViewController: UIViewController, UISearchBarDelegate {
     // MARK: - Fetch data
     
     func loadData() {
-        networkManadger.fetchTopHeadlines(categories: [Category.business], country: Country.us) { [weak self] result in
+        networkManadger.fetchTopHeadlines(categories: categoryStorage.categories, country: Country.us) { [weak self] result in
             switch result {
             case .success(let news):
                

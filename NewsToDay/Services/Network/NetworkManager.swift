@@ -93,7 +93,7 @@ final class NetworkManager {
     
     func fetchImage(url: String, imageView: UIImageView) {
             guard let url = URL(string: url) else {
-                preconditionFailure("Cannot implement URL from: (url)")
+                return
             }
             let mainQueue = DispatchQueue.main
             let globalQueue = DispatchQueue.global(qos: .utility)
@@ -117,7 +117,7 @@ extension NetworkManager {
         case codeError
     }
     func fetchTopHeadlines(
-        categories: [Category],
+        categories: [String],
         country: Country,
         completion: @escaping (Result<NewsModel, Error>) -> Void
     ) {
@@ -133,7 +133,7 @@ extension NetworkManager {
             )
 
             let queryParams: [URLQueryItem] = [
-                URLQueryItem(name: "category", value: category.rawValue),
+                URLQueryItem(name: "category", value: category),
                 URLQueryItem(name: "country", value: country.rawValue)
             ]
             let topHeadlinesURLWithCategory = urlMaker.getURL(
