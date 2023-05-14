@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class OneboardingVC: UIViewController    {
+class OnboardingVC: UIViewController    {
 
     let stackView = UIStackView ()
     let button = UIButton (type: .system)
@@ -163,3 +163,5 @@ class OneboardingVC: UIViewController    {
         ])
     }
 }
+
+
