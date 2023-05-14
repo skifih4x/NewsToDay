@@ -37,11 +37,11 @@ extension ForgetPasswordViewController: ForgetPasswordViewDelegate {
                 } else {
                     guard let error = err else {return}
                     let errString = String(error.localizedDescription)
-                    self?.showAlert(title: "Ooops!", message: errString)
+                    self?.showAlert(title: NSLocalizedString("ALERT_ERROR", comment: "Ooops!"), message: errString)
                 }
             }
         } else {
-            showAlert(title: "Please fill out all fields", message: nil)
+            showAlert(title: NSLocalizedString("ALERT_FILL", comment: "Please fill out all fields"), message: nil)
         }
     }
     

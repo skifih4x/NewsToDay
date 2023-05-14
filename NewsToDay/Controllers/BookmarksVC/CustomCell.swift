@@ -30,7 +30,7 @@ class CustomCell: UITableViewCell {
         category.font = UIFont.systemFont(ofSize: 14)
         category.textColor = .lightGray
         category.numberOfLines = 1
-        category.text = "Something went wrong"
+        category.text = NSLocalizedString("BOOKMARKS_CELL_CATEGORY_LABEL", comment: "Something went wrong")
         return category
     }()
     
@@ -40,7 +40,7 @@ class CustomCell: UITableViewCell {
         news.font = UIFont.systemFont(ofSize: 16)
         news.textColor = .black
         news.numberOfLines = 2
-        news.text = "We cant find your saved articles right now"
+        news.text = NSLocalizedString("BOOKMARKS_CELL_NEWS_LABEL", comment: "We cant find your saved articles right now")
         return news
     }()
     

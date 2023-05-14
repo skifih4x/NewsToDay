@@ -26,7 +26,7 @@ class LanguageView: UIView {
     
     private let headerLabel: UILabel = {
         let label = UILabel()
-        label.text = "Language"
+        label.text = NSLocalizedString("LANGUAGE_HEADER_LABEL", comment: "Language")
         label.numberOfLines = 1
         label.font = UIFont.systemFont(ofSize: 24)
         label.textColor = Resources.Colors.blackPrimary
@@ -36,7 +36,7 @@ class LanguageView: UIView {
     
     let englishButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("English", for: .normal)
+        button.setTitle(NSLocalizedString("LANGUAGE_ENGLISH_BUTTON", comment: "English"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.tintColor = Resources.Colors.greyDark
         button.contentHorizontalAlignment = .leading
@@ -49,7 +49,7 @@ class LanguageView: UIView {
     
     let russianButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Russian", for: .normal)
+        button.setTitle(NSLocalizedString("LANGUAGE_RUSSIAN_BUTTON", comment: "Русский"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.tintColor = Resources.Colors.greyDark
         button.contentHorizontalAlignment = .leading

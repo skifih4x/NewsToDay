@@ -20,7 +20,7 @@ class ProfileView: UIView {
     
     private let profileLabel: UILabel = {
         let label = UILabel()
-        label.text = "Profile"
+        label.text = NSLocalizedString("PROFILE_PROFILE_LABEL", comment: "Profile")
         label.numberOfLines = 1
         label.font = UIFont.systemFont(ofSize: 24)
         label.textColor = Resources.Colors.blackPrimary
@@ -29,7 +29,6 @@ class ProfileView: UIView {
     
     let profileImageView: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "ProfileImage")
         image.contentMode = .scaleAspectFit
         image.layer.cornerRadius = 36
         image.clipsToBounds = true
@@ -38,7 +37,6 @@ class ProfileView: UIView {
         
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Dev P"
         label.numberOfLines = 1
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = Resources.Colors.blackPrimary
@@ -47,7 +45,6 @@ class ProfileView: UIView {
     
     let emailLabel: UILabel = {
         let label = UILabel()
-        label.text = "dev@gmail.com"
         label.numberOfLines = 1
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = Resources.Colors.greyPrimary
@@ -56,7 +53,7 @@ class ProfileView: UIView {
     
     let languageButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Language", for: .normal)
+        button.setTitle(NSLocalizedString("PROFILE_LANGUAGE_BUTTON", comment: "Language"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.tintColor = Resources.Colors.greyDark
         button.contentHorizontalAlignment = .leading
@@ -77,7 +74,7 @@ class ProfileView: UIView {
     
     let termsAndConditionsButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Terms & Conditions", for: .normal)
+        button.setTitle(NSLocalizedString("PROFILE_TERMS_AND_CONDITIONS_BUTTON", comment: "Terms & Conditions"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.tintColor = Resources.Colors.greyDark
         button.contentHorizontalAlignment = .leading
@@ -98,7 +95,7 @@ class ProfileView: UIView {
     
     let signOutButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Sign Out", for: .normal)
+        button.setTitle(NSLocalizedString("PROFILE_SIGN_OUT_BUTTON", comment: "Sign Out"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.tintColor = Resources.Colors.greyDark
         button.contentHorizontalAlignment = .leading
@@ -147,7 +144,7 @@ class ProfileView: UIView {
             make.top.equalToSuperview().inset(72)
             make.leading.equalToSuperview().inset(20)
             make.height.equalTo(32)
-            make.width.equalTo(75)
+            make.width.equalTo(100)
         }
         
         profileImageView.snp.makeConstraints { make in

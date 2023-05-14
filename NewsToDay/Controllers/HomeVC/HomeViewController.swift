@@ -31,7 +31,7 @@ final class HomeViewController: UIViewController, UISearchBarDelegate, Categorie
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Browse"
+        label.text = NSLocalizedString("HOME_TITLE_LABEL", comment: "Browse")
         label.textColor = Resources.Colors.blackPrimary
         label.font = UIFont.boldSystemFont(ofSize: 24)
         label.textAlignment = .left
@@ -40,7 +40,7 @@ final class HomeViewController: UIViewController, UISearchBarDelegate, Categorie
     
     private let subtitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Discover things of this world"
+        label.text = NSLocalizedString("HOME_SUBTITLE_LABEL", comment: "Discover things of this world")
         label.textColor = Resources.Colors.greyPrimary
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.textAlignment = .left
@@ -49,7 +49,7 @@ final class HomeViewController: UIViewController, UISearchBarDelegate, Categorie
     
     lazy var searchBar: UISearchBar = {
         let sbar = UISearchBar()
-        sbar.placeholder = "Search"
+        sbar.placeholder = NSLocalizedString("HOME_SEARCH_BAR", comment: "Search")
         sbar.searchBarStyle = .minimal
         sbar.delegate = self
         return sbar

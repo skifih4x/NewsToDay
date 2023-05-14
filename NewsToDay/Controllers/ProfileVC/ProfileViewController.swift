@@ -64,12 +64,12 @@ extension ProfileViewController: ProfileViewDelegate {
     }
     
     func ProfileView(_ view: ProfileView, signOutButtonPressed button: UIButton) {
-        let alertController = UIAlertController(title: "Выход",
-                                                message: "Вы уверены, что хотите выйти из профиля?",
+        let alertController = UIAlertController(title: NSLocalizedString("PROFILE_ALERT_TITLE", comment: "Sign out"),
+                                                message: NSLocalizedString("PROFILE_ALERT_MESSAGE", comment: "Are you sure you want to sign out of your profile?"),
                                                 preferredStyle: .alert)
 
-        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
-        let okAction = UIAlertAction(title: "Да", style: .default) { (_) in
+        let cancelAction = UIAlertAction(title: NSLocalizedString("PROFILE_ALERT_CANCEL_ACTION", comment: "Cancel"), style: .cancel, handler: nil)
+        let okAction = UIAlertAction(title: NSLocalizedString("PROFILE_ALERT_OK_ACTION", comment: "Yes"), style: .default) { (_) in
             self.signOut()
         }
         alertController.addAction(cancelAction)
