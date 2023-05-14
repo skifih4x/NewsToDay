@@ -10,6 +10,7 @@ import UIKit
 
 class OnboardingViewController: UIViewController    {
 
+
     let stackView = UIStackView ()
     let button = UIButton (type: .system)
     let allNewsLabel = UILabel()
@@ -163,3 +164,5 @@ class OnboardingViewController: UIViewController    {
         ])
     }
 }
+
+
