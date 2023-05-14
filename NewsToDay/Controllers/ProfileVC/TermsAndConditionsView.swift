@@ -30,6 +30,7 @@ class TermsAndConditionsView: UIView {
         label.numberOfLines = 1
         label.font = UIFont.systemFont(ofSize: 24)
         label.textColor = Resources.Colors.blackPrimary
+        label.textAlignment = .center
         return label
     }()
     
@@ -78,13 +79,13 @@ Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, ad
     
     private func addConstraints() {
         backButton.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(78)
+            make.centerY.equalTo(headerLabel.snp.centerY)
             make.leading.equalToSuperview().inset(26)
             make.height.width.equalTo(12)
         }
         
         headerLabel.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(68)
+            make.top.equalToSuperview().offset(68)
             make.centerX.equalToSuperview()
             make.height.equalTo(32)
             make.width.equalTo(227)

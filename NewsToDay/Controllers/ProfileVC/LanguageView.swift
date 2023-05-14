@@ -30,39 +30,32 @@ class LanguageView: UIView {
         label.numberOfLines = 1
         label.font = UIFont.systemFont(ofSize: 24)
         label.textColor = Resources.Colors.blackPrimary
+        label.textAlignment = .center
         return label
     }()
     
     let englishButton: UIButton = {
-        var configuration = UIButton.Configuration.filled()
-        configuration.baseBackgroundColor = Resources.Colors.greyLighter
-        configuration.attributedTitle = AttributedString("English", attributes: AttributeContainer([NSAttributedString.Key.foregroundColor: Resources.Colors.greyDark]))
-        configuration.attributedTitle?.font = UIFont.systemFont(ofSize: 16)
-        configuration.titleAlignment = .leading
-        configuration.imagePadding = 250
-        configuration.imagePlacement = .trailing
-        configuration.cornerStyle = .fixed
-        
-        let button = UIButton(configuration: configuration, primaryAction: UIAction(handler: { action in
-          debugPrint("English")
-        }))
+        let button = UIButton(type: .system)
+        button.setTitle("English", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.tintColor = Resources.Colors.greyDark
+        button.contentHorizontalAlignment = .leading
+        button.titleEdgeInsets.left = 24
+        button.backgroundColor = Resources.Colors.greyLighter
+        button.addTarget(self, action: #selector(englishButtonPressed), for: .touchUpInside)
         button.layer.cornerRadius = 12
         return button
     }()
     
     let russianButton: UIButton = {
-        var configuration = UIButton.Configuration.filled()
-        configuration.baseBackgroundColor = Resources.Colors.greyLighter
-        configuration.attributedTitle = AttributedString("Russian", attributes: AttributeContainer([NSAttributedString.Key.foregroundColor: Resources.Colors.greyDark]))
-        configuration.attributedTitle?.font = UIFont.systemFont(ofSize: 16)
-        configuration.titleAlignment = .leading
-        configuration.imagePadding = 250
-        configuration.imagePlacement = .trailing
-        configuration.cornerStyle = .fixed
-        
-        let button = UIButton(configuration: configuration, primaryAction: UIAction(handler: { action in
-          debugPrint("Russian")
-        }))
+        let button = UIButton(type: .system)
+        button.setTitle("Russian", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.tintColor = Resources.Colors.greyDark
+        button.contentHorizontalAlignment = .leading
+        button.titleEdgeInsets.left = 24
+        button.backgroundColor = Resources.Colors.greyLighter
+        button.addTarget(self, action: #selector(russianButtonPressed), for: .touchUpInside)
         button.layer.cornerRadius = 12
         return button
     }()
@@ -88,13 +81,13 @@ class LanguageView: UIView {
     
     private func addConstraints() {
         backButton.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(78)
+            make.centerY.equalTo(headerLabel.snp.centerY)
             make.leading.equalToSuperview().inset(26)
             make.height.width.equalTo(12)
         }
         
         headerLabel.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(68)
+            make.top.equalToSuperview().offset(68)
             make.centerX.equalToSuperview()
             make.height.equalTo(32)
             make.width.equalTo(115)
@@ -121,5 +114,13 @@ private extension LanguageView {
     
     @objc func backButtonPressed(_ button: UIButton) {
         delegate?.LanguageView(self, backButtonPressed: button)
+    }
+    
+    @objc func englishButtonPressed(_ button: UIButton) {
+        print("English")
+    }
+    
+    @objc func russianButtonPressed(_ button: UIButton) {
+        print("Russian")
     }
 }
