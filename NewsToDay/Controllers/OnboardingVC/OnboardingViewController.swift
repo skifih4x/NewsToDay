@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class OneboardingVC: UIViewController    {
+class OnboardingViewController: UIViewController    {
 
     let stackView = UIStackView ()
     let button = UIButton (type: .system)
@@ -65,7 +65,7 @@ class OneboardingVC: UIViewController    {
         pageControl.currentPage += 1
         firstToNowLabel.text = ""
         scrollView.setContentOffset(CGPoint(x:  view.frame.size.width - 70, y: 0), animated: true)
-        button.setTitle("Get started", for: .normal)
+        button.setTitle(NSLocalizedString("ONBOARDING_GET_STARTED_BUTTON", comment: "Get Started"), for: .normal)
        
 
     }
@@ -82,7 +82,7 @@ class OneboardingVC: UIViewController    {
     //Button
     
     func buttonConfigure () {
-        button.configure(title: "Next")
+        button.configure(title: NSLocalizedString("ONBOARDING_BUTTON", comment: "Next"))
     
       
     }
@@ -97,8 +97,8 @@ class OneboardingVC: UIViewController    {
         allNewsLabel.numberOfLines = 2
         allNewsLabel.textColor = .gray
         allNewsLabel.textAlignment = .center
-        allNewsLabel.text = "All news in one place, be \nthe first to know last news"
-        firstToNowLabel.text = "First to now"
+        allNewsLabel.text = NSLocalizedString("ONBOARDING_ALL_NEWS_LABEL", comment: "All news in one place, be \nthe first to know last news")
+        firstToNowLabel.text = NSLocalizedString("ONBOARDING_FIRST_TO_KNOW_LABEL", comment: "First to know")
         firstToNowLabel.textAlignment = .center
         firstToNowLabel.font = UIFont.boldSystemFont(ofSize: 25)
     }
