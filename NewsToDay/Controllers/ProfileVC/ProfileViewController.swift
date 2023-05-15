@@ -52,7 +52,7 @@ extension ProfileViewController: ProfileViewDelegate {
     }
     
     func ProfileView(_ view: ProfileView, signOutButtonPressed button: UIButton) {
-        let onboardingVC = OnboardingViewController()
+        let onboardingVC = OnboardingVC()
         onboardingVC.modalPresentationStyle = .fullScreen
         onboardingVC.modalTransitionStyle = .crossDissolve
         self.present(onboardingVC, animated: true)

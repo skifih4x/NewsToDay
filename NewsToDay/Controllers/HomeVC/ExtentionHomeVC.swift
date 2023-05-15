@@ -22,7 +22,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case .categories:
             return categoryStorage.categories.count
         case .lastNews:
-            return soureces.count//news.count
+            return soureces.count
         case .recommended:
             return news.count
         }
@@ -51,7 +51,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
         
             let article = soureces[indexPath.item]
-            cell.configureCell(article: article)
+            let shuffledImage = imageNames.shuffled()
+            let image = shuffledImage[indexPath.item % shuffledImage.count]
+            cell.configureCell(article: article, image: image)
     
             return cell
             
@@ -124,15 +126,15 @@ extension HomeViewController {
         item.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 5)
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(
-            widthDimension: .absolute(90),
-            heightDimension: .absolute(32)),subitems: [item])
+            widthDimension: .absolute(100),
+            heightDimension: .absolute(45)),subitems: [item])
         
         let section = createLayoutSection(group: group,
                                           behavior: .continuous,
                                           interGroupSpacing: 16,
                                           supplementaryItems: [],
                                           contentInsets: false)
-        section.contentInsets = .init(top: 15, leading: 16, bottom: 24 , trailing: 0)
+        section.contentInsets = .init(top: 5, leading: 16, bottom: 24 , trailing: 0)
         
         return section
         

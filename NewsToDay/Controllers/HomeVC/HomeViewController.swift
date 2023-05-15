@@ -8,12 +8,13 @@
 import UIKit
 import SnapKit
 
-final class HomeViewController: UIViewController, UISearchBarDelegate, CategoriesDelegate {
+final class HomeViewController: UIViewController, CategoriesDelegate {
     
     // MARK: - Variables and constants
     
-    var searchController  = UISearchController()
-    var collectionView: UICollectionView!
+    let imageNames = ["cos", "hologram1", "hologram3", "parsons"]
+    
+    private var query: String?
     
     var networkManadger = NetworkManager.shared
     var categoryStorage = CategoriesStorage.shared
@@ -23,11 +24,11 @@ final class HomeViewController: UIViewController, UISearchBarDelegate, Categorie
     var news: [Article] = []
     var soureces: [Source] = []
     
-    var headline: HeadlineSources?
-    
    lazy var sections: [Section] = [.categories, .lastNews, .recommended]
     
     // MARK: - UI Properties
+    
+    var collectionView: UICollectionView!
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -55,6 +56,15 @@ final class HomeViewController: UIViewController, UISearchBarDelegate, Categorie
         return sbar
     }()
     
+    lazy var tableView: UITableView = {
+       let table = UITableView()
+        table.delegate = self
+        table.dataSource = self
+        table.showsVerticalScrollIndicator = false
+        
+       return table
+    }()
+    
 // MARK: - View's lifecycle
     
     override func viewDidLoad() {
@@ -63,6 +73,9 @@ final class HomeViewController: UIViewController, UISearchBarDelegate, Categorie
         setupCollectionView()
         configure()
         loadData()
+        
+        tableView.isHidden = true
+        setupTableView()
     }
     
     
@@ -80,12 +93,27 @@ final class HomeViewController: UIViewController, UISearchBarDelegate, Categorie
             }
         }
         
-        networkManadger.fetchHeadlinesSources(category: categories, country: Country.ru) { [weak self] result in
+        networkManadger.fetchHeadlinesSources(category: categories, country: Country.us) { [weak self] result in
             switch result {
             case .success(let soureces):
                 self?.soureces = soureces.sources
                 DispatchQueue.main.async {
                     self?.collectionView.reloadData()
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func fetchSearchData(for searchText: String) {
+        
+        networkManadger.fetchSearch(searchText: searchText) { [weak self] result in
+            switch result {
+            case .success(let news):
+                self?.news = news.articles
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -115,6 +143,12 @@ final class HomeViewController: UIViewController, UISearchBarDelegate, Categorie
     
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+    }
+    
+    private func setupTableView() {
+        
+        tableView.register(SearchCell.self, forCellReuseIdentifier: "SearchCell")
         
     }
     
@@ -152,6 +186,13 @@ extension HomeViewController {
             make.centerX.equalToSuperview()
             make.top.equalTo(searchBar.snp.bottom).offset(5)
             make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom).offset(10)
+            make.trailing.leading.equalToSuperview().inset(10)
             make.bottom.equalToSuperview()
         }
     }
