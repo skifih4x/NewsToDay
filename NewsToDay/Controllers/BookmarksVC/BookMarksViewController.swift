@@ -9,6 +9,9 @@ import UIKit
 
 class BookmarksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var storageManager: StorageManagerProtocol = StorageManager()
+    var bookmarks: [BookmarkModel] = []
+    
     let vectorView: UIImageView = {
         let vector = UIImageView()
         vector.translatesAutoresizingMaskIntoConstraints = false
@@ -67,7 +70,10 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         setConstraints()
     }
     
-    var data = [1, 2, 3, 4]
+    override func viewWillAppear(_ animated: Bool) {
+        bookmarks = storageManager.retrieveAll()
+        tableView.reloadData()
+    }
     
     func edit(rowIndexPath indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .normal, title: "Delete") { [weak self] (_,_, completionHandler) in
@@ -76,7 +82,8 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
                 completionHandler(false)
             }))
             alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
-                self?.data.remove(at: indexPath.row)
+                self?.storageManager.deleteItem(by: self?.bookmarks[indexPath.row].url ?? "")
+                self?.bookmarks.remove(at: indexPath.row)
                 self?.tableView.deleteRows(at: [indexPath], with: .automatic)
                 completionHandler(true)
             }))
@@ -105,7 +112,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let numberOfRows = data.count
+        let numberOfRows = bookmarks.count
         tableView.isHidden = numberOfRows == 0
         return numberOfRows
     }
@@ -117,7 +124,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.textLabel?.text = indexPath.row.description
         cell.delegate = self
         cell.tag = indexPath.row
-        //        cell.configure(img: <#T##UIImage#>, category: <#T##String#>, news: <#T##String#>)  // сюда должны поступать данные по отмеченным новостям
+        cell.configure(img: UIImage(), category: bookmarks[indexPath.row].category, news: bookmarks[indexPath.row].title ?? "")  // сюда должны поступать данные по отмеченным новостям
         return cell
     }
 }
@@ -157,7 +164,8 @@ extension BookmarksViewController: CellDelegate {
         let alert = UIAlertController(title: "Do You want to delete this bookmark?", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
-            self.data.remove(at: indexPath.row)
+            self.storageManager.deleteItem(by: self.bookmarks[indexPath.row].url)
+            self.bookmarks.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }))
         present(alert, animated: true, completion: nil)
