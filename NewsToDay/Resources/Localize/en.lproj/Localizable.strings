@@ -1,0 +1,101 @@
+/*
+  Localizable.strings
+  NewsToDay
+
+  Created by Ilyas Tyumenev on 14.05.2023.
+  
+*/
+AUTHORIZATION_VC_TRUE_TOP_LABEL = "Welcome to NewsToDay";
+AUTHORIZATION_VC_TRUE_GREETING_LABEL = "Hello, I guess you are new around here. You can start using the application after sign up.";
+AUTHORIZATION_VC_TRUE_SIGNIN_BUTTON = "Sign Up";
+AUTHORIZATION_VC_TRUE_CREATE_ACCOUNT_LABEL = "Already have an account?";
+AUTHORIZATION_VC_TRUE_CREATE_ACCOUNT_BUTTON = "Sign In";
+AUTHORIZATION_VC_FALSE_TOP_LABEL = "Welcome Back 👋";
+AUTHORIZATION_VC_FALSE_GREETING_LABEL = "I am happy to see you again. You can continue where you left off by logging in";
+AUTHORIZATION_VC_FALSE_SIGNIN_BUTTON = "Sign In";
+AUTHORIZATION_VC_FALSE_CREATE_ACCOUNT_LABEL = "Don't have an account?";
+AUTHORIZATION_VC_FALSE_CREATE_ACCOUNT_BUTTON = "Sign Up";
+
+ALERT_OK = "OK";
+ALERT_ERROR = "Ooops!";
+ALERT_FILL = "Please fill out all fields";
+ALERT_DONT_MATCH = "Passwords don't match, please try again";
+
+AUTHORIZATION_VIEW_USERNAME_TEXTFIELD = "Username";
+AUTHORIZATION_VIEW_EMAIL_TEXTFIELD = "Email Address";
+AUTHORIZATION_VIEW_PASSWORD_TEXTFIELD = "Password";
+AUTHORIZATION_VIEW_CONFIRM_PASSWORD_TEXTFIELD = "Repeat Password";
+AUTHORIZATION_VIEW_FORGOT_PASSWORD_BUTTON = "Forgot your password?";
+
+AUTHORIZATION_VIEW_SIGNIN_BUTTON = "Sign Up";
+AUTHORIZATION_VIEW_CREATE_ACCOUNT_LABEL = "Already have an account?";
+AUTHORIZATION_VIEW_CREATE_ACCOUNT_BUTTON = "Sign In";
+
+FORGET_GO_BACK_BUTTON = "x";
+FORGET_TOP_LABEL = "Reset your password";
+FORGET_GREETING_LABEL = "Don't worry. Please enter your email and we will send you a password reset email.";
+FORGET_EMAIL_TEXTFIELD = "Email Address";
+FORGET_RESET_PASSWORD_BUTTON = "Reset";
+
+ONBOARDING_FIRST_TO_KNOW_LABEL = "First to know";
+ONBOARDING_ALL_NEWS_LABEL = "All news in one place, be \nthe first to know last news";
+ONBOARDING_NEXT_BUTTON = "Next";
+ONBOARDING_GET_STARTED_BUTTON = "Get Started";
+
+HOME_TITLE_LABEL = "Browse";
+HOME_SUBTITLE_LABEL = "Discover things of this world";
+HOME_SEARCH_BAR = "Search";
+
+CATEGORIES_ONBOARDING_HEADER_TITLE = "Select your favourite topics";
+CATEGORIES_HEADER_TITLE = "Categories";
+CATEGORIES_ONBOARDING_SUBTITLE = "Select some of your favourite topics to let us suggest better news for you";
+CATEGORIES_SUBTITLE = "Thousands of articles in each category";
+CATEGORIES_NEXT_BUTTON_TITLE = "Next";
+
+BOOKMARKS_TITLE_LABEL = "Bookmarks";
+BOOKMARKS_SUBTITLE_LABEL = "Saved articles to the library";
+BOOKMARKS_MESSAGE_VIEW = "You haven't saved any articles yet. Start reading and bookmarking them now";
+BOOKMARKS_CELL_CATEGORY_LABEL = "Something went wrong";
+BOOKMARKS_CELL_NEWS_LABEL = "We cant find your saved articles right now";
+BOOKMARKS_ALERT_TITLE = "Do You want to delete this bookmark?";
+BOOKMARKS_CANCEL_ALERT_TITLE = "Cancel";
+BOOKMARKS_DELETE_ALERT_TITLE = "Delete";
+
+PROFILE_PROFILE_LABEL = "Profile";
+PROFILE_LANGUAGE_BUTTON = "Language";
+PROFILE_TERMS_AND_CONDITIONS_BUTTON = "Terms & Conditions";
+PROFILE_SIGN_OUT_BUTTON = "Sign Out";
+PROFILE_ALERT_TITLE = "Sign out";
+PROFILE_ALERT_MESSAGE = "Are you sure you want to sign out of your profile?";
+PROFILE_ALERT_CANCEL_ACTION = "Cancel";
+PROFILE_ALERT_OK_ACTION = "Yes";
+
+LANGUAGE_HEADER_LABEL = "Language";
+LANGUAGE_ENGLISH_BUTTON = "English";
+LANGUAGE_RUSSIAN_BUTTON = "Русский";
+
+TERMS_AND_CONDITIONS_HEADER_LABEL = "Terms & Conditions";
+TERMS_AND_CONDITIONS_MAIN_TEXT = "The User Agreement for the application (hereinafter referred to as the Agreement) is a special type of agreement between the owners of the application and its users regarding the procedure for its use, and also defines the obligations of the parties and their responsibilities.
+
+This document is not required by the current legislation, but it helps users (1) understand the permissible ways they use the application on a smartphone or other device; (2) determine the possible consequences of using the application in one way or another; (3) identify the liability measures applied to users for violating the established rules.
+
+The agreement is nothing more than the rules of the game for the user, because of this, it is difficult to overestimate the value of this document. As soon as the user agrees to the terms of the Agreement (for example, by ticking a box in the allotted field or by installing the program on a smartphone), the terms of this Agreement are legally binding for the user. Thus, the violation by the user of the terms of the Agreement inevitably entails the application to such a user of the types of liability provided for in such an Agreement.
+
+The proposed document template is suitable for applications of any kind, for example, an online store, a game, a social network, access to a cloud platform, business, media (magazines), etc. Please note that this document cannot be used for websites (you can use the User Agreement for the website) or cloud platforms (you can use the User Agreement for the cloud platform).
+
+The User Agreement should not be identified with the Privacy Policy (a document defining the procedure for collecting and processing personal data of users) for several reasons. Firstly, the privacy policy is a mandatory document, and secondly, such a document exclusively focuses on the methods, methods, timing and purposes of processing and collecting personal data.
+
+
+How to use the document
+
+The User Agreement can be used by individuals and legal entities, as well as individual entrepreneurs who create their own application and place it for download by users on Google Play or the App Store. The document is valid without limitation of its validity.
+
+The structure of the proposed template allows you to determine (1) whether you need to create your own personal account to use the application; and (2) what actions are prohibited to users; and (3) whether users have the right to post their own copyrighted content; and (4) whether it is possible to make purchases of goods/services through the application; and (5) is it possible to purchase virtual objects inside the application itself (in-app); and (6) liability measures of the parties, as well as other important provisions.
+
+Please note that some provisions of this document are set out in capital letters. This is done in order to draw the user's attention to important points concerning, for example, the limitation of the responsibility of application developers for this or that harm caused to the user for using the application and its content.
+
+
+Applicable law
+
+This User Agreement for the application has been developed in accordance with the current civil legislation of the Russian Federation, the norms of the Federal Law 'On Consumer Rights Protection', the norms of the Federal Law...
+";
