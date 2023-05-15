@@ -20,35 +20,31 @@ class ProfileView: UIView {
     
     private let profileLabel: UILabel = {
         let label = UILabel()
-        label.text = "Profile"
+        label.text = NSLocalizedString("PROFILE_PROFILE_LABEL", comment: "Profile")
         label.numberOfLines = 1
         label.font = UIFont.systemFont(ofSize: 24)
         label.textColor = Resources.Colors.blackPrimary
         return label
     }()
     
-    private let profileImageView: UIImageView = {
+    let profileImageView: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "ProfileImage")
         image.contentMode = .scaleAspectFit
         image.layer.cornerRadius = 36
         image.clipsToBounds = true
         return image
     }()
-    
-    
-    private let nameLabel: UILabel = {
+        
+    let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Dev P"
         label.numberOfLines = 1
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = Resources.Colors.blackPrimary
         return label
     }()
     
-    private let emailLabel: UILabel = {
+    let emailLabel: UILabel = {
         let label = UILabel()
-        label.text = "dev@gmail.com"
         label.numberOfLines = 1
         label.font = UIFont.systemFont(ofSize: 14)
         label.textColor = Resources.Colors.greyPrimary
@@ -56,54 +52,66 @@ class ProfileView: UIView {
     }()
     
     let languageButton: UIButton = {
-        var configuration = UIButton.Configuration.filled()
-        configuration.baseBackgroundColor = Resources.Colors.greyLighter
-        configuration.attributedTitle = AttributedString("Language", attributes: AttributeContainer([NSAttributedString.Key.foregroundColor: Resources.Colors.greyDark]))
-        configuration.attributedTitle?.font = UIFont.systemFont(ofSize: 16)
-        configuration.titleAlignment = .leading
-        configuration.image = UIImage(named: "LanguageButton")
-        configuration.imagePadding = 250
-        configuration.imagePlacement = .trailing
-        configuration.cornerStyle = .fixed
-        
-        let button = UIButton(configuration: configuration, primaryAction: nil)
+        let button = UIButton(type: .system)
+        button.setTitle(NSLocalizedString("PROFILE_LANGUAGE_BUTTON", comment: "Language"), for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.tintColor = Resources.Colors.greyDark
+        button.contentHorizontalAlignment = .leading
+        button.titleEdgeInsets.left = 24
+        button.backgroundColor = Resources.Colors.greyLighter
+        button.setBackgroundColorForTap(color: Resources.Colors.purplePrimary, forState: .highlighted)
         button.addTarget(self, action: #selector(languageButtonPressed), for: .touchUpInside)
         button.layer.cornerRadius = 12
         return button
     }()
     
+    private let languageButtonImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "LanguageButton")
+        image.contentMode = .scaleAspectFit
+        return image
+    }()
+    
     let termsAndConditionsButton: UIButton = {
-        var configuration = UIButton.Configuration.filled()
-        configuration.baseBackgroundColor = Resources.Colors.greyLighter
-        configuration.attributedTitle = AttributedString("Terms & Conditions", attributes: AttributeContainer([NSAttributedString.Key.foregroundColor: Resources.Colors.greyDark]))
-        configuration.attributedTitle?.font = UIFont.systemFont(ofSize: 16)
-        configuration.titleAlignment = .leading
-        configuration.image = UIImage(named: "LanguageButton")
-        configuration.imagePadding = 180
-        configuration.imagePlacement = .trailing
-        configuration.cornerStyle = .fixed
-        
-        let button = UIButton(configuration: configuration, primaryAction: nil)
+        let button = UIButton(type: .system)
+        button.setTitle(NSLocalizedString("PROFILE_TERMS_AND_CONDITIONS_BUTTON", comment: "Terms & Conditions"), for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.tintColor = Resources.Colors.greyDark
+        button.contentHorizontalAlignment = .leading
+        button.titleEdgeInsets.left = 24
+        button.backgroundColor = Resources.Colors.greyLighter
+        button.setBackgroundColorForTap(color: Resources.Colors.purplePrimary, forState: .highlighted)
         button.addTarget(self, action: #selector(termsAndConditionsButtonPressed), for: .touchUpInside)
         button.layer.cornerRadius = 12
         return button
     }()
     
+    private let termsAndConditionsButtonImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "LanguageButton")
+        image.contentMode = .scaleAspectFit
+        return image
+    }()
+    
     let signOutButton: UIButton = {
-        var configuration = UIButton.Configuration.filled()
-        configuration.baseBackgroundColor = Resources.Colors.greyLighter
-        configuration.attributedTitle = AttributedString("Sign Out", attributes: AttributeContainer([NSAttributedString.Key.foregroundColor: Resources.Colors.greyDark]))
-        configuration.attributedTitle?.font = UIFont.systemFont(ofSize: 16)
-        configuration.titleAlignment = .leading
-        configuration.image = UIImage(named: "SignOutButton")
-        configuration.imagePadding = 250
-        configuration.imagePlacement = .trailing
-        configuration.cornerStyle = .fixed
-        
-        let button = UIButton(configuration: configuration, primaryAction: nil)
+        let button = UIButton(type: .system)
+        button.setTitle(NSLocalizedString("PROFILE_SIGN_OUT_BUTTON", comment: "Sign Out"), for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.tintColor = Resources.Colors.greyDark
+        button.contentHorizontalAlignment = .leading
+        button.titleEdgeInsets.left = 24
+        button.backgroundColor = Resources.Colors.greyLighter
+        button.setBackgroundColorForTap(color: Resources.Colors.purplePrimary, forState: .highlighted)
         button.addTarget(self, action: #selector(signOutButtonPressed), for: .touchUpInside)
         button.layer.cornerRadius = 12
         return button
+    }()
+    
+    private let signOutButtonImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "SignOutButton")
+        image.contentMode = .scaleAspectFit
+        return image
     }()
     
     // MARK: - Initializers
@@ -124,8 +132,11 @@ class ProfileView: UIView {
         addSubview(nameLabel)
         addSubview(emailLabel)
         addSubview(languageButton)
+        addSubview(languageButtonImage)
         addSubview(termsAndConditionsButton)
+        addSubview(termsAndConditionsButtonImage)
         addSubview(signOutButton)
+        addSubview(signOutButtonImage)
     }
     
     private func addConstraints() {
@@ -133,7 +144,7 @@ class ProfileView: UIView {
             make.top.equalToSuperview().inset(72)
             make.leading.equalToSuperview().inset(20)
             make.height.equalTo(32)
-            make.width.equalTo(75)
+            make.width.equalTo(100)
         }
         
         profileImageView.snp.makeConstraints { make in
@@ -163,6 +174,13 @@ class ProfileView: UIView {
             make.height.equalTo(56)
         }
         
+        languageButtonImage.snp.makeConstraints { make in
+            make.centerY.equalTo(languageButton.snp.centerY)
+            make.centerX.equalTo(signOutButtonImage.snp.centerX)
+            make.height.equalTo(11)
+            make.width.equalTo(7)
+        }
+        
         termsAndConditionsButton.snp.makeConstraints { make in
             make.bottom.equalTo(signOutButton.snp.top).inset(-28)
             make.leading.equalToSuperview().inset(20)
@@ -170,11 +188,25 @@ class ProfileView: UIView {
             make.height.equalTo(56)
         }
         
+        termsAndConditionsButtonImage.snp.makeConstraints { make in
+            make.centerY.equalTo(termsAndConditionsButton.snp.centerY)
+            make.centerX.equalTo(signOutButtonImage.snp.centerX)
+            make.height.equalTo(11)
+            make.width.equalTo(7)
+        }
+        
         signOutButton.snp.makeConstraints { make in
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(28)
             make.leading.equalToSuperview().inset(20)
             make.trailing.equalToSuperview().inset(19)
             make.height.equalTo(56)
+        }
+        
+        signOutButtonImage.snp.makeConstraints { make in
+            make.centerY.equalTo(signOutButton.snp.centerY)
+            make.trailing.equalTo(signOutButton.snp.trailing).inset(18)
+            make.height.equalTo(20)
+            make.width.equalTo(16)
         }
     }
 }
@@ -192,5 +224,20 @@ private extension ProfileView {
     
     @objc func signOutButtonPressed(_ button: UIButton) {
         delegate?.ProfileView(self, signOutButtonPressed: button)
+    }
+}
+
+// MARK: - UIButton Extension
+extension UIButton {
+    func setBackgroundColorForTap(color: UIColor, forState: UIControl.State) {
+        self.clipsToBounds = true
+        UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
+        if let context = UIGraphicsGetCurrentContext() {
+            context.setFillColor(color.cgColor)
+            context.fill(CGRect(x: 0, y: 0, width: 1, height: 1))
+            let colorImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            self.setBackgroundImage(colorImage, for: forState)
+        }
     }
 }

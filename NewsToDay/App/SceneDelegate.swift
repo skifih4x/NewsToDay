@@ -20,9 +20,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
-        window?.rootViewController = tabBarController
-        window?.overrideUserInterfaceStyle = .light
-        window?.makeKeyAndVisible()
+        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+        if launchedBefore {
+            Auth.auth().addStateDidChangeListener { (auth, user) in
+                if user == nil {
+                    let authVC = AuthorizationViewController()
+                    authVC.modalPresentationStyle = .fullScreen
+                    self.window?.rootViewController?.present(authVC, animated: true)
+                }
+            }
+            window?.rootViewController = tabBarController
+        } else {
+            window?.rootViewController = OnboardingViewController()
+        }
+            window?.overrideUserInterfaceStyle = .light
+            window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -35,13 +47,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
-        Auth.auth().addStateDidChangeListener { (auth, user) in
-            if user == nil {
-                let authVC = AuthorizationViewController()
-                authVC.modalPresentationStyle = .fullScreen
-                self.window?.rootViewController?.present(authVC, animated: true)
-            }
-        }
     }
 
     func sceneWillResignActive(_ scene: UIScene) {

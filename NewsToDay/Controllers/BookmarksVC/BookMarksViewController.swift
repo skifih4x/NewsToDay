@@ -29,7 +29,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     let messageView: UILabel = {
         let message = UILabel()
         message.translatesAutoresizingMaskIntoConstraints = false
-        message.text = "You haven't saved any articles yet. Start reading and bookmarking them now"
+        message.text = NSLocalizedString("BOOKMARKS_MESSAGE_VIEW", comment: "You haven't saved any articles yet. Start reading and bookmarking them now")
         message.font = UIFont.systemFont(ofSize: 16)
         message.numberOfLines = 3
         message.textColor = .black
@@ -40,7 +40,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     let titleLabel: UILabel = {
         let title = UILabel()
         title.translatesAutoresizingMaskIntoConstraints = false
-        title.text = "Bookmarks"
+        title.text = NSLocalizedString("BOOKMARKS_TITLE_LABEL", comment: "Bookmarks")
         title.font = UIFont.systemFont(ofSize: 24)
         title.textColor = .black
         title.textAlignment = .left
@@ -50,7 +50,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     let subtitleLabel: UILabel = {
         let subtitle = UILabel()
         subtitle.translatesAutoresizingMaskIntoConstraints = false
-        subtitle.text = "Saved articles to the library"
+        subtitle.text = NSLocalizedString("BOOKMARKS_SUBTITLE_LABEL", comment: "Saved articles to the library")
         subtitle.font = UIFont.systemFont(ofSize: 16)
         subtitle.textColor = .lightGray
         subtitle.textAlignment = .left
@@ -77,15 +77,25 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func edit(rowIndexPath indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .normal, title: "Delete") { [weak self] (_,_, completionHandler) in
-            let alert = UIAlertController(title: "Do You want to delete this bookmark?", message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
-                completionHandler(false)
-            }))
-            alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
-                self?.storageManager.deleteItem(by: self?.bookmarks[indexPath.row].url ?? "")
-                self?.bookmarks.remove(at: indexPath.row)
-                self?.tableView.deleteRows(at: [indexPath], with: .automatic)
-                completionHandler(true)
+            let alert = UIAlertController(
+                title: NSLocalizedString("BOOKMARKS_ALERT_TITLE", comment: "Do You want to delete this bookmark?"),
+                message: "",
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(
+                title: NSLocalizedString("BOOKMARKS_CANCEL_ALERT_TITLE", comment: "Cancel"),
+                style: .cancel,
+                handler: { (_) in
+                    completionHandler(false)
+                }))
+            alert.addAction(UIAlertAction(
+                title: NSLocalizedString("BOOKMARKS_DELETE_ALERT_TITLE", comment: "Delete"),
+                style: .destructive,
+                handler: { (_) in
+                    self.storageManager.deleteItem(by: self.bookmarks[indexPath.row].url)
+                    self.bookmarks.remove(at: indexPath.row)
+                    self?.tableView.deleteRows(at: [indexPath], with: .automatic)
+                    completionHandler(true)
             }))
             self?.present(alert, animated: true)
         }
@@ -161,12 +171,23 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
 extension BookmarksViewController: CellDelegate {
     func buttonPressed(_ cell: CustomCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
-        let alert = UIAlertController(title: "Do You want to delete this bookmark?", message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
-            self.storageManager.deleteItem(by: self.bookmarks[indexPath.row].url)
-            self.bookmarks.remove(at: indexPath.row)
-            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        let alert = UIAlertController(
+            title: NSLocalizedString("BOOKMARKS_ALERT_TITLE", comment: "Do You want to delete this bookmark?"),
+            message: "",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(
+            title: NSLocalizedString("BOOKMARKS_CANCEL_ALERT_TITLE", comment: "Cancel"),
+            style: .cancel,
+            handler: nil
+        ))
+        alert.addAction(UIAlertAction(
+            title: NSLocalizedString("BOOKMARKS_DELETE_ALERT_TITLE", comment: "Delete"),
+            style: .destructive,
+            handler: { _ in
+                self.storageManager.deleteItem(by: self.bookmarks[indexPath.row].url)
+                self.bookmarks.remove(at: indexPath.row)
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }))
         present(alert, animated: true, completion: nil)
     }

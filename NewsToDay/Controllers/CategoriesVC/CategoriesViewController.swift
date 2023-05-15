@@ -45,8 +45,9 @@ final class CategoriesViewController: UIViewController {
 
     @objc
     private func nextButtonTapped() {
-        //TODO: Добавить делегата в SplashViewController для перехода в рутовый контроллер
-        dismiss(animated: true)
+        let tabBarController = TabBarController()
+        tabBarController.modalPresentationStyle = .fullScreen
+        self.present(tabBarController, animated: true)
     }
 }
 

@@ -19,7 +19,7 @@ class AuthorizationView: CustomView {
     //MARK: - Variables
     lazy var topLabel: UILabel = {
         let element = UILabel()
-        element.text = "Welcome to NewsToDay"
+        element.text = NSLocalizedString("AUTHORIZATION_VC_TRUE_TOP_LABEL", comment: "Welcome to NewsToDay")
         element.font = UIFont.systemFont(ofSize: 28, weight: .bold)
         element.textColor = Resources.Colors.blackPrimary
         element.translatesAutoresizingMaskIntoConstraints = false
@@ -28,7 +28,7 @@ class AuthorizationView: CustomView {
     
     lazy var greetingLabel: UILabel = {
         let element = UILabel()
-        element.text = "Hello, I guess you are new around here. You can start using the application after sign up."
+        element.text = NSLocalizedString("AUTHORIZATION_VC_TRUE_GREETING_LABEL", comment: "Hello, I guess you are new around here. You can start using the application after sign up.")
         element.lineBreakMode = .byWordWrapping
         element.numberOfLines = 2
         element.font = UIFont.systemFont(ofSize: 18, weight: .regular)
@@ -59,7 +59,7 @@ class AuthorizationView: CustomView {
         element.leftView = containerView
         element.leftViewMode = .always
 
-        element.placeholder = "Username"
+        element.placeholder = NSLocalizedString("AUTHORIZATION_VIEW_USERNAME_TEXTFIELD", comment: "Username")
         element.keyboardType = .default
         element.autocorrectionType = .no
         element.translatesAutoresizingMaskIntoConstraints = false
@@ -79,7 +79,7 @@ class AuthorizationView: CustomView {
         element.leftView = containerView
         element.leftViewMode = .always
 
-        element.placeholder = "Email Address"
+        element.placeholder = NSLocalizedString("AUTHORIZATION_VIEW_EMAIL_TEXTFIELD", comment: "Email Address")
         element.keyboardType = .emailAddress
         element.autocorrectionType = .no
         element.translatesAutoresizingMaskIntoConstraints = false
@@ -111,7 +111,7 @@ class AuthorizationView: CustomView {
         element.rightView = containerViewRight
         element.rightViewMode = .always
         
-        element.placeholder = "Password"
+        element.placeholder = NSLocalizedString("AUTHORIZATION_VIEW_PASSWORD_TEXTFIELD", comment: "Password")
         element.autocorrectionType = .no
         element.isSecureTextEntry = true
         element.translatesAutoresizingMaskIntoConstraints = false
@@ -143,7 +143,7 @@ class AuthorizationView: CustomView {
         element.rightView = containerViewRight
         element.rightViewMode = .always
         
-        element.placeholder = "Repeat Password"
+        element.placeholder = NSLocalizedString("AUTHORIZATION_VIEW_CONFIRM_PASSWORD_TEXTFIELD", comment: "Repeat Password")
         element.isSecureTextEntry = true
         element.autocorrectionType = .no
         element.translatesAutoresizingMaskIntoConstraints = false
@@ -153,7 +153,7 @@ class AuthorizationView: CustomView {
     lazy var forgotPasswordButton: UIButton = {
         let element = UIButton()
         element.backgroundColor = nil
-        element.setTitle("Forgot your password?", for: .normal)
+        element.setTitle(NSLocalizedString("AUTHORIZATION_VIEW_FORGOT_PASSWORD_BUTTON", comment: "Forgot your password?"), for: .normal)
         element.setTitleColor(Resources.Colors.blackPrimary, for: .normal)
         element.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         element.translatesAutoresizingMaskIntoConstraints = false
@@ -165,7 +165,7 @@ class AuthorizationView: CustomView {
     lazy var signInButton: UIButton = {
         let element = UIButton()
         element.backgroundColor = Resources.Colors.purplePrimary
-        element.setTitle("Sign Up", for: .normal)
+        element.setTitle(NSLocalizedString("AUTHORIZATION_VIEW_SIGNIN_BUTTON", comment: "Sign Up"), for: .normal)
         element.setTitleColor(.white, for: .normal)
         element.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         element.layer.cornerRadius = 12
@@ -184,7 +184,7 @@ class AuthorizationView: CustomView {
     
     lazy var createAccountLabel: UILabel = {
         let element = UILabel()
-        element.text = "Already have an account?"
+        element.text = NSLocalizedString("AUTHORIZATION_VIEW_CREATE_ACCOUNT_LABEL", comment: "Already have an account?")
         element.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         element.textColor = Resources.Colors.blackLighter
         element.translatesAutoresizingMaskIntoConstraints = false
@@ -194,7 +194,7 @@ class AuthorizationView: CustomView {
     lazy var createAccountButton: UIButton = {
         let element = UIButton()
         element.backgroundColor = nil
-        element.setTitle("Sign In", for: .normal)
+        element.setTitle(NSLocalizedString("AUTHORIZATION_VIEW_CREATE_ACCOUNT_BUTTON", comment: "Sign In"), for: .normal)
         element.setTitleColor(Resources.Colors.blackPrimary, for: .normal)
         element.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .heavy)
         element.translatesAutoresizingMaskIntoConstraints = false

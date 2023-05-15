@@ -12,23 +12,23 @@ class AuthorizationViewController: CustomViewController<AuthorizationView> {
     var signUp: Bool = true {
         willSet {
             if newValue {
-                customView.topLabel.text = "Welcome to NewsToDay"
-                customView.greetingLabel.text = "Hello, I guess you are new around here. You can start using the application after sign up."
+                customView.topLabel.text = NSLocalizedString("AUTHORIZATION_VC_TRUE_TOP_LABEL", comment: "Welcome to NewsToDay")
+                customView.greetingLabel.text = NSLocalizedString("AUTHORIZATION_VC_TRUE_GREETING_LABEL", comment: "Hello, I guess you are new around here. You can start using the application after sign up.")
                 customView.userNameTextField.isHidden = false
                 customView.confirmPasswordTextField.isHidden = false
                 customView.forgotPasswordButton.isHidden = true
-                customView.signInButton.setTitle("Sign Up", for: .normal)
-                customView.createAccountLabel.text = "Already have an account?"
-                customView.createAccountButton.setTitle("Sign In", for: .normal)
+                customView.signInButton.setTitle(NSLocalizedString("AUTHORIZATION_VC_TRUE_SIGNIN_BUTTON", comment: "Sign Up"), for: .normal)
+                customView.createAccountLabel.text = NSLocalizedString("AUTHORIZATION_VC_TRUE_CREATE_ACCOUNT_LABEL", comment: "Already have an account?")
+                customView.createAccountButton.setTitle(NSLocalizedString("AUTHORIZATION_VC_TRUE_CREATE_ACCOUNT_BUTTON", comment: "Sign In"), for: .normal)
             } else {
-                customView.topLabel.text = "Welcome Back 👋"
-                customView.greetingLabel.text = "I am happy to see you again. You can continue where you left off by logging in"
+                customView.topLabel.text = NSLocalizedString("AUTHORIZATION_VC_FALSE_TOP_LABEL", comment: "Welcome Back 👋")
+                customView.greetingLabel.text = NSLocalizedString("AUTHORIZATION_VC_FALSE_GREETING_LABEL", comment: "I am happy to see you again. You can continue where you left off by logging in")
                 customView.userNameTextField.isHidden = true
                 customView.confirmPasswordTextField.isHidden = true
                 customView.forgotPasswordButton.isHidden = false
-                customView.signInButton.setTitle("Sign In", for: .normal)
-                customView.createAccountLabel.text = "Don't have an account?"
-                customView.createAccountButton.setTitle("Sign Up", for: .normal)
+                customView.signInButton.setTitle(NSLocalizedString("AUTHORIZATION_VC_FALSE_SIGNIN_BUTTON", comment: "Sign In"), for: .normal)
+                customView.createAccountLabel.text = NSLocalizedString("AUTHORIZATION_VC_FALSE_CREATE_ACCOUNT_LABEL", comment: "Don't have an account?")
+                customView.createAccountButton.setTitle(NSLocalizedString("AUTHORIZATION_VC_FALSE_CREATE_ACCOUNT_BUTTON", comment: "Sign Up"), for: .normal)
             }
         }
     }
@@ -48,7 +48,7 @@ class AuthorizationViewController: CustomViewController<AuthorizationView> {
         let alertController = UIAlertController(title: title,
                                                 message: message,
                                                 preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("ALERT_OK", comment: "OK"), style: .cancel))
         present(alertController, animated: true)
     }
 }
@@ -65,32 +65,36 @@ extension AuthorizationViewController: AuthorizationViewDelegate {
                 if password == confirmPassword {
                     FirebaseManager.shared.createAccount(email: email, password: password, username: username) { err in
                         if err == nil {
-                            self.dismiss(animated: true)
+                            let categoriesVC = CategoriesViewController(isFirstEnter: true)
+                            categoriesVC.modalPresentationStyle = .fullScreen
+                            self.present(categoriesVC, animated: true)
                         } else {
                             guard let error = err else {return}
                             let errString = String(error.localizedDescription)
-                            self.showAlert(title: "Ooops!", message: errString)
+                            self.showAlert(title: NSLocalizedString("ALERT_ERROR", comment: "Ooops!"), message: errString)
                         }
                     }
                 } else {
-                    showAlert(title: "Passwords don't match, please try again", message: nil)
+                    showAlert(title: NSLocalizedString("ALERT_DONT_MATCH", comment: "Passwords don't match, please try again"), message: nil)
                 }
             } else {
-                showAlert(title: "Please fill out all fields", message: nil)
+                showAlert(title: NSLocalizedString("ALERT_FILL", comment: "Please fill out all fields"), message: nil)
             }
         } else {
             if !email.isEmpty && !password.isEmpty {
                 FirebaseManager.shared.signIn(email: email, password: password) { error in
                     if error == nil {
-                        self.dismiss(animated: true)
+                        let tabBarController = TabBarController()
+                        tabBarController.modalPresentationStyle = .fullScreen
+                        self.present(tabBarController, animated: true)
                     } else {
                         guard let error = error else {return}
                         let errString = String(error.localizedDescription)
-                        self.showAlert(title: "Ooops!", message: errString)
+                        self.showAlert(title: NSLocalizedString("ALERT_ERROR", comment: "Ooops!"), message: errString)
                     }
                 }
             } else {
-                showAlert(title: "Please fill out all fields", message: nil)
+                showAlert(title: NSLocalizedString("ALERT_FILL", comment: "Please fill out all fields"), message: nil)
             }
         }
     }

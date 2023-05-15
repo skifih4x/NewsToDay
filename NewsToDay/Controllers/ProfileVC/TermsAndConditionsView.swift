@@ -26,32 +26,42 @@ class TermsAndConditionsView: UIView {
     
     private let headerLabel: UILabel = {
         let label = UILabel()
-        label.text = "Terms & Conditions"
+        label.text = NSLocalizedString("TERMS_AND_CONDITIONS_HEADER_LABEL", comment: "Terms & Conditions")
         label.numberOfLines = 1
         label.font = UIFont.systemFont(ofSize: 24)
         label.textColor = Resources.Colors.blackPrimary
+        label.textAlignment = .center
         return label
     }()
     
     private let mainText: UITextView = {
         let text = UITextView()
-        text.text = """
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-
-Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-
-Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-
-Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-
-Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-"""
+        let mainText = """
+                                      The User Agreement for the application (hereinafter referred to as the Agreement) is a special type of agreement between the owners of the application and its users regarding the procedure for its use, and also defines the obligations of the parties and their responsibilities.
+                                      
+                                      This document is not required by the current legislation, but it helps users (1) understand the permissible ways they use the application on a smartphone or other device; (2) determine the possible consequences of using the application in one way or another; (3) identify the liability measures applied to users for violating the established rules.
+                                      
+                                      The agreement is nothing more than the rules of the game for the user, because of this, it is difficult to overestimate the value of this document. As soon as the user agrees to the terms of the Agreement (for example, by ticking a box in the allotted field or by installing the program on a smartphone), the terms of this Agreement are legally binding for the user. Thus, the violation by the user of the terms of the Agreement inevitably entails the application to such a user of the types of liability provided for in such an Agreement.
+                                      
+                                      The proposed document template is suitable for applications of any kind, for example, an online store, a game, a social network, access to a cloud platform, business, media (magazines), etc. Please note that this document cannot be used for websites (you can use the User Agreement for the website) or cloud platforms (you can use the User Agreement for the cloud platform).
+                                      
+                                      The User Agreement should not be identified with the Privacy Policy (a document defining the procedure for collecting and processing personal data of users) for several reasons. Firstly, the privacy policy is a mandatory document, and secondly, such a document exclusively focuses on the methods, methods, timing and purposes of processing and collecting personal data.
+                                      
+                                      
+                                      How to use the document
+                                      
+                                      The User Agreement can be used by individuals and legal entities, as well as individual entrepreneurs who create their own application and place it for download by users on Google Play or the App Store. The document is valid without limitation of its validity.
+                                      
+                                      The structure of the proposed template allows you to determine (1) whether you need to create your own personal account to use the application; and (2) what actions are prohibited to users; and (3) whether users have the right to post their own copyrighted content; and (4) whether it is possible to make purchases of goods/services through the application; and (5) is it possible to purchase virtual objects inside the application itself (in-app); and (6) liability measures of the parties, as well as other important provisions.
+                                      
+                                      Please note that some provisions of this document are set out in capital letters. This is done in order to draw the user's attention to important points concerning, for example, the limitation of the responsibility of application developers for this or that harm caused to the user for using the application and its content.
+                                      
+                                      
+                                      Applicable law
+                                      
+                                      This User Agreement for the application has been developed in accordance with the current civil legislation of the Russian Federation, the norms of the Federal Law 'On Consumer Rights Protection', the norms of the Federal Law...
+                                      """
+        text.text = NSLocalizedString("TERMS_AND_CONDITIONS_MAIN_TEXT", comment: mainText)
         text.font = UIFont.systemFont(ofSize: 16)
         text.textColor = Resources.Colors.greyPrimary
         text.isScrollEnabled = true
@@ -78,13 +88,13 @@ Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, ad
     
     private func addConstraints() {
         backButton.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(78)
+            make.centerY.equalTo(headerLabel.snp.centerY)
             make.leading.equalToSuperview().inset(26)
             make.height.width.equalTo(12)
         }
         
         headerLabel.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide).offset(68)
+            make.top.equalToSuperview().offset(68)
             make.centerX.equalToSuperview()
             make.height.equalTo(32)
             make.width.equalTo(227)
