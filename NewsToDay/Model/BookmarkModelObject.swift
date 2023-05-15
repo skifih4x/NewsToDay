@@ -9,23 +9,22 @@ import Foundation
 import RealmSwift
 
 @objcMembers
-class ArticleModel: Object {
-    @Persisted var author: String?
+class BookmarkModelObject: Object {
     @Persisted var title: String?
-    @Persisted var desc: String?
     @Persisted var url: String = ""
     @Persisted var urlToImage: String?
-    @Persisted var publishedAt: String = ""
-    @Persisted var content: String?
+    @Persisted var category: String = ""
     
-    convenience init(article a: Article) {
+    convenience init(article a: Article, category: String) {
         self.init()
-        self.author = a.author
+        
         self.title = a.title
-        self.desc = a.description
         self.url = a.url
         self.urlToImage = a.urlToImage
-        self.publishedAt = a.publishedAt
-        self.content = a.content
+        self.category = category
+    }
+    
+    override static func primaryKey() -> String? {
+        return "url"
     }
 }
