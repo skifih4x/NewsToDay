@@ -65,7 +65,9 @@ extension AuthorizationViewController: AuthorizationViewDelegate {
                 if password == confirmPassword {
                     FirebaseManager.shared.createAccount(email: email, password: password, username: username) { err in
                         if err == nil {
-                            self.dismiss(animated: true)
+                            let categoriesVC = CategoriesViewController(isFirstEnter: true)
+                            categoriesVC.modalPresentationStyle = .fullScreen
+                            self.present(categoriesVC, animated: true)
                         } else {
                             guard let error = err else {return}
                             let errString = String(error.localizedDescription)
@@ -82,7 +84,9 @@ extension AuthorizationViewController: AuthorizationViewDelegate {
             if !email.isEmpty && !password.isEmpty {
                 FirebaseManager.shared.signIn(email: email, password: password) { error in
                     if error == nil {
-                        self.dismiss(animated: true)
+                        let tabBarController = TabBarController()
+                        tabBarController.modalPresentationStyle = .fullScreen
+                        self.present(tabBarController, animated: true)
                     } else {
                         guard let error = error else {return}
                         let errString = String(error.localizedDescription)
