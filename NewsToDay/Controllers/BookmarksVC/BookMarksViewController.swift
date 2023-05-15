@@ -92,8 +92,8 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
                 title: NSLocalizedString("BOOKMARKS_DELETE_ALERT_TITLE", comment: "Delete"),
                 style: .destructive,
                 handler: { (_) in
-                    self.storageManager.deleteItem(by: self.bookmarks[indexPath.row].url)
-                    self.bookmarks.remove(at: indexPath.row)
+                    self?.storageManager.deleteItem(by: self?.bookmarks[indexPath.row].url ?? "")
+                    self?.bookmarks.remove(at: indexPath.row)
                     self?.tableView.deleteRows(at: [indexPath], with: .automatic)
                     completionHandler(true)
             }))
