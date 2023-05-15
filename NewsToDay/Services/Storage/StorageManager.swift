@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 protocol StorageManagerProtocol {
-    func save(article: ArticleModel)
+    func save(article: Article)
     func retrieve() -> [ArticleModel]
     func clearDB()
 }
@@ -17,9 +17,11 @@ protocol StorageManagerProtocol {
 class StorageManager: StorageManagerProtocol {
     fileprivate lazy var mainRealm = try! Realm()
     
-    func save(article: ArticleModel) {
+    func save(article: Article) {
+        let a = ArticleModel(article: article)
+        
         try! mainRealm.write {
-            mainRealm.add(article)
+            mainRealm.add(a)
         }
     }
     
