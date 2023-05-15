@@ -9,26 +9,42 @@ import Foundation
 import RealmSwift
 
 protocol StorageManagerProtocol {
-    func save(article: Article)
-    func retrieve() -> [ArticleModel]
+    func save(article: Article, category: String)
+    func retrieveAll() -> [BookmarkModel]
+    func deleteItem(by key: String)
     func clearDB()
 }
 
 class StorageManager: StorageManagerProtocol {
     fileprivate lazy var mainRealm = try! Realm()
     
-    func save(article: Article) {
-        let a = ArticleModel(article: article)
+    func save(article: Article, category: String) {
+        let a = BookmarkModelObject(article: article, category: category)
         
         try! mainRealm.write {
             mainRealm.add(a)
         }
     }
     
-    func retrieve() -> [ArticleModel] {
-        let articles = mainRealm.objects(ArticleModel.self)
+    func retrieveAll() -> [BookmarkModel] {
+        var bookmarkAny: [BookmarkModel] = []
         
-        return Array(articles)
+        let bookmarks = mainRealm.objects(BookmarkModelObject.self)
+        for bookmark in bookmarks {
+            bookmarkAny.append(BookmarkModel(title: bookmark.title,
+                                             url: bookmark.url,
+                                             urlToImage: bookmark.urlToImage,
+                                             category: bookmark.category))
+        }
+        return bookmarkAny
+    }
+    
+    func deleteItem(by key: String) {
+        if let object = mainRealm.object(ofType: BookmarkModelObject.self, forPrimaryKey: key) {
+            try! mainRealm.write {
+                mainRealm.delete(object)
+            }
+        }
     }
     
     func clearDB() {
