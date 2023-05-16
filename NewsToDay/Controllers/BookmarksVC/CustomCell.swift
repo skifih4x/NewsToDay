@@ -19,8 +19,9 @@ class CustomCell: UITableViewCell {
     
     private let cellImageView: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
         image.layer.cornerRadius = 12
+        image.layer.masksToBounds = true
         return image
     }()
     
@@ -84,11 +85,10 @@ class CustomCell: UITableViewCell {
         unmarkButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            cellImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            cellImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-            cellImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
-            cellImageView.heightAnchor.constraint(equalToConstant: 96),
-            cellImageView.widthAnchor.constraint(equalToConstant: 96),
+            cellImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15),
+            cellImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            cellImageView.heightAnchor.constraint(equalToConstant: 85),
+            cellImageView.widthAnchor.constraint(equalToConstant: 85),
             
             cellCategoryLabel.leadingAnchor.constraint(equalTo: cellImageView.trailingAnchor, constant: 16),
             cellCategoryLabel.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
