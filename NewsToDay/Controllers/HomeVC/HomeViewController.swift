@@ -10,9 +10,12 @@ import SnapKit
 
 final class HomeViewController: UIViewController, CategoriesDelegate {
     
+    
     // MARK: - Variables and constants
     
-    let imageNames = ["cos", "hologram1", "hologram3", "parsons"]
+    //let imageNames = ["cos", "hologram1", "hologram3", "parsons"]
+    
+    var timer: Timer?
     
     private var query: String?
     
@@ -20,6 +23,7 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
     var categoryStorage = CategoriesStorage.shared
 
     var categories: Category?
+    var categorySelect: [String] = []
     
     var news: [Article] = []
     var soureces: [Source] = []
@@ -61,6 +65,7 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
         table.delegate = self
         table.dataSource = self
         table.showsVerticalScrollIndicator = false
+        table.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 26, right: .zero)
         
        return table
     }()
@@ -72,33 +77,43 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
         view.backgroundColor = .white
         setupCollectionView()
         configure()
-        loadData()
+        fetchCategories()
         
         tableView.isHidden = true
         setupTableView()
+    }
+    
+    func fetchCategories() {
+        categorySelect = categoryStorage.categories
+        collectionView.reloadSections(IndexSet(integer: 0))
     }
     
     
     
     // MARK: - Fetch data
     
-    func loadData() {
-        networkManadger.fetchTopHeadlines(categories: categoryStorage.categories, country: Country.us) { [weak self] result in
+    func fetchNewsModel(for category: String) {
+        
+        
+        networkManadger.fetchTopHeadlines(categories: [category], country: Country.us) { [weak self] result in
             switch result {
             case .success(let news):
                 self?.news = news.articles
-                self?.collectionView.reloadData()
+                self?.collectionView.reloadSections(IndexSet(integer: 1))
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func fetchHeadlineSource(for category: String) {
         
-        networkManadger.fetchHeadlinesSources(category: categories, country: Country.us) { [weak self] result in
+        networkManadger.fetchHeadlinesSources(category: Category(rawValue: category), country: Country.us) { [weak self] result in
             switch result {
             case .success(let soureces):
                 self?.soureces = soureces.sources
                 DispatchQueue.main.async {
-                    self?.collectionView.reloadData()
+                    self?.collectionView.reloadSections(IndexSet(integer: 1))
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -191,8 +206,8 @@ extension HomeViewController {
         
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(10)
-            make.trailing.leading.equalToSuperview().inset(10)
+            make.top.equalTo(searchBar.snp.bottom).offset(3)
+            make.trailing.leading.equalToSuperview()
             make.bottom.equalToSuperview()
         }
     }

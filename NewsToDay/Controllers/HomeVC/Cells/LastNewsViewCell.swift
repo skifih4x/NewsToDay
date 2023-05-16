@@ -10,6 +10,8 @@ import SnapKit
 
 class LastNewsViewCell: UICollectionViewCell {
     
+    var networkManadger = NetworkManager.shared
+    
     
     // MARK: - Properties
     
@@ -69,10 +71,11 @@ class LastNewsViewCell: UICollectionViewCell {
         layer.cornerRadius = 16
     }
     
-    func configureCell(article: Source, image: String) {
-        imageView.image = UIImage(named: image)
+    func configureCell(article: Source) {
         titleLabel.text = article.name
         categoryLabel.text = article.category
+        
+        //networkManadger.fetchImage(url: image.urlToImage ?? "", imageView: imageView)
         
     }
     

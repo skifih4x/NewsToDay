@@ -26,6 +26,7 @@ final class CategoriesViewController: UIViewController {
     private let categories = Category.categories
 
     var delegate: CategoriesDelegate?
+    var category: String?
 
     init(isFirstEnter: Bool) {
         super.init(nibName: nil, bundle: nil)
@@ -98,7 +99,8 @@ extension CategoriesViewController: UICollectionViewDelegate {
 
         categoriesStorage.set(category: categories[indexPath.row])
         cell.activate()
-        delegate?.loadData()
+        delegate?.fetchNewsModel(for: category ?? "")
+        delegate?.fetchHeadlineSource(for: category ?? "")
     }
 
     func collectionView(
@@ -111,7 +113,8 @@ extension CategoriesViewController: UICollectionViewDelegate {
 
         categoriesStorage.delete(category: categories[indexPath.row])
         cell.deactivate()
-        delegate?.loadData()
+        delegate?.fetchNewsModel(for: category ?? "")
+        delegate?.fetchHeadlineSource(for: category ?? "")
     }
 }
 
