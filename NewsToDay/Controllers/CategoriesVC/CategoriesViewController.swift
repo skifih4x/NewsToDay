@@ -24,6 +24,7 @@ final class CategoriesViewController: UIViewController {
     private let constants = CategoryConstants()
     private let categoriesStorage = CategoriesStorage.shared
     private let categories = Category.categories
+    private let firebaseManager = FirebaseManager.shared
 
     var delegate: CategoriesDelegate?
     var category: String?
@@ -43,9 +44,16 @@ final class CategoriesViewController: UIViewController {
         view = categoryView
         view.backgroundColor = .white
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        categoriesStorage.updateCategoryList()
+    }
 
     @objc
     private func nextButtonTapped() {
+        //Save in Firebase
+        firebaseManager.saveCategoriesInDatabase(categories: categoriesStorage.categories)
+        
         let tabBarController = TabBarController()
         tabBarController.modalPresentationStyle = .fullScreen
         self.present(tabBarController, animated: true)
