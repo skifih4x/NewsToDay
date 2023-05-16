@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class BookmarksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -131,10 +132,26 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomCell.identifier, for: indexPath) as? CustomCell else {
             fatalError("Error")
         }
-        cell.textLabel?.text = indexPath.row.description
         cell.delegate = self
         cell.tag = indexPath.row
-        cell.configure(img: UIImage(), category: bookmarks[indexPath.row].category, news: bookmarks[indexPath.row].title ?? "")  // сюда должны поступать данные по отмеченным новостям
+        
+        let defaultImage = UIImage(systemName: "photo")
+        let articleImageView = UIImageView()
+        
+        if let urlToImageString = bookmarks[indexPath.row].urlToImage {
+            guard let url = URL(string: urlToImageString) else { return cell }
+            articleImageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "network"), options: [.continueInBackground,.progressiveLoad]) { _, _, _, _ in
+                cell.configure(img: articleImageView.image!,
+                               category: self.bookmarks[indexPath.row].category,
+                               news: self.bookmarks[indexPath.row].title ?? "")
+            }
+        } else {
+            articleImageView.image = defaultImage
+            cell.configure(img: articleImageView.image!,
+                           category: bookmarks[indexPath.row].category,
+                           news: bookmarks[indexPath.row].title ?? "")
+        }
+
         return cell
     }
 }
