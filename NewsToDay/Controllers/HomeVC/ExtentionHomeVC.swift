@@ -41,7 +41,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 return UICollectionViewCell()
             }
             
-            cell.configureCell(text: categoryStorage.categories[indexPath.row])
+            cell.configureCell(text: categoryStorage.categories[indexPath.item])
             return cell
             
         case .lastNews:
@@ -51,9 +51,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
         
             let article = soureces[indexPath.item]
-            let shuffledImage = imageNames.shuffled()
-            let image = shuffledImage[indexPath.item % shuffledImage.count]
-            cell.configureCell(article: article, image: image)
+            //let image = news[indexPath.item]
+            //let shuffledImage = imageNames.shuffled()
+            //let image = shuffledImage[indexPath.item % shuffledImage.count]
+            cell.configureCell(article: article)
     
             return cell
             
@@ -63,10 +64,20 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 return UICollectionViewCell()
             }
             
-            cell.configureCell(article: news[indexPath.row])
+            cell.configureCell(article: news[indexPath.item])
             return cell
         }
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard indexPath.item < categorySelect.count else { return }
+        if indexPath.section == 0 {
+            let categoryName = categorySelect[indexPath.item]
+            fetchNewsModel(for: categoryName)
+            fetchHeadlineSource(for: categoryName)
+            
+        }
     }
     
     // MARK: - Configure for header
@@ -126,7 +137,7 @@ extension HomeViewController {
         item.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 5)
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(
-            widthDimension: .absolute(100),
+            widthDimension: .absolute(110),
             heightDimension: .absolute(45)),subitems: [item])
         
         let section = createLayoutSection(group: group,

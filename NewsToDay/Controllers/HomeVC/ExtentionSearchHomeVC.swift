@@ -25,14 +25,17 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let article = news[indexPath.row]
         let detail = DatailVC()
+     detail.
         
     }
     
     */
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        100
+        110
     }
+    
+    
     
 }
 
@@ -45,7 +48,10 @@ extension HomeViewController: UISearchBarDelegate {
         let text = searchText.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         
         if text != "" {
-            fetchSearchData(for: searchText)
+            timer?.invalidate()
+            timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [weak self] _ in
+                self?.fetchSearchData(for: searchText)
+            })
         } else if searchBar.text?.count == 0 {
             news = []
             tableView.reloadData()
