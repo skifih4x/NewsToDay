@@ -62,6 +62,7 @@ class SearchCell: UITableViewCell {
         super.layoutSubviews()
         layer.borderColor = Resources.Colors.greyLighter.cgColor
         layer.borderWidth = 1
+        
     }
     
     // MARK: - Methods
@@ -82,9 +83,9 @@ extension SearchCell {
         
         addSubview(imageNews)
         imageNews.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(10)
             make.leading.equalToSuperview()
-            make.bottom.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-5)
             make.height.equalTo(96)
             make.width.equalTo(96)
         }

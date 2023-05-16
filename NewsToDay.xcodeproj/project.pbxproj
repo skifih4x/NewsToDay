@@ -187,7 +187,6 @@
 				0039BD962A07D5C2002F8F71 /* Resources */,
 				0039BD872A07D4B7002F8F71 /* App */,
 				0039BD7E2A07D242002F8F71 /* LaunchScreen.storyboard */,
-				0039BD792A07D241002F8F71 /* Main.storyboard */,
 			);
 			path = NewsToDay;
 			sourceTree = "<group>";
@@ -276,6 +275,7 @@
 			children = (
 				432ACC022A1170FE00E2EE64 /* Localize */,
 				0039BD7C2A07D242002F8F71 /* Assets.xcassets */,
+				0039BD792A07D241002F8F71 /* Main.storyboard */,
 				8474A16B2A0839EE00D6EE4E /* UIColorExtension.swift */,
 				8474A16D2A083AA000D6EE4E /* Resources.swift */,
 			);
