@@ -10,11 +10,16 @@ import Foundation
 enum Category: String, CaseIterable {
     case business
     case entertainment
-    case general
+    case environment
+    case food
     case health
+    case politics
     case science
     case sports
     case technology
+    case top
+    case tourism
+    case world
 
     static var categories: [String] {
         return self.allCases.map { $0.rawValue }

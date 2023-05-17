@@ -31,7 +31,7 @@ final class CategoriesView: UIView {
         label.textColor = UIColor(
             red: 0.488, green: 0.51, blue: 0.632, alpha: 1
         )
-        label.numberOfLines = 2
+        label.numberOfLines = 3
 
         return label
     }()
@@ -70,6 +70,7 @@ extension CategoriesView {
             collectionViewLayout: layout
         )
         collectionView?.allowsMultipleSelection = true
+        collectionView?.isScrollEnabled = false
 
         guard let collectionView = collectionView else {
             return
@@ -95,11 +96,11 @@ extension CategoriesView {
             ),
             collectionView.topAnchor.constraint(
                 equalTo: subtitle.bottomAnchor,
-                constant: 50
+                constant: 8
             ),
             collectionView.bottomAnchor.constraint(
                 equalTo: bottomAnchor,
-                constant: -230
+                constant: -110
             ),
             headerTitle.topAnchor.constraint(
                 equalTo: safeAreaLayoutGuide.topAnchor,
@@ -126,7 +127,7 @@ extension CategoriesView {
             ),
             nextButton.topAnchor.constraint(
                 equalTo: collectionView.bottomAnchor,
-                constant: 50
+                constant: 5
             ),
             nextButton.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
@@ -141,7 +142,7 @@ extension CategoriesView {
     private func getLayout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(0.5),
-            heightDimension: .fractionalWidth(0.27)
+            heightDimension: .fractionalWidth(0.25)
         )
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -151,7 +152,7 @@ extension CategoriesView {
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalWidth(0.27)
+            heightDimension: .fractionalWidth(0.25)
         )
 
         let group = NSCollectionLayoutGroup.horizontal(
@@ -170,7 +171,7 @@ extension CategoriesView {
 
 extension CategoriesView {
     func getCategories() -> [String] {
-        let logos = ["💵", "🎨", "🌐", "💊", "🧬", "⚽", "📱"]
+        let logos = ["💵", "🎨", "🌐", "🍔", "💊", "🏛️", "🧬", "⚽", "📱", "🔝", "✈️", "🌍"]
         let categories = Category.categories.map { $0.capitalized }
 
         return zip(logos, categories).map { $0.0 + " " + $0.1 }
