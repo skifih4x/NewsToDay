@@ -12,7 +12,6 @@ final class RequestMaker {
 
     func makeGETRequest(url: URL) -> URLRequest {
         var request = URLRequest(url: url)
-        request.setValue(API.apiKey, forHTTPHeaderField: "x-api-key")
         return request
     }
 }

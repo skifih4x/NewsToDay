@@ -19,7 +19,7 @@ class BookmarkModelObject: Object {
         self.init()
         
         self.title = a.title
-        self.url = a.url
+        self.url = a.link
         self.urlToImage = a.urlToImage
         self.category = category
     }

@@ -46,7 +46,7 @@ HOME_TITLE_LABEL = "Найти";
 HOME_SUBTITLE_LABEL = "Открывайте для себя вещи этого мира";
 HOME_SEARCH_BAR = "Поиск";
 
-CATEGORIES_ONBOARDING_HEADER_TITLE = "Выберите ваши любимые темы";
+CATEGORIES_ONBOARDING_HEADER_TITLE = "Выберите любимые темы";
 CATEGORIES_HEADER_TITLE = "Категории";
 CATEGORIES_ONBOARDING_SUBTITLE = "Выберите несколько ваших любимых тем, чтобы мы могли предложить вам лучшие новости.";
 CATEGORIES_SUBTITLE = "Тысячи статей в каждой категории";

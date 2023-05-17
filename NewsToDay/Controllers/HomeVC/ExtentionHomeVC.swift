@@ -74,8 +74,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         guard indexPath.item < categorySelect.count else { return }
         if indexPath.section == 0 {
             let categoryName = categorySelect[indexPath.item]
-            fetchNewsModel(for: categoryName)
-            fetchHeadlineSource(for: categoryName)
+//            fetchNewsModel(for: categoryName)
+            fetchLatestNews(for: [categoryName])
             
         }
     }

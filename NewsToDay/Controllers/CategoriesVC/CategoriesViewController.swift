@@ -113,8 +113,7 @@ extension CategoriesViewController: UICollectionViewDelegate {
 
         categoriesStorage.set(category: categories[indexPath.row])
         cell.activate()
-        delegate?.fetchNewsModel(for: category ?? "")
-        delegate?.fetchHeadlineSource(for: category ?? "")
+        delegate?.fetchLatestNews(for: categoriesStorage.categories)
     }
 
     func collectionView(
@@ -127,8 +126,7 @@ extension CategoriesViewController: UICollectionViewDelegate {
 
         categoriesStorage.delete(category: categories[indexPath.row])
         cell.deactivate()
-        delegate?.fetchNewsModel(for: category ?? "")
-        delegate?.fetchHeadlineSource(for: category ?? "")
+        delegate?.fetchLatestNews(for: categoriesStorage.categories)
     }
 }
 
