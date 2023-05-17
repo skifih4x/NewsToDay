@@ -44,12 +44,24 @@ class LastNewsViewCell: UICollectionViewCell {
         return image
     }()
     
-    private let imageBookmark: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(systemName: "bookmark")
-        image.tintColor = Resources.Colors.blackDark
-        return image
+    private lazy var bookmarkButton: UIButton = {
+        let button = UIButton()
+        button.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        button.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
+        button.tintColor = Resources.Colors.blackDark
+        button.addTarget(self, action: #selector(bookmarkButtonPressed), for: .touchUpInside)
+        return button
     }()
+    
+    @objc private func bookmarkButtonPressed(_ sender: UIButton) {
+        if sender.currentBackgroundImage == UIImage(systemName: "bookmark") {
+            sender.setBackgroundImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+            // тут нужно передавать информацию о статье в BookmarkViewController
+        } else {
+            sender.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
+            // тут нужно удалять новоcть из BookmarkViewController
+        }
+    }
     
     // MARK: - init
     
@@ -106,8 +118,8 @@ extension LastNewsViewCell {
             make.leading.equalToSuperview().offset(20)
         }
         
-        addSubview(imageBookmark)
-        imageBookmark.snp.makeConstraints { make in
+        addSubview(bookmarkButton)
+        bookmarkButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
         }
