@@ -8,8 +8,14 @@
 import UIKit
 import SnapKit
 
+protocol LastNewsCellDelegate: AnyObject {
+    func addToBookmarks(_ cell: LastNewsViewCell)
+    func removeFromBookmarks(_ cell: LastNewsViewCell)
+}
+
 class LastNewsViewCell: UICollectionViewCell {
     
+    weak var delegate: LastNewsCellDelegate?
     var networkManadger = NetworkManager.shared
     
     
@@ -48,7 +54,7 @@ class LastNewsViewCell: UICollectionViewCell {
         let button = UIButton()
         button.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
         button.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
-        button.tintColor = Resources.Colors.blackDark
+        button.tintColor = .gray
         button.addTarget(self, action: #selector(bookmarkButtonPressed), for: .touchUpInside)
         return button
     }()
@@ -56,10 +62,10 @@ class LastNewsViewCell: UICollectionViewCell {
     @objc private func bookmarkButtonPressed(_ sender: UIButton) {
         if sender.currentBackgroundImage == UIImage(systemName: "bookmark") {
             sender.setBackgroundImage(UIImage(systemName: "bookmark.fill"), for: .normal)
-            // тут нужно передавать информацию о статье в BookmarkViewController
+            delegate?.addToBookmarks(self)
         } else {
             sender.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
-            // тут нужно удалять новоcть из BookmarkViewController
+            delegate?.removeFromBookmarks(self)
         }
     }
     

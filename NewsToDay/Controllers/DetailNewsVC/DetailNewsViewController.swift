@@ -9,21 +9,19 @@ import Foundation
 import UIKit
 
 
-class DatailVC: UIViewController    {
-    
-   
+class DatailVC: UIViewController {
     
     let stackView = UIStackView ()
     let scrollView = UIScrollView()
-    let textOfNews = UILabel ()
+    let textOfNews = UILabel()
     let topLabel = UILabel()
     let authorNameLabel = UILabel()
     let authorLabel = UILabel()
-    let categoryLabel = UILabel ()
-    let imageOfNews = UIImageView ()
+    let categoryLabel = UILabel()
+    let imageOfNews = UIImageView()
     
-    let backButton = UIButton ()
-    let bookMark = UIButton ()
+    let backButton = UIButton()
+    let bookMark = UIButton()
     let forwardButton = UIButton()
     
     
@@ -58,13 +56,21 @@ class DatailVC: UIViewController    {
     }
     // Image View Configure
     
+    @objc private func bookmarkButtonPressed(_ sender: UIButton) {
+        sender.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
+    }
+    
     func stackViewConfigure () {
         imageOfNews.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 384)
         imageOfNews.image = UIImage(named: "newsImage")
         
         stackView.addSubview(imageOfNews)
         backButton.setImage(UIImage(named: "narrow"), for: .normal)
-        bookMark.setImage(UIImage(named: "bookMark"), for: .normal)
+        bookMark.setBackgroundImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+        bookMark.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        bookMark.tintColor = .gray
+        bookMark.addTarget(self, action: #selector(bookmarkButtonPressed), for: .touchUpInside)
+        
         forwardButton.setImage(UIImage(named: "forward"), for: .normal)
      
         
@@ -94,6 +100,7 @@ class DatailVC: UIViewController    {
            
         ])
     }
+    
     
     //Label Text View Configure
     
