@@ -48,6 +48,10 @@ final class CategoriesViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         categoriesStorage.updateCategoryList()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        FirebaseManager.shared.saveCategoriesInDatabase(categories: categoriesStorage.categories)
+    }
 
     @objc
     private func nextButtonTapped() {
