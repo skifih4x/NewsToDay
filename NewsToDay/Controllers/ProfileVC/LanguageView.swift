@@ -10,6 +10,8 @@ import SnapKit
 
 protocol LanguageViewDelegate: AnyObject {
     func LanguageView(_ view: LanguageView, backButtonPressed button: UIButton)
+    func LanguageView(_ view: LanguageView, englishButtonPressed button: UIButton)
+    func LanguageView(_ view: LanguageView, russianButtonPressed button: UIButton)
 }
 
 class LanguageView: UIView {
@@ -117,10 +119,10 @@ private extension LanguageView {
     }
     
     @objc func englishButtonPressed(_ button: UIButton) {
-        print("English")
+        delegate?.LanguageView(self, englishButtonPressed: button)
     }
     
     @objc func russianButtonPressed(_ button: UIButton) {
-        print("Russian")
+        delegate?.LanguageView(self, russianButtonPressed: button)
     }
 }

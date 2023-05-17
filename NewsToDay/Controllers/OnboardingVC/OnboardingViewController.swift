@@ -82,7 +82,7 @@ class OnboardingViewController: UIViewController    {
     //Button
     
     func buttonConfigure () {
-        button.configure(title: NSLocalizedString("ONBOARDING_BUTTON", comment: "Next"))
+        button.configure(title: NSLocalizedString("ONBOARDING_NEXT_BUTTON", comment: "Next"))
     
       
     }
