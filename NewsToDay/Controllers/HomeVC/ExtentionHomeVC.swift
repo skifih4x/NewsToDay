@@ -22,7 +22,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case .categories:
             return categoryStorage.categories.count
         case .lastNews:
-            return soureces.count//news.count
+            return soureces.count
         case .recommended:
             return news.count
         }
@@ -41,7 +41,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 return UICollectionViewCell()
             }
             
-            cell.configureCell(text: categoryStorage.categories[indexPath.row])
+            cell.configureCell(text: categoryStorage.categories[indexPath.item])
             return cell
             
         case .lastNews:
@@ -51,6 +51,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
         
             let article = soureces[indexPath.item]
+            //let image = news[indexPath.item]
+            //let shuffledImage = imageNames.shuffled()
+            //let image = shuffledImage[indexPath.item % shuffledImage.count]
             cell.configureCell(article: article)
     
             return cell
@@ -61,10 +64,20 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 return UICollectionViewCell()
             }
             
-            cell.configureCell(article: news[indexPath.row])
+            cell.configureCell(article: news[indexPath.item])
             return cell
         }
         
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard indexPath.item < categorySelect.count else { return }
+        if indexPath.section == 0 {
+            let categoryName = categorySelect[indexPath.item]
+//            fetchNewsModel(for: categoryName)
+            fetchLatestNews(for: [categoryName])
+            
+        }
     }
     
     // MARK: - Configure for header
@@ -124,15 +137,15 @@ extension HomeViewController {
         item.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 5)
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(
-            widthDimension: .absolute(90),
-            heightDimension: .absolute(32)),subitems: [item])
+            widthDimension: .absolute(110),
+            heightDimension: .absolute(45)),subitems: [item])
         
         let section = createLayoutSection(group: group,
                                           behavior: .continuous,
                                           interGroupSpacing: 16,
                                           supplementaryItems: [],
                                           contentInsets: false)
-        section.contentInsets = .init(top: 15, leading: 16, bottom: 24 , trailing: 0)
+        section.contentInsets = .init(top: 5, leading: 16, bottom: 24 , trailing: 0)
         
         return section
         

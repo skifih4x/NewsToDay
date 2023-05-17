@@ -24,8 +24,10 @@ final class CategoriesViewController: UIViewController {
     private let constants = CategoryConstants()
     private let categoriesStorage = CategoriesStorage.shared
     private let categories = Category.categories
+    private let firebaseManager = FirebaseManager.shared
 
     var delegate: CategoriesDelegate?
+    var category: String?
 
     init(isFirstEnter: Bool) {
         super.init(nibName: nil, bundle: nil)
@@ -42,11 +44,24 @@ final class CategoriesViewController: UIViewController {
         view = categoryView
         view.backgroundColor = .white
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        categoriesStorage.updateCategoryList()
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        FirebaseManager.shared.saveCategoriesInDatabase(categories: categoriesStorage.categories)
+    }
 
     @objc
     private func nextButtonTapped() {
-        //TODO: Добавить делегата в SplashViewController для перехода в рутовый контроллер
-        dismiss(animated: true)
+        //Save in Firebase
+        firebaseManager.saveCategoriesInDatabase(categories: categoriesStorage.categories)
+        
+        let tabBarController = TabBarController()
+        tabBarController.modalPresentationStyle = .fullScreen
+        self.present(tabBarController, animated: true)
     }
 }
 
@@ -98,7 +113,7 @@ extension CategoriesViewController: UICollectionViewDelegate {
 
         categoriesStorage.set(category: categories[indexPath.row])
         cell.activate()
-        delegate?.loadData()
+        delegate?.fetchLatestNews(for: categoriesStorage.categories)
     }
 
     func collectionView(
@@ -111,7 +126,7 @@ extension CategoriesViewController: UICollectionViewDelegate {
 
         categoriesStorage.delete(category: categories[indexPath.row])
         cell.deactivate()
-        delegate?.loadData()
+        delegate?.fetchLatestNews(for: categoriesStorage.categories)
     }
 }
 

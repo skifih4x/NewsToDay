@@ -48,6 +48,7 @@ HOME_SUBTITLE_LABEL = "Открывайте для себя вещи этого 
 HOME_SEARCH_BAR = "Поиск";
 HOME_HEADER_TITLE = "Рекомендованное для Вас";
 
+
 CATEGORIES_ONBOARDING_HEADER_TITLE = "Выберите Ваши любимые темы";
 CATEGORIES_HEADER_TITLE = "Категории";
 CATEGORIES_ONBOARDING_SUBTITLE = "Выберите несколько Ваших любимых тем, чтобы мы могли предложить Вам лучшие новости.";

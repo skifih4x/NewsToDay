@@ -14,6 +14,18 @@ final class FirebaseManager {
     var userDefaults = UserDefaults.standard
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()
+    private var userUid: String {
+        get {
+            if let uid = userDefaults.string(forKey: "UserUID") {
+                return uid
+            } else {
+                return ""
+            }
+        }
+        set {
+            userDefaults.set(newValue, forKey: "UserUID")
+        }
+    }
     
     func createAccount(email: String,
                        password: String,
@@ -23,6 +35,7 @@ final class FirebaseManager {
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
             if error == nil {
                 if let result = result {
+                    self?.userUid = result.user.uid
                     let ref = Database.database().reference().child("users")
                     ref.child(result.user.uid).updateChildValues(["name" : username])
                     ref.child(result.user.uid).updateChildValues(["email" : email])
@@ -42,9 +55,11 @@ final class FirebaseManager {
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
             if error == nil {
                 if let result = result {
-                    self?.fetchUserInfo(for: result.user.uid, complition: { info, error in
+                    self?.userUid = result.user.uid
+                    self?.fetchUserInfo(for: result.user.uid, complition: { info, cat, error in
                         if error == nil {
                             self?.saveInUserDefaults(userInfo: info)
+                            self?.saveInUserDefaults(categories: cat)
                             completion(nil)
                         } else {
                             completion(error)
@@ -73,6 +88,13 @@ final class FirebaseManager {
         }
     }
     
+    func saveCategoriesInDatabase(categories: [String]) {
+        if userUid != "" {
+            let ref = Database.database().reference().child("users")
+            ref.child(userUid).updateChildValues(["categories" : categories])
+        }
+    }
+    
     func getFromUserDefaultsUserInfo() -> UserInfo? {
         guard let info = userDefaults.object(forKey: "userInfo") as? Data else {
             return nil
@@ -84,8 +106,9 @@ final class FirebaseManager {
         return decodedInfo
     }
     
-    private func fetchUserInfo(for userId: String, complition: @escaping (UserInfo, Error?) -> ()) {
+    private func fetchUserInfo(for userId: String, complition: @escaping (UserInfo, [String], Error?) -> ()) {
         var userInfo = UserInfo()
+        var categories: [String] = []
         
         let data = Database.database().reference(withPath: "users")
         data.child(userId).child("name").getData { error, data in
@@ -95,7 +118,7 @@ final class FirebaseManager {
                     userInfo.name = name
                 }
             } else {
-                complition(userInfo, error)
+                complition(userInfo, categories, error)
             }
         }
         data.child(userId).child("email").getData { error, data in
@@ -103,16 +126,28 @@ final class FirebaseManager {
                 if let data = data {
                     let email = data.value as? String
                     userInfo.email = email
-                    complition(userInfo, nil)
                 }
             } else {
-                complition(userInfo, error)
+                complition(userInfo, categories, error)
+            }
+        }
+        data.child(userId).child("categories").getData { error, data in
+            if error == nil {
+                if let data = data {
+                    let cat = data.value as? [String]
+                    categories = cat ?? []
+                    complition(userInfo, categories, nil)
+                }
+            } else {
+                complition(userInfo, categories, error)
             }
         }
     }
-    
     private func saveInUserDefaults(userInfo: UserInfo) {
         guard let encoded = try? encoder.encode(userInfo) else { return }
         userDefaults.set(encoded, forKey: "userInfo")
+    }
+    private func saveInUserDefaults(categories: [String]) {
+        userDefaults.set(categories, forKey: "SavedCategories")
     }
 }

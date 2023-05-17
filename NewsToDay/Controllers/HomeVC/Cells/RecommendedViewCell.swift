@@ -58,7 +58,9 @@ class RecommendedViewCell: UICollectionViewCell {
     
     func configureCell(article: Article) {
         titleLabel.text = article.title
-        categoryLabel.text = article.author
+        if let creator = article.creator {
+            categoryLabel.text = creator[0]
+        }
 
         networkManadger.fetchImage(url: article.urlToImage ?? "", imageView: imageView)
   

@@ -10,6 +10,7 @@ import UIKit
 
 class OnboardingViewController: UIViewController    {
 
+
     let stackView = UIStackView ()
     let button = UIButton (type: .system)
     let allNewsLabel = UILabel()
@@ -67,7 +68,12 @@ class OnboardingViewController: UIViewController    {
         scrollView.setContentOffset(CGPoint(x:  view.frame.size.width - 70, y: 0), animated: true)
         button.setTitle(NSLocalizedString("ONBOARDING_GET_STARTED_BUTTON", comment: "Get Started"), for: .normal)
        
-
+        if button.titleLabel?.text == "Get Started" || button.titleLabel?.text == "Начать" {
+            UserDefaults.standard.set(true, forKey: "launchedBefore")
+            let authVC = AuthorizationViewController()
+            authVC.modalPresentationStyle = .fullScreen
+            self.present(authVC, animated: true)
+        }
     }
     
     //StackView
@@ -163,3 +169,5 @@ class OnboardingViewController: UIViewController    {
         ])
     }
 }
+
+

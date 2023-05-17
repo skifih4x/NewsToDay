@@ -10,6 +10,8 @@ import SnapKit
 
 class LastNewsViewCell: UICollectionViewCell {
     
+    var networkManadger = NetworkManager.shared
+    
     
     // MARK: - Properties
     
@@ -18,6 +20,8 @@ class LastNewsViewCell: UICollectionViewCell {
         label.textColor = Resources.Colors.blackPrimary
         label.textAlignment = .left
         label.numberOfLines = 2
+        label.textColor = .white
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
     }()
     
@@ -25,6 +29,8 @@ class LastNewsViewCell: UICollectionViewCell {
         let label = UILabel()
         label.textColor = Resources.Colors.blackPrimary
         label.numberOfLines = 3
+        label.textColor = .white
+        label.font = UIFont.boldSystemFont(ofSize: 24)
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .left
         return label
@@ -33,6 +39,8 @@ class LastNewsViewCell: UICollectionViewCell {
     lazy var imageView: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
+        image.clipsToBounds = true
+        image.layer.cornerRadius = 10
         return image
     }()
     
@@ -66,6 +74,9 @@ class LastNewsViewCell: UICollectionViewCell {
     func configureCell(article: Source) {
         titleLabel.text = article.name
         categoryLabel.text = article.category
+        
+        //networkManadger.fetchImage(url: image.urlToImage ?? "", imageView: imageView)
+        
     }
     
 }
@@ -75,6 +86,11 @@ class LastNewsViewCell: UICollectionViewCell {
 extension LastNewsViewCell {
     
     private func setupConstraints() {
+        
+        addSubview(imageView)
+        imageView.snp.makeConstraints { make in
+            make.top.leading.trailing.bottom.equalToSuperview()
+        }
         
         addSubview(categoryLabel)
         categoryLabel.snp.makeConstraints { make in
@@ -96,9 +112,5 @@ extension LastNewsViewCell {
             make.trailing.equalToSuperview().offset(-20)
         }
         
-        addSubview(imageView)
-        imageView.snp.makeConstraints { make in
-            make.top.leading.trailing.bottom.equalToSuperview()
-        }
     }
 }
