@@ -41,7 +41,7 @@ extension ForgetPasswordViewController: ForgetPasswordViewDelegate {
                 }
             }
         } else {
-            showAlert(title: NSLocalizedString("ALERT_FILL", comment: "Please fill out all fields"), message: nil)
+            showAlert(title: NSLocalizedString("FORGET_RESET_PASSWORD_ALERT", comment: "Please fill in the email address"), message: nil)
         }
     }
     

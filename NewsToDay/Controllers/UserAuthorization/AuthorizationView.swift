@@ -20,7 +20,9 @@ class AuthorizationView: CustomView {
     lazy var topLabel: UILabel = {
         let element = UILabel()
         element.text = NSLocalizedString("AUTHORIZATION_VC_TRUE_TOP_LABEL", comment: "Welcome to NewsToDay")
-        element.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        element.font = UIFont.systemFont(ofSize: 24, weight: .medium)
+        element.adjustsFontSizeToFitWidth = true
+        element.minimumScaleFactor = 0.5
         element.textColor = Resources.Colors.blackPrimary
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
@@ -30,8 +32,8 @@ class AuthorizationView: CustomView {
         let element = UILabel()
         element.text = NSLocalizedString("AUTHORIZATION_VC_TRUE_GREETING_LABEL", comment: "Hello, I guess you are new around here. You can start using the application after sign up.")
         element.lineBreakMode = .byWordWrapping
-        element.numberOfLines = 2
-        element.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        element.numberOfLines = 0
+        element.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         element.textColor = Resources.Colors.greyPrimary
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
@@ -167,7 +169,7 @@ class AuthorizationView: CustomView {
         element.backgroundColor = Resources.Colors.purplePrimary
         element.setTitle(NSLocalizedString("AUTHORIZATION_VIEW_SIGNIN_BUTTON", comment: "Sign Up"), for: .normal)
         element.setTitleColor(.white, for: .normal)
-        element.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        element.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         element.layer.cornerRadius = 12
         element.translatesAutoresizingMaskIntoConstraints = false
         element.addTarget(self, action: #selector(didTapSignInButton(_:)), for: .touchUpInside)
@@ -185,7 +187,7 @@ class AuthorizationView: CustomView {
     lazy var createAccountLabel: UILabel = {
         let element = UILabel()
         element.text = NSLocalizedString("AUTHORIZATION_VIEW_CREATE_ACCOUNT_LABEL", comment: "Already have an account?")
-        element.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        element.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         element.textColor = Resources.Colors.blackLighter
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
@@ -196,7 +198,7 @@ class AuthorizationView: CustomView {
         element.backgroundColor = nil
         element.setTitle(NSLocalizedString("AUTHORIZATION_VIEW_CREATE_ACCOUNT_BUTTON", comment: "Sign In"), for: .normal)
         element.setTitleColor(Resources.Colors.blackPrimary, for: .normal)
-        element.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .heavy)
+        element.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         element.translatesAutoresizingMaskIntoConstraints = false
         element.addTarget(self, action: #selector(didTapCreateAccountButton(_:)), for: .touchUpInside)
         return element
@@ -243,14 +245,16 @@ class AuthorizationView: CustomView {
         super.layoutViews()
         
         NSLayoutConstraint.activate([
-            topLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
+            topLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 72),
             topLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            topLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            topLabel.heightAnchor.constraint(equalToConstant: 32),
             
-            greetingLabel.topAnchor.constraint(equalTo: topLabel.bottomAnchor, constant: 12),
+            greetingLabel.topAnchor.constraint(equalTo: topLabel.bottomAnchor, constant: 8),
             greetingLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             greetingLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
-            textFieldsVStack.topAnchor.constraint(equalTo: greetingLabel.bottomAnchor, constant: 40),
+            textFieldsVStack.topAnchor.constraint(equalTo: greetingLabel.bottomAnchor, constant: 32),
             textFieldsVStack.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             textFieldsVStack.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
@@ -267,7 +271,7 @@ class AuthorizationView: CustomView {
             signInButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             signInButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
-            createAccountHStack.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -30),
+            createAccountHStack.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -42),
             createAccountHStack.centerXAnchor.constraint(equalTo: self.centerXAnchor),
         ])
     }

@@ -30,7 +30,7 @@ class ForgetPasswordView: CustomView {
     private lazy var topLabel: UILabel = {
         let element = UILabel()
         element.text = NSLocalizedString("FORGET_TOP_LABEL", comment: "Reset your password")
-        element.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        element.font = UIFont.systemFont(ofSize: 24, weight: .medium)
         element.textColor = Resources.Colors.blackPrimary
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
@@ -40,8 +40,8 @@ class ForgetPasswordView: CustomView {
         let element = UILabel()
         element.text = NSLocalizedString("FORGET_GREETING_LABEL", comment: "Don't worry. Please enter your email and we will send you a password reset email.")
         element.lineBreakMode = .byWordWrapping
-        element.numberOfLines = 2
-        element.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        element.numberOfLines = 0
+        element.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         element.textColor = Resources.Colors.greyPrimary
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
@@ -72,7 +72,7 @@ class ForgetPasswordView: CustomView {
         element.backgroundColor = Resources.Colors.purplePrimary
         element.setTitle(NSLocalizedString("FORGET_RESET_PASSWORD_BUTTON", comment: "Reset"), for: .normal)
         element.setTitleColor(.white, for: .normal)
-        element.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        element.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         element.layer.cornerRadius = 12
         element.translatesAutoresizingMaskIntoConstraints = false
         element.addTarget(self, action: #selector(didTapResetPasswordButton(_:)), for: .touchUpInside)
