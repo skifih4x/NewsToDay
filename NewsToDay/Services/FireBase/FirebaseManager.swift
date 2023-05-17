@@ -14,7 +14,18 @@ final class FirebaseManager {
     var userDefaults = UserDefaults.standard
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()
-    private var userUid = ""
+    private var userUid: String {
+        get {
+            if let uid = userDefaults.string(forKey: "UserUID") {
+                return uid
+            } else {
+                return ""
+            }
+        }
+        set {
+            userDefaults.set(newValue, forKey: "UserUID")
+        }
+    }
     
     func createAccount(email: String,
                        password: String,
@@ -44,6 +55,7 @@ final class FirebaseManager {
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] result, error in
             if error == nil {
                 if let result = result {
+                    self?.userUid = result.user.uid
                     self?.fetchUserInfo(for: result.user.uid, complition: { info, cat, error in
                         if error == nil {
                             self?.saveInUserDefaults(userInfo: info)
@@ -77,9 +89,10 @@ final class FirebaseManager {
     }
     
     func saveCategoriesInDatabase(categories: [String]) {
-        let ref = Database.database().reference().child("users")
-        ref.child(userUid).updateChildValues(["categories" : categories])
-        
+        if userUid != "" {
+            let ref = Database.database().reference().child("users")
+            ref.child(userUid).updateChildValues(["categories" : categories])
+        }
     }
     
     func getFromUserDefaultsUserInfo() -> UserInfo? {
