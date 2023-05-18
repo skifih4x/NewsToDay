@@ -142,7 +142,6 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
     
         collectionView.delegate = self
         collectionView.dataSource = self
-        
     }
     
     private func setupTableView() {
@@ -202,13 +201,11 @@ extension HomeViewController: LastNewsCellDelegate {
             
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
         self.storageManager.deleteItem(by: self.news[indexPath.row].link)
-        self.news.remove(at: indexPath.row)
-        self.tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
     func addToBookmarks(_ cell: LastNewsViewCell) {
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
-        self.storageManager.save(article: news[indexPath.row], category: "main")
+        self.storageManager.save(article: news[indexPath.row])
     }
     
 }
