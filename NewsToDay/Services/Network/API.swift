@@ -14,6 +14,6 @@ struct API {
         }
         return url
     }()
-    static let apiKey = "pub_2234110292898a635f60fc8414b803ea89b15"
+    static let apiKey = "pub_22332f13bbb1a8edcaab9f87eefcd693f63ed"
     static let path = "/api/1/news"
 }
