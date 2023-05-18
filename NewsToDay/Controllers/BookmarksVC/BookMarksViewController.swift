@@ -124,7 +124,8 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let destination = DatailVC()
-        navigationController?.pushViewController(destination, animated: true)
+        destination.modalPresentationStyle = .fullScreen
+        self.present(destination, animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

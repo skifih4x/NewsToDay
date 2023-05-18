@@ -42,6 +42,11 @@ class DatailVC: UIViewController {
         
     }
     
+    @objc private func bookmarkButtonPressed(_ sender: UIButton) {
+        sender.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
+        print("My name is bookmarkButtonPressed")
+    }
+    
     // Scroll&StackView Configure
     
     func scrollStackViewConfigure () {
@@ -56,10 +61,6 @@ class DatailVC: UIViewController {
     }
     // Image View Configure
     
-    @objc private func bookmarkButtonPressed(_ sender: UIButton) {
-        sender.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
-    }
-    
     func stackViewConfigure () {
         imageOfNews.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 384)
         imageOfNews.image = UIImage(named: "newsImage")
@@ -67,8 +68,7 @@ class DatailVC: UIViewController {
         stackView.addSubview(imageOfNews)
         backButton.setImage(UIImage(named: "narrow"), for: .normal)
         bookMark.setBackgroundImage(UIImage(systemName: "bookmark.fill"), for: .normal)
-        bookMark.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-        bookMark.tintColor = .gray
+        bookMark.tintColor = .white
         bookMark.addTarget(self, action: #selector(bookmarkButtonPressed), for: .touchUpInside)
         
         forwardButton.setImage(UIImage(named: "forward"), for: .normal)
@@ -89,9 +89,9 @@ class DatailVC: UIViewController {
             backButton.bottomAnchor.constraint(equalTo: imageOfNews.bottomAnchor, constant: -280),
             
             bookMark.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -26),
-            bookMark.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 337),
             bookMark.topAnchor.constraint(equalTo: imageOfNews.topAnchor, constant: 74),
-            bookMark.bottomAnchor.constraint(equalTo: imageOfNews.bottomAnchor, constant: -280),
+            bookMark.heightAnchor.constraint(equalToConstant: 30),
+            bookMark.widthAnchor.constraint(equalToConstant: 30),
             
            forwardButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -26),
            forwardButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 337),

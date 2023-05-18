@@ -52,9 +52,9 @@ class LastNewsViewCell: UICollectionViewCell {
     
     private lazy var bookmarkButton: UIButton = {
         let button = UIButton()
-        button.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         button.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
-        button.tintColor = .gray
+        button.tintColor = .white
         button.addTarget(self, action: #selector(bookmarkButtonPressed), for: .touchUpInside)
         return button
     }()
