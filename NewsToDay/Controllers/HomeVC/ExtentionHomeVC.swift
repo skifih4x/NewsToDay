@@ -51,8 +51,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
         
             let article = news[indexPath.item]
-            cell.configureCell(article: article)
-    
+            cell.configureCell(article: article, isTintedBookmark: true)
             return cell
             
         case .recommended:

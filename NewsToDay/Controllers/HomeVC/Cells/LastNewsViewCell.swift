@@ -99,7 +99,7 @@ class LastNewsViewCell: UICollectionViewCell {
         layer.cornerRadius = 16
     }
     
-    func configureCell(article: Article) {
+    func configureCell(article: Article, isTintedBookmark: Bool) {
         titleLabel.text = article.title
         categoryLabel.text = article.category.joined(separator: ", ")
         
