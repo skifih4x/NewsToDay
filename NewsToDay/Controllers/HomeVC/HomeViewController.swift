@@ -57,6 +57,7 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
         sbar.placeholder = NSLocalizedString("HOME_SEARCH_BAR", comment: "Search")
         sbar.searchBarStyle = .minimal
         sbar.delegate = self
+        sbar.frame.size.height = 170
         return sbar
     }()
     
@@ -177,14 +178,14 @@ extension HomeViewController {
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(20)
-            make.top.equalToSuperview().offset(100)
+            make.top.equalToSuperview().offset(80)
             
         }
         
         view.addSubview(subtitleLabel)
         subtitleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(titleLabel.snp.bottom).offset(15)
+            make.top.equalTo(titleLabel.snp.bottom).offset(8)
             make.leading.equalToSuperview().offset(20)
         }
         
