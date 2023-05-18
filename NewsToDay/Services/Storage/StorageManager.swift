@@ -35,6 +35,7 @@ class StorageManager: StorageManagerProtocol {
             bookmarkAny.append(BookmarkModel(title: bookmark.title,
                                              url: bookmark.url,
                                              urlToImage: bookmark.urlToImage,
+                                             content: bookmark.content,
                                              category: bookmark.category))
         }
         return bookmarkAny
