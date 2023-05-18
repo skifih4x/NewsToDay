@@ -13,15 +13,17 @@ class BookmarkModelObject: Object {
     @Persisted var title: String?
     @Persisted var url: String = ""
     @Persisted var urlToImage: String?
+    @Persisted var content: String?
     @Persisted var category: String = ""
     
-    convenience init(article a: Article, category: String) {
+    convenience init(article a: Article) {
         self.init()
         
         self.title = a.title
         self.url = a.link
         self.urlToImage = a.urlToImage
-        self.category = category
+        self.content = a.content
+        self.category = a.category.joined(separator: ", ")
     }
     
     override static func primaryKey() -> String? {

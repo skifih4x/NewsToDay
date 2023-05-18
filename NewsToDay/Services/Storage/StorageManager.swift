@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 protocol StorageManagerProtocol {
-    func save(article: Article, category: String)
+    func save(article: Article)
     func retrieveAll() -> [BookmarkModel]
     func hasObjectInStorage(with url: String) -> Bool
     func deleteItem(by key: String)
@@ -19,8 +19,8 @@ protocol StorageManagerProtocol {
 class StorageManager: StorageManagerProtocol {
     fileprivate lazy var mainRealm = try! Realm()
     
-    func save(article: Article, category: String) {
-        let a = BookmarkModelObject(article: article, category: category)
+    func save(article: Article) {
+        let a = BookmarkModelObject(article: article)
         
         try! mainRealm.write {
             mainRealm.add(a)
