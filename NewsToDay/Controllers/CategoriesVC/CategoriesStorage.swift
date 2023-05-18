@@ -13,14 +13,10 @@ final class CategoriesStorage {
 
     static let shared = CategoriesStorage()
 
-    var categories: [String]
+    var categories: [String] = []
 
     init() {
-        if let categories = userDefaults.object(forKey: key) as? [String] {
-            self.categories = categories
-        } else {
-            self.categories = []
-        }
+        updateCategoryList()
     }
 
     func set(category: String) {
@@ -31,6 +27,14 @@ final class CategoriesStorage {
     func delete(category: String) {
         categories.removeAll { $0 == category }
         saveCategories()
+    }
+    
+    func updateCategoryList() {
+        if let categories = userDefaults.object(forKey: key) as? [String] {
+            self.categories = categories
+        } else {
+            self.categories = []
+        }
     }
 
     private func saveCategories() {

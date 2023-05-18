@@ -79,6 +79,7 @@ extension ProfileViewController: ProfileViewDelegate {
     
     func signOut() {
         FirebaseManager.shared.signOut {
+            UserDefaults.standard.set([], forKey: "SavedCategories")
             let onboardingVC = OnboardingViewController()
             onboardingVC.modalPresentationStyle = .fullScreen
             onboardingVC.modalTransitionStyle = .crossDissolve

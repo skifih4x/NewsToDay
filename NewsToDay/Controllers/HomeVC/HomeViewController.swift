@@ -95,48 +95,48 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
     
     // MARK: - Fetch data
     
-    func fetchNewsModel(for category: String) {
+    func fetchLatestNews(for category: [String]) {
         
         
-        networkManadger.fetchTopHeadlines(categories: [category], country: Country.us) { [weak self] result in
+        networkManadger.fetchLatestNews(category: category, country: Country.us) { [weak self] result in
             switch result {
             case .success(let news):
-                self?.news = news.articles
+                self?.news = news.results
                 self?.collectionView.reloadSections(IndexSet(integer: 1))
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
     }
-    
-    func fetchHeadlineSource(for category: String) {
-        
-        networkManadger.fetchHeadlinesSources(category: Category(rawValue: category), country: Country.us) { [weak self] result in
-            switch result {
-            case .success(let soureces):
-                self?.soureces = soureces.sources
-                DispatchQueue.main.async {
-                    self?.collectionView.reloadSections(IndexSet(integer: 1))
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
+
+//    func fetchHeadlineSource(for category: String) {
+//
+//        networkManadger.fetchHeadlinesSources(category: Category(rawValue: category), country: Country.us) { [weak self] result in
+//            switch result {
+//            case .success(let soureces):
+//                self?.soureces = soureces.sources
+//                DispatchQueue.main.async {
+//                    self?.collectionView.reloadSections(IndexSet(integer: 1))
+//                }
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
+//    }
     
     func fetchSearchData(for searchText: String) {
-        
-        networkManadger.fetchSearch(searchText: searchText) { [weak self] result in
-            switch result {
-            case .success(let news):
-                self?.news = news.articles
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+
+//        networkManadger.fetchSearch(searchText: searchText) { [weak self] result in
+//            switch result {
+//            case .success(let news):
+//                self?.news = news.articles
+//                DispatchQueue.main.async {
+//                    self?.tableView.reloadData()
+//                }
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
     }
     
     

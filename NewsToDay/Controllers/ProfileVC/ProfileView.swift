@@ -156,15 +156,15 @@ class ProfileView: UIView {
         nameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(148)
             make.leading.equalTo(profileImageView.snp.trailing).offset(24)
+            make.trailing.equalToSuperview().inset(19)
             make.height.equalTo(24)
-            make.width.equalTo(45)
         }
         
         emailLabel.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom)
             make.leading.equalTo(profileImageView.snp.trailing).offset(24)
+            make.trailing.equalToSuperview().inset(19)
             make.height.equalTo(24)
-            make.width.equalTo(105)
         }
         
         languageButton.snp.makeConstraints { make in
