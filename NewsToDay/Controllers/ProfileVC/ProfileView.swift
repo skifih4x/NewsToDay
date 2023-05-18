@@ -22,7 +22,7 @@ class ProfileView: UIView {
         let label = UILabel()
         label.text = NSLocalizedString("PROFILE_PROFILE_LABEL", comment: "Profile")
         label.numberOfLines = 1
-        label.font = UIFont.systemFont(ofSize: 24)
+        label.font = .boldSystemFont(ofSize: 24)
         label.textColor = Resources.Colors.blackPrimary
         return label
     }()
@@ -141,10 +141,9 @@ class ProfileView: UIView {
     
     private func addConstraints() {
         profileLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(72)
+            make.top.equalToSuperview().inset(80)
             make.leading.equalToSuperview().inset(20)
             make.height.equalTo(32)
-            make.width.equalTo(100)
         }
         
         profileImageView.snp.makeConstraints { make in

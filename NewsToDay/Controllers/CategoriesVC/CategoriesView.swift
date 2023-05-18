@@ -16,9 +16,7 @@ final class CategoriesView: UIView {
         let label = UILabel()
 
         label.font = .boldSystemFont(ofSize: 24)
-        label.textColor = UIColor(
-            red: 0.2, green: 0.212, blue: 0.278, alpha: 1
-        )
+        label.textColor = Resources.Colors.blackPrimary
         label.numberOfLines = 2
 
         return label
@@ -28,9 +26,7 @@ final class CategoriesView: UIView {
         let label = UILabel()
 
         label.font = .systemFont(ofSize: 16)
-        label.textColor = UIColor(
-            red: 0.488, green: 0.51, blue: 0.632, alpha: 1
-        )
+        label.textColor = Resources.Colors.greyPrimary
         label.numberOfLines = 3
 
         return label
@@ -96,15 +92,15 @@ extension CategoriesView {
             ),
             collectionView.topAnchor.constraint(
                 equalTo: subtitle.bottomAnchor,
-                constant: 8
+                constant: 14
             ),
             collectionView.bottomAnchor.constraint(
                 equalTo: bottomAnchor,
                 constant: -110
             ),
             headerTitle.topAnchor.constraint(
-                equalTo: safeAreaLayoutGuide.topAnchor,
-                constant: 30
+                equalTo: topAnchor,
+                constant: 80
             ),
             headerTitle.leadingAnchor.constraint(
                 equalTo: leadingAnchor,
