@@ -22,7 +22,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case .categories:
             return categoryStorage.categories.count
         case .lastNews:
-            return soureces.count
+            return news.count
         case .recommended:
             return news.count
         }
@@ -50,10 +50,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 return UICollectionViewCell()
             }
         
-            let article = soureces[indexPath.item]
-            //let image = news[indexPath.item]
-            //let shuffledImage = imageNames.shuffled()
-            //let image = shuffledImage[indexPath.item % shuffledImage.count]
+            let article = news[indexPath.item]
             cell.configureCell(article: article)
     
             return cell
@@ -71,15 +68,41 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard indexPath.item < categorySelect.count else { return }
-        if indexPath.section == 0 {
-            let categoryName = categorySelect[indexPath.item]
-//            fetchNewsModel(for: categoryName)
-            fetchLatestNews(for: [categoryName])
+        
+         let section = sections[indexPath.section]
+        
+        switch section {
             
+        case .categories:
+            let categorySelect  = categoryStorage.categories[indexPath.item]
+            fetchLatestNews(for: [categorySelect])
+        case .lastNews, .recommended:
+            let selectedArticle: Article
+            if section == .lastNews {
+                selectedArticle = news[indexPath.item]
+            } else {
+                selectedArticle = news[indexPath.item]
+            }
+        navigareToDetail(with: selectedArticle)
         }
     }
-    
+
+    func navigareToDetail(with article: Article) {
+        let articleInfo = ArticleInfo(
+            title: article.title,
+            category: article.category.joined(separator: ", "),
+            //autor: article.creator,
+            image: article.urlToImage,
+            content: article.content
+        )
+        
+        let detailVC = DatailVC()
+        detailVC.articleInfo = articleInfo
+        
+        present(detailVC, animated: true)
+        
+    }
+
     // MARK: - Configure for header
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {

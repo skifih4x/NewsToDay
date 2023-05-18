@@ -63,7 +63,7 @@ final class NetworkManager {
         var queryParams = [URLQueryItem]()
         queryParams.append(URLQueryItem(
             name: "apikey",
-            value: "pub_2234110292898a635f60fc8414b803ea89b15"
+            value: API.apiKey
         ))
         queryParams.append(URLQueryItem(
             name: "country",

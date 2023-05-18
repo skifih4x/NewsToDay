@@ -7,26 +7,22 @@
 
 import UIKit
 import SnapKit
+import SDWebImage
 
 final class HomeViewController: UIViewController, CategoriesDelegate {
     
     
     // MARK: - Variables and constants
     
-    //let imageNames = ["cos", "hologram1", "hologram3", "parsons"]
-    
     var timer: Timer?
-    
-    private var query: String?
     
     var networkManadger = NetworkManager.shared
     var categoryStorage = CategoriesStorage.shared
 
     var categories: Category?
-    var categorySelect: [String] = []
     
     var news: [Article] = []
-    var soureces: [Source] = []
+    
     
    lazy var sections: [Section] = [.categories, .lastNews, .recommended]
     
@@ -77,63 +73,45 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
         view.backgroundColor = .white
         setupCollectionView()
         configure()
-        fetchCategories()
         
         tableView.isHidden = true
         setupTableView()
     }
     
-    func fetchCategories() {
-        categorySelect = categoryStorage.categories
-        collectionView.reloadSections(IndexSet(integer: 0))
-    }
-    
-    
-    
     // MARK: - Fetch data
     
     func fetchLatestNews(for category: [String]) {
         
-        
         networkManadger.fetchLatestNews(category: category, country: Country.us) { [weak self] result in
             switch result {
-            case .success(let news):
-                self?.news = news.results
-                self?.collectionView.reloadSections(IndexSet(integer: 1))
+            case .success(let newsModel):
+                self?.news = newsModel.results
+                
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadSections(IndexSet(integer: 1))
+            }
+                
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
     }
 
-//    func fetchHeadlineSource(for category: String) {
-//
-//        networkManadger.fetchHeadlinesSources(category: Category(rawValue: category), country: Country.us) { [weak self] result in
-//            switch result {
-//            case .success(let soureces):
-//                self?.soureces = soureces.sources
-//                DispatchQueue.main.async {
-//                    self?.collectionView.reloadSections(IndexSet(integer: 1))
-//                }
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
-//    }
-    
     func fetchSearchData(for searchText: String) {
-
-//        networkManadger.fetchSearch(searchText: searchText) { [weak self] result in
-//            switch result {
-//            case .success(let news):
-//                self?.news = news.articles
-//                DispatchQueue.main.async {
-//                    self?.tableView.reloadData()
-//                }
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
+        
+        networkManadger.fetchSearch(searchText: searchText) { [weak self] result in
+            switch result {
+            case .success(let newsMod):
+                self?.news = newsMod.results
+                
+                DispatchQueue.main.async {
+                self?.tableView.reloadData()
+            }
+    
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     

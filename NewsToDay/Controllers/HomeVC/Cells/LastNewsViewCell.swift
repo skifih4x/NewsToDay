@@ -19,20 +19,29 @@ class LastNewsViewCell: UICollectionViewCell {
         let label = UILabel()
         label.textColor = Resources.Colors.blackPrimary
         label.textAlignment = .left
-        label.numberOfLines = 2
+        label.numberOfLines = 1
         label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.backgroundColor = Resources.Colors.purpleLight
+        label.clipsToBounds = true
         return label
     }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = Resources.Colors.blackPrimary
-        label.numberOfLines = 3
+        label.numberOfLines = 4
         label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .left
+        let attributeText = NSMutableAttributedString(string: label.text ?? "")
+        let boarderColor = UIColor.red
+        let boarderWidth: CGFloat = 4.0
+        let range = NSRange(location: 0, length: attributeText.length)
+        attributeText.addAttribute(.strokeColor, value: boarderColor, range: range)
+        attributeText.addAttribute(.strokeWidth, value: boarderWidth, range: range)
+        label.attributedText = attributeText
         return label
     }()
     
@@ -58,6 +67,7 @@ class LastNewsViewCell: UICollectionViewCell {
         super.init(frame: frame)
         setupView()
         setupConstraints()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -71,11 +81,11 @@ class LastNewsViewCell: UICollectionViewCell {
         layer.cornerRadius = 16
     }
     
-    func configureCell(article: Source) {
-        titleLabel.text = article.name
-        categoryLabel.text = article.category
+    func configureCell(article: Article) {
+        titleLabel.text = article.title
+        categoryLabel.text = article.category.joined(separator: ", ")
         
-        //networkManadger.fetchImage(url: image.urlToImage ?? "", imageView: imageView)
+        networkManadger.fetchImage(url: article.urlToImage ?? "", imageView: imageView)
         
     }
     
@@ -94,7 +104,8 @@ extension LastNewsViewCell {
         
         addSubview(categoryLabel)
         categoryLabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(100)
+            make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(20)
             
         }
