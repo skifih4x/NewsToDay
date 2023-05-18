@@ -11,6 +11,7 @@ import RealmSwift
 protocol StorageManagerProtocol {
     func save(article: Article, category: String)
     func retrieveAll() -> [BookmarkModel]
+    func hasObjectInStorage(with url: String) -> Bool
     func deleteItem(by key: String)
     func clearDB()
 }
@@ -37,6 +38,14 @@ class StorageManager: StorageManagerProtocol {
                                              category: bookmark.category))
         }
         return bookmarkAny
+    }
+    
+    func hasObjectInStorage(with key: String) -> Bool {
+        if let _ = mainRealm.object(ofType: BookmarkModelObject.self, forPrimaryKey: key) {
+            return true
+        } else {
+            return false
+        }
     }
     
     func deleteItem(by key: String) {
