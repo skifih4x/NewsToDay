@@ -219,31 +219,16 @@ extension HomeViewController {
 extension HomeViewController: LastNewsCellDelegate {
     func removeFromBookmarks(_ cell: LastNewsViewCell) {
             
-            guard let indexPath = collectionView.indexPath(for: cell) else { return }
-            let alert = UIAlertController(
-                title: NSLocalizedString("BOOKMARKS_ALERT_TITLE", comment: "Do You want to delete this bookmark?"),
-                message: "",
-                preferredStyle: .alert
-            )
-            alert.addAction(UIAlertAction(
-                title: NSLocalizedString("BOOKMARKS_CANCEL_ALERT_TITLE", comment: "Cancel"),
-                style: .cancel,
-                handler: nil
-            ))
-            alert.addAction(UIAlertAction(
-                title: NSLocalizedString("BOOKMARKS_DELETE_ALERT_TITLE", comment: "Delete"),
-                style: .destructive,
-                handler: { _ in
-                    self.storageManager.deleteItem(by: self.bookmarks[indexPath.row].url)
-                    self.bookmarks.remove(at: indexPath.row)
-                    self.tableView.deleteRows(at: [indexPath], with: .automatic)
-                }))
-            present(alert, animated: true, completion: nil)
-
+        guard let indexPath = collectionView.indexPath(for: cell) else { return }
+        self.storageManager.deleteItem(by: self.bookmarks[indexPath.row].url)
+        self.bookmarks.remove(at: indexPath.row)
+        self.tableView.deleteRows(at: [indexPath], with: .automatic)
+                
     }
     
     func addToBookmarks(_ cell: LastNewsViewCell) {
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
+        self.storageManager.save(article: news[indexPath.row], category: "main")
         // отсюда новость должна сохраняться в закладки
     }
     
