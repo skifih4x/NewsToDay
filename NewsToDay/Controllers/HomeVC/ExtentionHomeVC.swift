@@ -51,7 +51,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
         
             let article = news[indexPath.item]
-            cell.configureCell(article: article, isTintedBookmark: true)
+            let hasInRealm = storageManager.hasObjectInStorage(with: article.link)
+            cell.configureCell(article: article, isTintedBookmark: hasInRealm)
             return cell
             
         case .recommended:
@@ -93,6 +94,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             //autor: article.creator,
             image: article.urlToImage,
             content: article.content
+            link: article.link
         )
         
         let detailVC = DatailVC()
