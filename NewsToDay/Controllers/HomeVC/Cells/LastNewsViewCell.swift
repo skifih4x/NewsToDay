@@ -104,7 +104,11 @@ class LastNewsViewCell: UICollectionViewCell {
         categoryLabel.text = article.category.joined(separator: ", ")
         
         networkManadger.fetchImage(url: article.urlToImage ?? "", imageView: imageView)
-        
+        if isTintedBookmark {
+            bookmarkButton.setBackgroundImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+        } else {
+            bookmarkButton.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
+        }
     }
     
 }
