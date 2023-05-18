@@ -13,4 +13,5 @@ struct ArticleInfo {
     //let autor: String?
     let image: String?
     let content: String?
+    let link: String
 }

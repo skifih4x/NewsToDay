@@ -71,6 +71,18 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         setConstraints()
     }
     
+    func setupViews() {
+        view.backgroundColor = .white
+        view.addSubview(ellipseView)
+        view.addSubview(vectorView)
+        view.addSubview(messageView)
+        view.addSubview(titleLabel)
+        view.addSubview(subtitleLabel)
+        view.addSubview(tableView)
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         bookmarks = storageManager.retrieveAll()
         tableView.reloadData()
@@ -110,16 +122,10 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         return swipe
     }
     
-    func setupViews() {
-        view.backgroundColor = .white
-        view.addSubview(ellipseView)
-        view.addSubview(vectorView)
-        view.addSubview(messageView)
-        view.addSubview(titleLabel)
-        view.addSubview(subtitleLabel)
-        view.addSubview(tableView)
-        tableView.delegate = self
-        tableView.dataSource = self
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let destination = DatailVC()
+        destination.modalPresentationStyle = .fullScreen
+        self.present(destination, animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
