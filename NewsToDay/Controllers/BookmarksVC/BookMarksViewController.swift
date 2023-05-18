@@ -42,8 +42,8 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         let title = UILabel()
         title.translatesAutoresizingMaskIntoConstraints = false
         title.text = NSLocalizedString("BOOKMARKS_TITLE_LABEL", comment: "Bookmarks")
-        title.font = UIFont.systemFont(ofSize: 24)
-        title.textColor = .black
+        title.font = .boldSystemFont(ofSize: 24)
+        title.textColor = Resources.Colors.blackPrimary
         title.textAlignment = .left
         return title
     }()
@@ -53,7 +53,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         subtitle.translatesAutoresizingMaskIntoConstraints = false
         subtitle.text = NSLocalizedString("BOOKMARKS_SUBTITLE_LABEL", comment: "Saved articles to the library")
         subtitle.font = UIFont.systemFont(ofSize: 16)
-        subtitle.textColor = .lightGray
+        subtitle.textColor = Resources.Colors.greyPrimary
         subtitle.textAlignment = .left
         return subtitle
     }()
@@ -181,7 +181,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
                 messageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 60),
                 messageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -59),
                 
-                titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 72),
+                titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 80),
                 titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
                 
                 subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),

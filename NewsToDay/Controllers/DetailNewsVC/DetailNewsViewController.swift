@@ -9,7 +9,9 @@ import Foundation
 import UIKit
 
 
-class DatailVC: UIViewController {
+class DatailVC: UIViewController    {
+    
+    var articleInfo: ArticleInfo?
     
     let stackView = UIStackView ()
     let scrollView = UIScrollView()

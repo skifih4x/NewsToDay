@@ -8,7 +8,5 @@
 import Foundation
 
 protocol CategoriesDelegate: AnyObject {
-    //func loadData()
-//    func fetchNewsModel(for category: String)
     func fetchLatestNews(for category: [String])
 }
