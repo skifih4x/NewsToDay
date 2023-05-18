@@ -123,7 +123,17 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let article = bookmarks[indexPath.row]
+        let articleInfo = ArticleInfo(
+            title: article.title ?? "",
+            category: article.category,
+            image: article.urlToImage,
+            content: article.content,
+            link: article.url
+        )
+        
         let destination = DatailVC()
+        destination.articleInfo = articleInfo
         destination.modalPresentationStyle = .fullScreen
         self.present(destination, animated: true)
     }
