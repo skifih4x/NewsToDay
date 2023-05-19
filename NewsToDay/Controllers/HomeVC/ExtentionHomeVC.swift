@@ -63,7 +63,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 return UICollectionViewCell()
             }
             
-            cell.configureCell(article: news[indexPath.item])
+            cell.delegate = self
+            
+            let article = news[indexPath.item]
+            let hasInRealm = storageManager.hasObjectInStorage(with: article.link)
+            cell.configureCell(article: article, isTintedBookmark: hasInRealm)
             return cell
         }
         
