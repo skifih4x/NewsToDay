@@ -11,19 +11,20 @@ import SnapKit
 class LastNewsViewCell: UICollectionViewCell {
     
     var networkManadger = NetworkManager.shared
-    
+    let image = UIImage(systemName: "bookmark")
     
     // MARK: - Properties
     
     private let categoryLabel: UILabel = {
         let label = UILabel()
         label.textColor = Resources.Colors.blackPrimary
-        label.textAlignment = .left
+        label.textAlignment = .center
         label.numberOfLines = 1
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 16)
         label.backgroundColor = Resources.Colors.purpleLight
         label.clipsToBounds = true
+        label.layer.cornerRadius = 5
         return label
     }()
     
@@ -35,12 +36,10 @@ class LastNewsViewCell: UICollectionViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.lineBreakMode = .byWordWrapping
         label.textAlignment = .left
+        label.clipsToBounds = false
         let attributeText = NSMutableAttributedString(string: label.text ?? "")
-        let boarderColor = UIColor.red
-        let boarderWidth: CGFloat = 4.0
         let range = NSRange(location: 0, length: attributeText.length)
-        attributeText.addAttribute(.strokeColor, value: boarderColor, range: range)
-        attributeText.addAttribute(.strokeWidth, value: boarderWidth, range: range)
+        
         label.attributedText = attributeText
         return label
     }()
@@ -53,11 +52,11 @@ class LastNewsViewCell: UICollectionViewCell {
         return image
     }()
     
-    private let imageBookmark: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(systemName: "bookmark")
-        image.tintColor = Resources.Colors.blackDark
-        return image
+    lazy var buttonBookmark: UIButton = {
+        let button = UIButton()
+        button.setImage(image, for: .normal)
+        button.tintColor = Resources.Colors.blackDark
+        return button
     }()
     
     // MARK: - init
@@ -107,6 +106,7 @@ extension LastNewsViewCell {
             make.top.equalToSuperview().offset(100)
             make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-150)
             
         }
         
@@ -117,8 +117,8 @@ extension LastNewsViewCell {
             make.leading.equalToSuperview().offset(20)
         }
         
-        addSubview(imageBookmark)
-        imageBookmark.snp.makeConstraints { make in
+        addSubview(buttonBookmark)
+        buttonBookmark.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
         }

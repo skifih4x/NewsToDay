@@ -18,10 +18,14 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
     
     var networkManadger = NetworkManager.shared
     var categoryStorage = CategoriesStorage.shared
+    var storageManager: StorageManagerProtocol = StorageManager()
+    var dataManager = DataManager.shared
 
     var categories: Category?
     
     var news: [Article] = []
+    
+    var selectedCategory: String?
     
     
    lazy var sections: [Section] = [.categories, .lastNews, .recommended]
@@ -76,6 +80,7 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
         
         tableView.isHidden = true
         setupTableView()
+        saveData()
     }
     
     // MARK: - Fetch data
@@ -87,6 +92,10 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
             case .success(let newsModel):
                 self?.news = newsModel.results
                 
+                if let fetchNews = self?.news {
+                    self?.dataManager.saveNews(fetchNews)
+                }
+                
                 DispatchQueue.main.async {
                     self?.collectionView.reloadSections(IndexSet(integer: 1))
             }
@@ -95,6 +104,21 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func saveData() {
+        if let savedCategory = dataManager.loadSelectedCategory() {
+            selectedCategory = savedCategory
+        }
+        
+        if let savedNews = dataManager.loadData() {
+            news = savedNews
+        } else {
+            if let categoryS = selectedCategory {
+                fetchLatestNews(for: [categoryS])
+            }
+        }
+        
     }
 
     func fetchSearchData(for searchText: String) {
