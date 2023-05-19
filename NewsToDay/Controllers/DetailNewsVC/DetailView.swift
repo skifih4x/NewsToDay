@@ -18,10 +18,10 @@ class DetailView: CustomView {
     weak var delegate: DetailViewDelegate?
     
     //MARK: - Variables
-    lazy var scrollView = UIScrollView(frame: self.bounds)
+    lazy var scrollView = UIScrollView()
     
     lazy var contentView: UIView = {
-        let element = UIStackView()
+        let element = UIView()
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -108,9 +108,7 @@ class DetailView: CustomView {
         
         self.backgroundColor = .white
         
-        self.addSubview(scrollView)
         scrollView.addSubview(contentView)
-        
         contentView.addSubview(imageOfNews)
         contentView.addSubview(textOfNews)
         contentView.addSubview(backButton)
@@ -120,13 +118,13 @@ class DetailView: CustomView {
         contentView.addSubview(authorNameLabel)
         contentView.addSubview(categoryLabel)
         
-//        scrollView.addSubview(stackView)
+        self.addSubview(scrollView)
     }
     
     //MARK: - layoutViews
     override func layoutViews() {
         super.layoutViews()
-        
+
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -139,10 +137,12 @@ class DetailView: CustomView {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            contentView.widthAnchor.constraint(equalTo: self.widthAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(equalToConstant: 2000),
             
             imageOfNews.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageOfNews.heightAnchor.constraint(equalToConstant: 384),
+            imageOfNews.widthAnchor.constraint(equalTo: contentView.widthAnchor),
             imageOfNews.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageOfNews.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
@@ -150,33 +150,35 @@ class DetailView: CustomView {
             backButton.topAnchor.constraint(equalTo: imageOfNews.topAnchor, constant: 75),
             backButton.heightAnchor.constraint(equalToConstant: 30),
             backButton.widthAnchor.constraint(equalToConstant: 30),
-            
+
             bookmarkButton.trailingAnchor.constraint(equalTo: imageOfNews.trailingAnchor, constant: -25),
             bookmarkButton.topAnchor.constraint(equalTo: imageOfNews.topAnchor, constant: 75),
             bookmarkButton.heightAnchor.constraint(equalToConstant: 40),
             bookmarkButton.widthAnchor.constraint(equalToConstant: 40),
-            
+
             forwardButton.trailingAnchor.constraint(equalTo: imageOfNews.trailingAnchor, constant: -26),
             forwardButton.topAnchor.constraint(equalTo: imageOfNews.topAnchor, constant: 125),
             forwardButton.heightAnchor.constraint(equalToConstant: 30),
             forwardButton.widthAnchor.constraint(equalToConstant: 30),
-            
+
             categoryLabel.leadingAnchor.constraint(equalTo: imageOfNews.leadingAnchor, constant: 20),
             categoryLabel.widthAnchor.constraint(equalToConstant: 110),
             categoryLabel.topAnchor.constraint(equalTo: imageOfNews.topAnchor,constant: 130),
             categoryLabel.heightAnchor.constraint(equalToConstant: 40),
-            
+
             topLabel.trailingAnchor.constraint(equalTo: imageOfNews.trailingAnchor, constant: -20),
             topLabel.leadingAnchor.constraint(equalTo: imageOfNews.leadingAnchor, constant: 20),
             topLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor,constant: 40),
-            
+
             authorNameLabel.trailingAnchor.constraint(equalTo: imageOfNews.trailingAnchor),
             authorNameLabel.leadingAnchor.constraint(equalTo: imageOfNews.leadingAnchor, constant: 20),
             authorNameLabel.bottomAnchor.constraint(equalTo: imageOfNews.bottomAnchor, constant: -20),
-            
+
+            textOfNews.topAnchor.constraint(equalTo: imageOfNews.bottomAnchor, constant: 10),
+            textOfNews.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+//            textOfNews.widthAnchor.constraint(equalTo: contentView.widthAnchor),
             textOfNews.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             textOfNews.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            textOfNews.topAnchor.constraint(equalTo: imageOfNews.bottomAnchor, constant: 5),
         ])
     }
 }
