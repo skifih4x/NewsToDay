@@ -83,6 +83,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let selectedArticle: Article
             if section == .lastNews {
                 selectedArticle = news[indexPath.item]
+                navigareToDetail(with: selectedArticle)
             } else {
                 selectedArticle = news[indexPath.item]
             }
@@ -91,11 +92,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let selectedArticle: Article
             if section == .recommended {
                 selectedArticle = news[indexPath.item]
+                navigareToDetail(with: selectedArticle)
             } else {
                 selectedArticle = news[indexPath.item]
             }
-            
-        navigareToDetail(with: selectedArticle)
         }
     }
 

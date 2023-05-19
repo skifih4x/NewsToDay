@@ -16,9 +16,6 @@ class DetailViewController: CustomViewController<DetailView> {
         super.viewDidLoad()
         
         customView.delegate = self
-        
-        print(articleInfo)
-        
         setImage()
         customView.categoryLabel.text = articleInfo?.category
         customView.topLabel.text = articleInfo?.title

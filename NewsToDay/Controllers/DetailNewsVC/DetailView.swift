@@ -75,6 +75,7 @@ class DetailView: CustomView {
         let element = UILabel()
         element.font = UIFont.boldSystemFont(ofSize: 25)
         element.textColor = .white
+        element.backgroundColor = Resources.Colors.greyLight
         element.numberOfLines = 4
         element.adjustsFontSizeToFitWidth = true
         element.minimumScaleFactor = 0.3
@@ -86,6 +87,7 @@ class DetailView: CustomView {
         let element = UILabel()
         element.font = UIFont.boldSystemFont(ofSize: 18)
         element.textColor = .white
+        element.backgroundColor = Resources.Colors.greyLight
         element.numberOfLines = 2
         element.adjustsFontSizeToFitWidth = true
         element.minimumScaleFactor = 0.5
@@ -128,7 +130,7 @@ class DetailView: CustomView {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: self.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: self.topAnchor, constant: -70),
             scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
@@ -175,7 +177,7 @@ class DetailView: CustomView {
             authorNameLabel.bottomAnchor.constraint(equalTo: imageOfNews.bottomAnchor, constant: -20),
 
             textOfNews.topAnchor.constraint(equalTo: imageOfNews.bottomAnchor, constant: 10),
-            textOfNews.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+//            textOfNews.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
 //            textOfNews.widthAnchor.constraint(equalTo: contentView.widthAnchor),
             textOfNews.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             textOfNews.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
