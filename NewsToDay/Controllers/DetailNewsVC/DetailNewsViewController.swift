@@ -68,7 +68,17 @@ class DatailVC: UIViewController    {
     
     func stackViewConfigure () {
         imageOfNews.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 384)
-        imageOfNews.image = UIImage(named: "newsImage")
+        let defaultImage = UIImage(named: "newsImage")
+        let articleImageView = UIImageView()
+        
+        if let urlToImageString = articleInfo?.image {
+            guard let url = URL(string: urlToImageString) else { return }
+            articleImageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "network"), options: [.continueInBackground,.progressiveLoad]) { _, _, _, _ in
+                self.imageOfNews.image = articleImageView.image
+            }
+        } else {
+            self.imageOfNews.image = defaultImage
+        }
         
         stackView.addSubview(imageOfNews)
         backButton.setImage(UIImage(named: "narrow"), for: .normal)
@@ -151,6 +161,11 @@ class DatailVC: UIViewController    {
         topLabel.numberOfLines = 4
         topLabel.adjustsFontSizeToFitWidth = true
         topLabel.minimumScaleFactor = 0.3
+        
+        authorNameLabel.numberOfLines = 2
+        authorNameLabel.adjustsFontSizeToFitWidth = true
+        authorNameLabel.minimumScaleFactor = 0.5
+        
         topLabel.translatesAutoresizingMaskIntoConstraints = false
         authorNameLabel.translatesAutoresizingMaskIntoConstraints = false
         categoryLabel.translatesAutoresizingMaskIntoConstraints = false
