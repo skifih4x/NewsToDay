@@ -21,7 +21,7 @@ class OnboardingViewController: UIViewController    {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        scrollView.delegate = self
         scrollViewConfigure()
         pageControlFunc()
         labelConfigure ()
@@ -48,7 +48,7 @@ class OnboardingViewController: UIViewController    {
             
             page.image = UIImage(named: imagesOfCity[x])
     
-            scrollView.isScrollEnabled = false
+          pageControl.currentPage += 1
             page.layer.cornerRadius = 20
             scrollView.addSubview(page)
             
@@ -88,13 +88,8 @@ class OnboardingViewController: UIViewController    {
     //Button
     
     func buttonConfigure () {
-        button.configure(title: NSLocalizedString("ONBOARDING_BUTTON", comment: "Next"))
-    
-      
+        button.configure(title: NSLocalizedString("ONBOARDING_NEXT_BUTTON", comment: "Next"))
     }
-   
-
-//
     // Labels
     
     func labelConfigure () {
@@ -170,4 +165,9 @@ class OnboardingViewController: UIViewController    {
     }
 }
 
+extension OnboardingViewController : UIScrollViewDelegate {
+     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+         pageControl.currentPage = Int(floorf(Float(scrollView.contentOffset.x)) - Float (70))
+    }
+}
 
