@@ -127,12 +127,13 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         let articleInfo = ArticleInfo(
             title: article.title ?? "",
             category: article.category,
+            author: article.author,
             image: article.urlToImage,
             content: article.content,
             link: article.url
         )
         
-        let destination = DatailVC()
+        let destination = DetailViewController()
         destination.articleInfo = articleInfo
         destination.modalPresentationStyle = .fullScreen
         self.present(destination, animated: true)
@@ -155,11 +156,18 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         let articleImageView = UIImageView()
         
         if let urlToImageString = bookmarks[indexPath.row].urlToImage {
-            guard let url = URL(string: urlToImageString) else { return cell }
-            articleImageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "network"), options: [.continueInBackground,.progressiveLoad]) { _, _, _, _ in
+            if urlToImageString != "" {
+                guard let url = URL(string: urlToImageString) else { return cell }
+                articleImageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "network"), options: [.continueInBackground,.progressiveLoad]) { _, _, _, _ in
+                    cell.configure(img: articleImageView.image!,
+                                   category: self.bookmarks[indexPath.row].category,
+                                   news: self.bookmarks[indexPath.row].title ?? "")
+                }
+            } else {
+                articleImageView.image = defaultImage
                 cell.configure(img: articleImageView.image!,
-                               category: self.bookmarks[indexPath.row].category,
-                               news: self.bookmarks[indexPath.row].title ?? "")
+                               category: bookmarks[indexPath.row].category,
+                               news: bookmarks[indexPath.row].title ?? "")
             }
         } else {
             articleImageView.image = defaultImage

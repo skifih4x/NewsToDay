@@ -103,13 +103,14 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let articleInfo = ArticleInfo(
             title: article.title,
             category: article.category.joined(separator: ", "),
-            //autor: article.creator,
+            author: article.creator?.joined(separator: ", "),
             image: article.urlToImage,
             content: article.content,
             link: article.link
         )
         
-        let detailVC = DatailVC()
+        let detailVC = DetailViewController()
+        detailVC.modalPresentationStyle = .fullScreen
         detailVC.articleInfo = articleInfo
         
         present(detailVC, animated: true)

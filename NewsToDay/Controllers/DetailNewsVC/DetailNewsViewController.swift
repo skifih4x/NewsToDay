@@ -18,7 +18,6 @@ class DatailVC: UIViewController    {
     let textOfNews = UILabel()
     let topLabel = UILabel()
     let authorNameLabel = UILabel()
-    let authorLabel = UILabel()
     let categoryLabel = UILabel()
     let imageOfNews = UIImageView()
     
@@ -28,6 +27,7 @@ class DatailVC: UIViewController    {
     
     
     override func viewDidLoad() {
+        print(articleInfo)
         
         view.addSubview(scrollView)
         view.backgroundColor = .white
@@ -38,15 +38,15 @@ class DatailVC: UIViewController    {
         stackViewConfigure()
         textViewConfigure()
         topViewConfigure ()
-
-      
-      
-        
     }
     
     @objc private func bookmarkButtonPressed(_ sender: UIButton) {
         sender.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
         print("My name is bookmarkButtonPressed")
+    }
+    
+    @objc private func backButtonPressed(_ sender: UIButton) {
+        self.dismiss(animated: true)
     }
     
     // Scroll&StackView Configure
@@ -55,7 +55,7 @@ class DatailVC: UIViewController    {
      
         stackView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         scrollView.frame = CGRect(x: 0, y: -60, width: view.frame.width, height: view.frame.height)
-        scrollView.contentSize = CGSize(width: view.frame.size.width, height: view.frame.size.height * 1.3)
+        scrollView.contentSize = CGSize(width: view.frame.size.width, height: textOfNews.frame.height)
        
         
       
@@ -65,13 +65,28 @@ class DatailVC: UIViewController    {
     
     func stackViewConfigure () {
         imageOfNews.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 384)
-        imageOfNews.image = UIImage(named: "newsImage")
+        let defaultImage = UIImage(named: "newsImage")
+        let articleImageView = UIImageView()
+        
+        if let urlToImageString = articleInfo?.image {
+            if urlToImageString != "" {
+                guard let url = URL(string: urlToImageString) else { return }
+                articleImageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "network"), options: [.continueInBackground,.progressiveLoad]) { _, _, _, _ in
+                    self.imageOfNews.image = articleImageView.image
+                }
+            } else {
+                self.imageOfNews.image = defaultImage
+            }
+        } else {
+            self.imageOfNews.image = defaultImage
+        }
         
         stackView.addSubview(imageOfNews)
         backButton.setImage(UIImage(named: "narrow"), for: .normal)
+        backButton.addTarget(self, action: #selector(backButtonPressed(_:)), for: .touchUpInside)
         bookMark.setBackgroundImage(UIImage(systemName: "bookmark.fill"), for: .normal)
         bookMark.tintColor = .white
-        bookMark.addTarget(self, action: #selector(bookmarkButtonPressed), for: .touchUpInside)
+        bookMark.addTarget(self, action: #selector(bookmarkButtonPressed(_:)), for: .touchUpInside)
         
         forwardButton.setImage(UIImage(named: "forward"), for: .normal)
      
@@ -112,17 +127,7 @@ class DatailVC: UIViewController    {
         textOfNews.numberOfLines = 0
         textOfNews.textColor = UIColor(named: "gray")
         textOfNews.font = textOfNews.font.withSize(20)
-        textOfNews.text = """
-       
-       Results
-       
-       Leads in individual states may change from one party to another as all the votes are counted. Select a state for detailed results, and select the Senate, House or Governor tabs to view those races.
-       
-       For more detailed state results click on the States A-Z links at the bottom of this page. Results source: NEP/Edison via Reuters.
-       
-       Leads in individual states may change from one party to another as all the votes are counted. Select a state for detailed results, and select the Senate, House or Governor tabs to view those races.For more detailed state results click on the States A-Z links at the bottom of this page. Results source: NEP/Edison via Reuters.
-       
-       """
+        textOfNews.text = articleInfo?.content ?? "Article without content"
         textOfNews.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             textOfNews.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
@@ -130,20 +135,16 @@ class DatailVC: UIViewController    {
             textOfNews.topAnchor.constraint(equalTo: imageOfNews.bottomAnchor, constant: 24),
            
         ])
-      
     }
     func topViewConfigure () {
         imageOfNews.addSubview(topLabel)
         imageOfNews.addSubview(authorNameLabel)
-        imageOfNews.addSubview(authorLabel)
         imageOfNews.addSubview(bookMark)
         imageOfNews.addSubview(categoryLabel)
         
-        categoryLabel.text = "Politics"
-        topLabel.text = "The latest situation in the \npresidential election"
-        authorNameLabel.text = "John Doe"
-        authorLabel.text = "Autor"
-       
+        categoryLabel.text = articleInfo?.category
+        topLabel.text = articleInfo?.title
+        authorNameLabel.text = articleInfo?.author ?? "Author unknown"
         
         topLabel.font = UIFont.boldSystemFont(ofSize: 25)
         authorNameLabel.font = UIFont.boldSystemFont(ofSize: 18)
@@ -154,38 +155,36 @@ class DatailVC: UIViewController    {
         categoryLabel.textColor = .white
         categoryLabel.layer.masksToBounds = true
         categoryLabel.layer.cornerRadius = 20
-        authorLabel.textColor = .gray
         categoryLabel.backgroundColor = UIColor (named: "purpleColor")
         categoryLabel.textAlignment = .center
         
         
-        topLabel.numberOfLines = 2
+        topLabel.numberOfLines = 4
+        topLabel.adjustsFontSizeToFitWidth = true
+        topLabel.minimumScaleFactor = 0.3
+        
+        authorNameLabel.numberOfLines = 2
+        authorNameLabel.adjustsFontSizeToFitWidth = true
+        authorNameLabel.minimumScaleFactor = 0.5
+        
         topLabel.translatesAutoresizingMaskIntoConstraints = false
         authorNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        authorLabel.translatesAutoresizingMaskIntoConstraints = false
         categoryLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             
-            categoryLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -280),
             categoryLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            categoryLabel.topAnchor.constraint(equalTo: imageOfNews.topAnchor,constant: 165),
-            categoryLabel.bottomAnchor.constraint(equalTo: imageOfNews.bottomAnchor, constant: -180),
+            categoryLabel.widthAnchor.constraint(equalToConstant: 110),
+            categoryLabel.topAnchor.constraint(equalTo: imageOfNews.topAnchor,constant: 130),
+            categoryLabel.heightAnchor.constraint(equalToConstant: 40),
             
-            topLabel.trailingAnchor.constraint(equalTo: imageOfNews.trailingAnchor, constant: 19),
+            topLabel.trailingAnchor.constraint(equalTo: imageOfNews.trailingAnchor, constant: -20),
             topLabel.leadingAnchor.constraint(equalTo: imageOfNews.leadingAnchor, constant: 20),
-            topLabel.topAnchor.constraint(equalTo: imageOfNews.topAnchor,constant: 216),
-            topLabel.bottomAnchor.constraint(equalTo: imageOfNews.bottomAnchor, constant: -96),
+            topLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor,constant: 40),
             
             authorNameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             authorNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            authorNameLabel.topAnchor.constraint(equalTo: imageOfNews.topAnchor,constant: 296),
-            authorNameLabel.bottomAnchor.constraint(equalTo: imageOfNews.bottomAnchor, constant: -64),
-            
-            authorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            authorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            authorLabel.topAnchor.constraint(equalTo: imageOfNews.topAnchor,constant: 320),
-            authorLabel.bottomAnchor.constraint(equalTo: imageOfNews.bottomAnchor, constant: -40),
+            authorNameLabel.bottomAnchor.constraint(equalTo: imageOfNews.bottomAnchor, constant: -20),
         ])
     }
             }
