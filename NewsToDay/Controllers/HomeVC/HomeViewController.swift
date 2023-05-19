@@ -23,7 +23,6 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
     
     var networkManadger = NetworkManager.shared
     var categoryStorage = CategoriesStorage.shared
-    var storageManager: StorageManagerProtocol = StorageManager()
     var dataManager = DataManager.shared
 
     var categories: Category?
