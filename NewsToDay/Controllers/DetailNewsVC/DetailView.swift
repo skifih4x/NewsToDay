@@ -10,6 +10,8 @@ import UIKit
 
 protocol DetailViewDelegate: AnyObject {
     func DetailView(_ view: DetailView, backButtonPressed button: UIButton)
+    func DetailView(_ view: DetailView, bookmarkButtonPressed button: UIButton)
+    func DetailView(_ view: DetailView, forwardButtonPressed button: UIButton)
 }
 
 class DetailView: CustomView {
@@ -178,5 +180,13 @@ class DetailView: CustomView {
 private extension DetailView {
     @objc func backButtonPressed(_ button: UIButton) {
         delegate?.DetailView(self, backButtonPressed: button)
+    }
+    
+    @objc func bookmarkButtonPressed(_ button: UIButton) {
+        delegate?.DetailView(self, bookmarkButtonPressed: button)
+    }
+    
+    @objc func forwardButtonPressed(_ button: UIButton) {
+        delegate?.DetailView(self, forwardButtonPressed: button)
     }
 }

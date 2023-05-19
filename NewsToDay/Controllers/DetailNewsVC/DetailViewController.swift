@@ -47,4 +47,12 @@ extension DetailViewController: DetailViewDelegate {
     func DetailView(_ view: DetailView, backButtonPressed button: UIButton) {
         self.dismiss(animated: true)
     }
+    
+    func DetailView(_ view: DetailView, bookmarkButtonPressed button: UIButton) {
+        
+    }
+    
+    func DetailView(_ view: DetailView, forwardButtonPressed button: UIButton) {
+        
+    }
 }
