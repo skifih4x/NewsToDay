@@ -17,7 +17,6 @@ class LastNewsViewCell: UICollectionViewCell {
     
     weak var delegate: LastNewsCellDelegate?
     var networkManadger = NetworkManager.shared
-    let image = UIImage(systemName: "bookmark")
     
     // MARK: - Properties
     

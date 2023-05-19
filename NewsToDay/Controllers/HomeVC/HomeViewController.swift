@@ -18,9 +18,6 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
     
     private var query: String?
     
-    var storageManager: StorageManagerProtocol = StorageManager()
-    var bookmarks: [BookmarkModel] = []
-    
     var networkManadger = NetworkManager.shared
     var categoryStorage = CategoriesStorage.shared
     var storageManager: StorageManagerProtocol = StorageManager()
@@ -228,6 +225,20 @@ extension HomeViewController: LastNewsCellDelegate {
     }
     
     func addToBookmarks(_ cell: LastNewsViewCell) {
+        guard let indexPath = collectionView.indexPath(for: cell) else { return }
+        self.storageManager.save(article: news[indexPath.row])
+    }
+    
+}
+
+extension HomeViewController: RecommendedNewsCellDelegate {
+    func removeFromBookmarks(_ cell: RecommendedViewCell) {
+            
+        guard let indexPath = collectionView.indexPath(for: cell) else { return }
+        self.storageManager.deleteItem(by: self.news[indexPath.row].link)
+    }
+    
+    func addToBookmarks(_ cell: RecommendedViewCell) {
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
         self.storageManager.save(article: news[indexPath.row])
     }

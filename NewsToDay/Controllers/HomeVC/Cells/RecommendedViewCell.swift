@@ -8,10 +8,15 @@
 import UIKit
 import SnapKit
 
+protocol RecommendedNewsCellDelegate: AnyObject {
+    func addToBookmarks(_ cell: RecommendedViewCell)
+    func removeFromBookmarks(_ cell: RecommendedViewCell)
+}
+
 class RecommendedViewCell: UICollectionViewCell {
     
+    weak var delegate: RecommendedNewsCellDelegate?
     var networkManadger = NetworkManager.shared
-    let image = UIImage(systemName: "bookmark")
     
     // MARK: - UI Properties
     
@@ -42,12 +47,24 @@ class RecommendedViewCell: UICollectionViewCell {
         return image
     }()
     
-    lazy var buttonBookmark: UIButton = {
+    lazy private var buttonBookmark: UIButton = {
         let button = UIButton()
-        button.setImage(image, for: .normal)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
         button.tintColor = Resources.Colors.blackDark
+        button.addTarget(self, action: #selector(buttonBookmarkIspressed), for: .touchUpInside)
         return button
     }()
+    
+    @objc private func buttonBookmarkIspressed(_ sender: UIButton) {
+        if sender.currentBackgroundImage == UIImage(systemName: "bookmark") {
+            sender.setBackgroundImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+            delegate?.addToBookmarks(self)
+        } else {
+            sender.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
+            delegate?.removeFromBookmarks(self)
+        }
+    }
     
     // MARK: - init
     
@@ -63,14 +80,18 @@ class RecommendedViewCell: UICollectionViewCell {
     }
     
     // MARK: - Method for cell
-    
-    func configureCell(article: Article) {
+   
+    func configureCell(article: Article, isTintedBookmark: Bool) {
         titleLabel.text = article.title
         if let creator = article.creator {
             categoryLabel.text = creator[0]
         }
-
         networkManadger.fetchImage(url: article.urlToImage ?? "", imageView: imageView)
+        if isTintedBookmark {
+            buttonBookmark.setBackgroundImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+        } else {
+            buttonBookmark.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
+        }
   
     }
     
