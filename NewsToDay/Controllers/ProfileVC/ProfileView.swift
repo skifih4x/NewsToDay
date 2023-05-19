@@ -67,7 +67,7 @@ class ProfileView: UIView {
     
     private let languageButtonImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "LanguageButton")
+        image.image = UIImage(named: "languageButton")
         image.contentMode = .scaleAspectFit
         return image
     }()
@@ -88,7 +88,7 @@ class ProfileView: UIView {
     
     private let termsAndConditionsButtonImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "LanguageButton")
+        image.image = UIImage(named: "languageButton")
         image.contentMode = .scaleAspectFit
         return image
     }()
@@ -109,7 +109,7 @@ class ProfileView: UIView {
     
     private let signOutButtonImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "SignOutButton")
+        image.image = UIImage(named: "signOutButton")
         image.contentMode = .scaleAspectFit
         return image
     }()
@@ -153,7 +153,7 @@ class ProfileView: UIView {
         }
         
         nameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(148)
+            make.top.equalTo(profileLabel.snp.bottom).offset(44)
             make.leading.equalTo(profileImageView.snp.trailing).offset(24)
             make.trailing.equalToSuperview().inset(19)
             make.height.equalTo(24)
