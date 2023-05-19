@@ -27,6 +27,7 @@ class DatailVC: UIViewController    {
     
     
     override func viewDidLoad() {
+        print(articleInfo)
         
         view.addSubview(scrollView)
         view.backgroundColor = .white
@@ -37,10 +38,6 @@ class DatailVC: UIViewController    {
         stackViewConfigure()
         textViewConfigure()
         topViewConfigure ()
-
-      
-      print(articleInfo)
-        
     }
     
     @objc private func bookmarkButtonPressed(_ sender: UIButton) {
@@ -72,9 +69,13 @@ class DatailVC: UIViewController    {
         let articleImageView = UIImageView()
         
         if let urlToImageString = articleInfo?.image {
-            guard let url = URL(string: urlToImageString) else { return }
-            articleImageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "network"), options: [.continueInBackground,.progressiveLoad]) { _, _, _, _ in
-                self.imageOfNews.image = articleImageView.image
+            if urlToImageString != "" {
+                guard let url = URL(string: urlToImageString) else { return }
+                articleImageView.sd_setImage(with: url, placeholderImage: UIImage(systemName: "network"), options: [.continueInBackground,.progressiveLoad]) { _, _, _, _ in
+                    self.imageOfNews.image = articleImageView.image
+                }
+            } else {
+                self.imageOfNews.image = defaultImage
             }
         } else {
             self.imageOfNews.image = defaultImage
