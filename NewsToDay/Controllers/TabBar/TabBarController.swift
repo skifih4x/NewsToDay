@@ -37,16 +37,17 @@ final class TabBarController: UITabBarController {
         tabBar.layer.masksToBounds = true
         
         let homeController = HomeViewController()
-        let categoriesController = CategoriesViewController()
+
+        let categoriesController = CategoriesViewController(isFirstEnter: false)
+        categoriesController.delegate = homeController
+
         let bookmarksController = BookmarksViewController()
         let profileController = ProfileViewController()
         
         let homeNavigation = UINavigationController(rootViewController: homeController)
-        let categoriesNavigation = UINavigationController(rootViewController: categoriesController)
-        let bookmarksNavigation = UINavigationController(rootViewController: bookmarksController)
-        let profileNavigation = UINavigationController(rootViewController: profileController)
+
         
-        homeController.tabBarItem = UITabBarItem(title: nil,
+        homeNavigation.tabBarItem = UITabBarItem(title: nil,
                                                  image: Resources.Icons.TabBar.home,
                                                  tag: Tabs.home.rawValue)
         categoriesController.tabBarItem = UITabBarItem(title: nil,
@@ -60,10 +61,12 @@ final class TabBarController: UITabBarController {
                                                  tag: Tabs.profile.rawValue)
         
         setViewControllers([
-            homeController,
+            homeNavigation,
             categoriesController,
             bookmarksController,
             profileController,
         ], animated: false)
+        
+        
     }
 }
