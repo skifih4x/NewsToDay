@@ -78,13 +78,23 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case .categories:
             let categorySelect  = categoryStorage.categories[indexPath.item]
             fetchLatestNews(for: [categorySelect])
-        case .lastNews, .recommended:
+            
+        case .lastNews:
             let selectedArticle: Article
             if section == .lastNews {
                 selectedArticle = news[indexPath.item]
             } else {
                 selectedArticle = news[indexPath.item]
             }
+            
+        case .recommended:
+            let selectedArticle: Article
+            if section == .recommended {
+                selectedArticle = news[indexPath.item]
+            } else {
+                selectedArticle = news[indexPath.item]
+            }
+            
         navigareToDetail(with: selectedArticle)
         }
     }

@@ -11,6 +11,7 @@ import SnapKit
 class RecommendedViewCell: UICollectionViewCell {
     
     var networkManadger = NetworkManager.shared
+    let image = UIImage(systemName: "bookmark")
     
     // MARK: - UI Properties
     
@@ -39,6 +40,13 @@ class RecommendedViewCell: UICollectionViewCell {
         image.layer.cornerRadius = 10
         image.contentMode = .scaleAspectFill
         return image
+    }()
+    
+    lazy var buttonBookmark: UIButton = {
+        let button = UIButton()
+        button.setImage(image, for: .normal)
+        button.tintColor = Resources.Colors.blackDark
+        return button
     }()
     
     // MARK: - init
@@ -87,7 +95,7 @@ extension RecommendedViewCell {
         categoryLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(6)
             make.leading.equalTo(imageView.snp.trailing).offset(20)
-            make.trailing.equalToSuperview().offset(-3)
+            make.trailing.equalToSuperview().offset(-20)
         }
         
         addSubview(titleLabel)
@@ -95,6 +103,12 @@ extension RecommendedViewCell {
             make.top.equalTo(categoryLabel.snp.bottom).offset(10)
             make.leading.equalTo(imageView.snp.trailing).offset(20)
             make.trailing.equalToSuperview().offset(-3)
+        }
+        
+        addSubview(buttonBookmark)
+        buttonBookmark.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(5)
+            make.trailing.equalToSuperview().offset(-10)
         }
     }
     

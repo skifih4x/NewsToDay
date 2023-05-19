@@ -24,6 +24,7 @@
 		006CBAA12A0AFC1500380833 /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8482018C2A08FD7700C8C20A /* ForgetPasswordView.swift */; };
 		006CBAA22A0AFC1800380833 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0039BD912A07D580002F8F71 /* ProfileViewController.swift */; };
 		046F6F1A2A1607C500AFA490 /* ArticleInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046F6F192A1607C500AFA490 /* ArticleInfo.swift */; };
+		04981BEE2A17526800B7680E /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04981BED2A17526800B7680E /* DataManager.swift */; };
 		04C562B92A090303009F94B4 /* ExtentionHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C562B82A090303009F94B4 /* ExtentionHomeVC.swift */; };
 		04C562BB2A090B41009F94B4 /* ListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C562BA2A090B41009F94B4 /* ListSection.swift */; };
 		04C562BD2A0A1B9C009F94B4 /* CategoriesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C562BC2A0A1B9C009F94B4 /* CategoriesViewCell.swift */; };
@@ -107,6 +108,7 @@
 		0039BDA02A07D6E8002F8F71 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		0039BDA52A07D703002F8F71 /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 		046F6F192A1607C500AFA490 /* ArticleInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleInfo.swift; sourceTree = "<group>"; };
+		04981BED2A17526800B7680E /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		04C562B82A090303009F94B4 /* ExtentionHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtentionHomeVC.swift; sourceTree = "<group>"; };
 		04C562BA2A090B41009F94B4 /* ListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSection.swift; sourceTree = "<group>"; };
 		04C562BC2A0A1B9C009F94B4 /* CategoriesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewCell.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				04C562B82A090303009F94B4 /* ExtentionHomeVC.swift */,
 				04E05FC12A120148003EE8D3 /* ExtentionSearchHomeVC.swift */,
 				04C562C12A0A22DC009F94B4 /* HeaderReusableView.swift */,
+				04981BED2A17526800B7680E /* DataManager.swift */,
 				04C562C32A0A5A42009F94B4 /* Model */,
 				04C562BE2A0A1D43009F94B4 /* Cells */,
 			);
@@ -537,6 +540,7 @@
 				848201912A08FE7000C8C20A /* CustomView.swift in Sources */,
 				8482018B2A08FD4C00C8C20A /* AuthorizationView.swift in Sources */,
 				07C4D9312A0BA9D000E679BE /* CustomUIButton.swift in Sources */,
+				04981BEE2A17526800B7680E /* DataManager.swift in Sources */,
 				0039BD9C2A07D65C002F8F71 /* CategoriesViewController.swift in Sources */,
 				E4E7EF2C2A0A8538007DC5F2 /* URLMaker.swift in Sources */,
 				8474A16C2A0839EE00D6EE4E /* UIColorExtension.swift in Sources */,
