@@ -8,8 +8,14 @@
 import UIKit
 import SnapKit
 
+protocol LastNewsCellDelegate: AnyObject {
+    func addToBookmarks(_ cell: LastNewsViewCell)
+    func removeFromBookmarks(_ cell: LastNewsViewCell)
+}
+
 class LastNewsViewCell: UICollectionViewCell {
     
+    weak var delegate: LastNewsCellDelegate?
     var networkManadger = NetworkManager.shared
     let image = UIImage(systemName: "bookmark")
     
@@ -52,12 +58,24 @@ class LastNewsViewCell: UICollectionViewCell {
         return image
     }()
     
-    lazy var buttonBookmark: UIButton = {
+    private lazy var bookmarkButton: UIButton = {
         let button = UIButton()
-        button.setImage(image, for: .normal)
-        button.tintColor = Resources.Colors.blackDark
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        button.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(bookmarkButtonPressed), for: .touchUpInside)
         return button
     }()
+    
+    @objc private func bookmarkButtonPressed(_ sender: UIButton) {
+        if sender.currentBackgroundImage == UIImage(systemName: "bookmark") {
+            sender.setBackgroundImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+            delegate?.addToBookmarks(self)
+        } else {
+            sender.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
+            delegate?.removeFromBookmarks(self)
+        }
+    }
     
     // MARK: - init
     
@@ -80,12 +98,16 @@ class LastNewsViewCell: UICollectionViewCell {
         layer.cornerRadius = 16
     }
     
-    func configureCell(article: Article) {
+    func configureCell(article: Article, isTintedBookmark: Bool) {
         titleLabel.text = article.title
         categoryLabel.text = article.category.joined(separator: ", ")
         
         networkManadger.fetchImage(url: article.urlToImage ?? "", imageView: imageView)
-        
+        if isTintedBookmark {
+            bookmarkButton.setBackgroundImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+        } else {
+            bookmarkButton.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
+        }
     }
     
 }
@@ -117,8 +139,8 @@ extension LastNewsViewCell {
             make.leading.equalToSuperview().offset(20)
         }
         
-        addSubview(buttonBookmark)
-        buttonBookmark.snp.makeConstraints { make in
+        addSubview(bookmarkButton)
+        bookmarkButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
         }

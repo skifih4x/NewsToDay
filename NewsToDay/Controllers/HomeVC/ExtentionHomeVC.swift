@@ -50,9 +50,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 return UICollectionViewCell()
             }
         
+            cell.delegate = self
+            
             let article = news[indexPath.item]
-            cell.configureCell(article: article)
-    
+            let hasInRealm = storageManager.hasObjectInStorage(with: article.link)
+            cell.configureCell(article: article, isTintedBookmark: hasInRealm)
             return cell
             
         case .recommended:
@@ -103,7 +105,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             category: article.category.joined(separator: ", "),
             //autor: article.creator,
             image: article.urlToImage,
-            content: article.content
+            content: article.content,
+            link: article.link
         )
         
         let detailVC = DatailVC()
