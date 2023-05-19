@@ -18,6 +18,8 @@ class DetailView: CustomView {
     weak var delegate: DetailViewDelegate?
     
     //MARK: - Variables
+    lazy var scrollView = UIScrollView(frame: self.bounds)
+    
     lazy var contentView: UIView = {
         let element = UIStackView()
         element.translatesAutoresizingMaskIntoConstraints = false
@@ -106,8 +108,8 @@ class DetailView: CustomView {
         
         self.backgroundColor = .white
         
-//        view.addSubview(scrollView)
-        self.addSubview(contentView)
+        self.addSubview(scrollView)
+        scrollView.addSubview(contentView)
         
         contentView.addSubview(imageOfNews)
         contentView.addSubview(textOfNews)
@@ -125,16 +127,19 @@ class DetailView: CustomView {
     override func layoutViews() {
         super.layoutViews()
         
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
-//            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-//            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-//            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: self.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             
-            contentView.topAnchor.constraint(equalTo: self.topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.widthAnchor.constraint(equalTo: self.widthAnchor),
             
             imageOfNews.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageOfNews.heightAnchor.constraint(equalToConstant: 384),
