@@ -36,7 +36,8 @@ class StorageManager: StorageManagerProtocol {
                                              url: bookmark.url,
                                              urlToImage: bookmark.urlToImage,
                                              content: bookmark.content,
-                                             category: bookmark.category))
+                                             category: bookmark.category,
+                                             author: bookmark.author))
         }
         return bookmarkAny
     }

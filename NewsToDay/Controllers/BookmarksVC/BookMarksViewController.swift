@@ -127,6 +127,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         let articleInfo = ArticleInfo(
             title: article.title ?? "",
             category: article.category,
+            author: article.author,
             image: article.urlToImage,
             content: article.content,
             link: article.url

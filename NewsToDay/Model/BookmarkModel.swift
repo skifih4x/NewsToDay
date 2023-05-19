@@ -13,4 +13,5 @@ struct BookmarkModel {
     let urlToImage: String?
     let content: String?
     let category: String
+    let author: String?
 }

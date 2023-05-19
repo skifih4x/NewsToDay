@@ -15,6 +15,7 @@ class BookmarkModelObject: Object {
     @Persisted var urlToImage: String?
     @Persisted var content: String?
     @Persisted var category: String = ""
+    @Persisted var author: String? = ""
     
     convenience init(article a: Article) {
         self.init()
@@ -24,6 +25,7 @@ class BookmarkModelObject: Object {
         self.urlToImage = a.urlToImage
         self.content = a.content
         self.category = a.category.joined(separator: ", ")
+        self.author = a.creator?.joined(separator: ", ")
     }
     
     override static func primaryKey() -> String? {
