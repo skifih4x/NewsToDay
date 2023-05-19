@@ -133,7 +133,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
             link: article.url
         )
         
-        let destination = DatailVC()
+        let destination = DetailViewController()
         destination.articleInfo = articleInfo
         destination.modalPresentationStyle = .fullScreen
         self.present(destination, animated: true)

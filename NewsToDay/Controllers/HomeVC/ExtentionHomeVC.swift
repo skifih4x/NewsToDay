@@ -99,8 +99,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             link: article.link
         )
         
-        let detailVC = DatailVC()
-//        detailVC.modalPresentationStyle = .fullScreen
+        let detailVC = DetailViewController()
+        detailVC.modalPresentationStyle = .fullScreen
         detailVC.articleInfo = articleInfo
         
         present(detailVC, animated: true)
