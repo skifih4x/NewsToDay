@@ -18,7 +18,7 @@ class TermsAndConditionsView: UIView {
     
     private let backButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "backButton"), for: .normal)
+        button.setImage(Resources.Profile.backButton, for: .normal)
         button.tintColor = Resources.Colors.greyPrimary
         button.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         return button
