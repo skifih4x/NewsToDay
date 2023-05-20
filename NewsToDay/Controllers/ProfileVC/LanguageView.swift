@@ -20,13 +20,13 @@ class LanguageView: UIView {
     
     private let backButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "backButton"), for: .normal)
+        button.setImage(Resources.Profile.backButton, for: .normal)
         button.tintColor = Resources.Colors.greyPrimary
         button.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         return button
     }()
     
-    private let headerLabel: UILabel = {
+    let headerLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("LANGUAGE_HEADER_LABEL", comment: "Language")
         label.numberOfLines = 1
