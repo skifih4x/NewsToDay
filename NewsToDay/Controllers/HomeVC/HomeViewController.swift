@@ -18,16 +18,15 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
     
     private var query: String?
     
-    var storageManager: StorageManagerProtocol = StorageManager()
-    var bookmarks: [BookmarkModel] = []
-    
     var networkManadger = NetworkManager.shared
     var categoryStorage = CategoriesStorage.shared
     var dataManager = DataManager.shared
+    var storageManager = StorageManager()
 
     var categories: Category?
     
     var news: [Article] = []
+    var randomNews = [Article]()
     
     var selectedCategory: String?
     
@@ -86,6 +85,15 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
         tableView.isHidden = true
         setupTableView()
         saveData()
+        
+        shuffleNews()
+        //randomNews = news.shuffled()
+        
+    }
+    
+    func shuffleNews() {
+        randomNews = news.shuffled()
+        collectionView.reloadSections(IndexSet(integer: 2))
     }
     
     // MARK: - Fetch data
@@ -103,6 +111,7 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
                 
                 DispatchQueue.main.async {
                     self?.collectionView.reloadSections(IndexSet(integer: 1))
+                    
             }
                 
             case .failure(let error):
@@ -227,6 +236,20 @@ extension HomeViewController: LastNewsCellDelegate {
     }
     
     func addToBookmarks(_ cell: LastNewsViewCell) {
+        guard let indexPath = collectionView.indexPath(for: cell) else { return }
+        self.storageManager.save(article: news[indexPath.row])
+    }
+    
+}
+
+extension HomeViewController: RecommendedNewsCellDelegate {
+    func removeFromBookmarks(_ cell: RecommendedViewCell) {
+            
+        guard let indexPath = collectionView.indexPath(for: cell) else { return }
+        self.storageManager.deleteItem(by: self.news[indexPath.row].link)
+    }
+    
+    func addToBookmarks(_ cell: RecommendedViewCell) {
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
         self.storageManager.save(article: news[indexPath.row])
     }

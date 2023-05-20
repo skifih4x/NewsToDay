@@ -67,7 +67,7 @@ class ProfileView: UIView {
     
     private let languageButtonImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "languageButton")
+        image.image = Resources.Profile.languageButton
         image.contentMode = .scaleAspectFit
         return image
     }()
@@ -88,7 +88,7 @@ class ProfileView: UIView {
     
     private let termsAndConditionsButtonImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "languageButton")
+        image.image = Resources.Profile.languageButton
         image.contentMode = .scaleAspectFit
         return image
     }()
@@ -109,7 +109,7 @@ class ProfileView: UIView {
     
     private let signOutButtonImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "signOutButton")
+        image.image = Resources.Profile.signOutButton
         image.contentMode = .scaleAspectFit
         return image
     }()

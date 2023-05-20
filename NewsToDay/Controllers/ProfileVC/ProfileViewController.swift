@@ -89,10 +89,10 @@ extension ProfileViewController: ProfileViewDelegate {
     
     func getProfileImage() -> UIImage {
         let images = [
-            UIImage(named: "profileImage_1"),
-            UIImage(named: "profileImage_2"),
-            UIImage(named: "profileImage_3"),
-            UIImage(named: "profileImage_4")
+            Resources.Profile.profileImage1,
+            Resources.Profile.profileImage2,
+            Resources.Profile.profileImage3,
+            Resources.Profile.profileImage4
         ]
     
         guard let image = images.randomElement()! else { return UIImage(systemName: "person.crop.circle")! }
