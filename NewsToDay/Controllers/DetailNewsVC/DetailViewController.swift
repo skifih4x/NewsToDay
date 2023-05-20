@@ -44,8 +44,10 @@ class DetailViewController: CustomViewController<DetailView> {
     
     func updateHeightContentView() {
         let textSize = customView.textOfNews.sizeThatFits(CGSize(width: UIScreen.main.bounds.size.width - 40, height: CGFloat.greatestFiniteMagnitude))
-        customView.contentViewHeightAnchor.constant = textSize.height + 384
-        customView.layoutIfNeeded()
+        if textSize.height > UIScreen.main.bounds.size.height {
+            customView.contentViewHeightAnchor.constant = textSize.height + 384
+            customView.layoutIfNeeded()
+        }
     }
 }
 
