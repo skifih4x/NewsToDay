@@ -20,10 +20,14 @@ class StorageManager: StorageManagerProtocol {
     fileprivate lazy var mainRealm = try! Realm()
     
     func save(article: Article) {
-        let a = BookmarkModelObject(article: article)
-        
-        try! mainRealm.write {
-            mainRealm.add(a)
+        if !hasObjectInStorage(with: article.link) {
+            let a = BookmarkModelObject(article: article)
+            
+            try! mainRealm.write {
+                mainRealm.add(a)
+            }
+        } else {
+            print("Object already wrote in database")
         }
     }
     
