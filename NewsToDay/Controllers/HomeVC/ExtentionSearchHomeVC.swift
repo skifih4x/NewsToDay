@@ -21,15 +21,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         cell.configure(article: article)
         return cell
     }
-    /*
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let article = news[indexPath.row]
-        let detail = DatailVC()
-     detail.
-        
+       navigateToDetail(with: article)
     }
-    
-    */
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         110

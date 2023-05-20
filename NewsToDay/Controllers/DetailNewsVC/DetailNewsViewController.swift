@@ -27,7 +27,7 @@ class DatailVC: UIViewController    {
     
     
     override func viewDidLoad() {
-        print(articleInfo)
+        //print(articleInfo)
         
         view.addSubview(scrollView)
         view.backgroundColor = .white

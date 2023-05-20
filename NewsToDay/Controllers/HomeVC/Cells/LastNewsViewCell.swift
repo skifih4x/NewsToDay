@@ -27,9 +27,9 @@ class LastNewsViewCell: UICollectionViewCell {
         label.numberOfLines = 1
         label.textColor = .white
         label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.backgroundColor = Resources.Colors.purpleLight
+        label.backgroundColor = Resources.Colors.purplePrimary
         label.clipsToBounds = true
-        label.layer.cornerRadius = 5
+        label.layer.cornerRadius = 15
         return label
     }()
     
@@ -127,7 +127,8 @@ extension LastNewsViewCell {
             make.top.equalToSuperview().offset(100)
             make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-150)
+            make.height.equalTo(30)
+            make.trailing.equalToSuperview().offset(-130)
             
         }
         

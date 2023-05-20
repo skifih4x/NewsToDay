@@ -24,7 +24,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         case .lastNews:
             return news.count
         case .recommended:
-            return news.count
+            return randomNews.count
         }
          
     }
@@ -65,7 +65,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             cell.delegate = self
             
-            let article = news[indexPath.item]
+            let article = randomNews[indexPath.item]
             let hasInRealm = storageManager.hasObjectInStorage(with: article.link)
             cell.configureCell(article: article, isTintedBookmark: hasInRealm)
             return cell
@@ -84,26 +84,20 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             fetchLatestNews(for: [categorySelect])
             
         case .lastNews:
-            let selectedArticle: Article
-            if section == .lastNews {
-                selectedArticle = news[indexPath.item]
-            } else {
-                selectedArticle = news[indexPath.item]
-            }
+            
+            let selectedArticle = news[indexPath.item]
+            navigateToDetail(with: selectedArticle)
             
         case .recommended:
-            let selectedArticle: Article
-            if section == .recommended {
-                selectedArticle = news[indexPath.item]
-            } else {
-                selectedArticle = news[indexPath.item]
-            }
+
+            let selectedArticle = randomNews[indexPath.item]
+            navigateToDetail(with: selectedArticle)
+          
             
-        navigareToDetail(with: selectedArticle)
         }
     }
 
-    func navigareToDetail(with article: Article) {
+    func navigateToDetail(with article: Article) {
         let articleInfo = ArticleInfo(
             title: article.title,
             category: article.category.joined(separator: ", "),
