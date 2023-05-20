@@ -53,4 +53,14 @@ enum Resources {
         static var signOutButton = UIImage(named: "signOutButton.svg")
         static var backButton = UIImage(named: "backButton.svg")
     }
+    
+    enum DeveloperTeamPhoto {
+        static var Artem = UIImage(named: "artem")
+        static var Anton = UIImage(named: "anton")
+        static var Albina = UIImage(named: "albina")
+        static var Mihail = UIImage(named: "mihail")
+        static var Ilyas = UIImage(named: "ilyas")
+        static var Ramil = UIImage(named: "ramil")
+        static var Andrey = UIImage(named: "andrey")
+    }
 }

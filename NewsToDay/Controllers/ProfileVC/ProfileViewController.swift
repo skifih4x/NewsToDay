@@ -56,6 +56,13 @@ extension ProfileViewController: ProfileViewDelegate {
         self.present(languageVC, animated: true)
     }
     
+    func ProfileView(_ view: ProfileView, developerTeamButtonPressed button: UIButton) {
+        let developerTeamVC = DeveloperTeamViewController()
+        developerTeamVC.modalPresentationStyle = .fullScreen
+        developerTeamVC.modalTransitionStyle = .crossDissolve
+        self.present(developerTeamVC, animated: true)
+    }
+    
     func ProfileView(_ view: ProfileView, termsAndConditionsButtonPressed button: UIButton) {
         let termsAndConditionsVC = TermsAndConditionsViewController()
         termsAndConditionsVC.modalPresentationStyle = .fullScreen

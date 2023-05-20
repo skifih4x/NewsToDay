@@ -10,6 +10,7 @@ import SnapKit
 
 protocol ProfileViewDelegate: AnyObject {
     func ProfileView(_ view: ProfileView, languageButtonPressed button: UIButton)
+    func ProfileView(_ view: ProfileView, developerTeamButtonPressed button: UIButton)
     func ProfileView(_ view: ProfileView, termsAndConditionsButtonPressed button: UIButton)
     func ProfileView(_ view: ProfileView, signOutButtonPressed button: UIButton)
 }
@@ -72,7 +73,28 @@ class ProfileView: UIView {
         return image
     }()
     
-    let termsAndConditionsButton: UIButton = {
+    lazy var developerTeamButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Команда разработки", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.tintColor = Resources.Colors.greyDark
+        button.contentHorizontalAlignment = .leading
+        button.titleEdgeInsets.left = 24
+        button.backgroundColor = Resources.Colors.greyLighter
+        button.setBackgroundColorForTap(color: Resources.Colors.purplePrimary, forState: .highlighted)
+        button.addTarget(self, action: #selector(developerTeamButtonPressed), for: .touchUpInside)
+        button.layer.cornerRadius = 12
+        return button
+    }()
+    
+    private let developerTeamButtonImage: UIImageView = {
+        let image = UIImageView()
+        image.image = Resources.Profile.languageButton
+        image.contentMode = .scaleAspectFit
+        return image
+    }()
+    
+    lazy var termsAndConditionsButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle(NSLocalizedString("PROFILE_TERMS_AND_CONDITIONS_BUTTON", comment: "Terms & Conditions"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
@@ -133,6 +155,8 @@ class ProfileView: UIView {
         addSubview(emailLabel)
         addSubview(languageButton)
         addSubview(languageButtonImage)
+        addSubview(developerTeamButton)
+        addSubview(developerTeamButtonImage)
         addSubview(termsAndConditionsButton)
         addSubview(termsAndConditionsButtonImage)
         addSubview(signOutButton)
@@ -180,6 +204,20 @@ class ProfileView: UIView {
             make.width.equalTo(7)
         }
         
+        developerTeamButton.snp.makeConstraints { make in
+            make.bottom.equalTo(termsAndConditionsButton.snp.top).inset(-28)
+            make.leading.equalToSuperview().inset(20)
+            make.trailing.equalToSuperview().inset(19)
+            make.height.equalTo(56)
+        }
+        
+        developerTeamButtonImage.snp.makeConstraints { make in
+            make.centerY.equalTo(developerTeamButton.snp.centerY)
+            make.centerX.equalTo(signOutButtonImage.snp.centerX)
+            make.height.equalTo(11)
+            make.width.equalTo(7)
+        }
+        
         termsAndConditionsButton.snp.makeConstraints { make in
             make.bottom.equalTo(signOutButton.snp.top).inset(-28)
             make.leading.equalToSuperview().inset(20)
@@ -215,6 +253,10 @@ private extension ProfileView {
     
     @objc func languageButtonPressed(_ button: UIButton) {
         delegate?.ProfileView(self, languageButtonPressed: button)
+    }
+    
+    @objc func developerTeamButtonPressed(_ button: UIButton) {
+        delegate?.ProfileView(self, developerTeamButtonPressed: button)
     }
     
     @objc func termsAndConditionsButtonPressed(_ button: UIButton) {
