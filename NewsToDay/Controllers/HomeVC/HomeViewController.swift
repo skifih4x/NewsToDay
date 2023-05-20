@@ -88,7 +88,10 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
         
         shuffleNews()
         //randomNews = news.shuffled()
-        
+    }
+    
+    override func viewWillAppear(_: Bool) {
+        collectionView.reloadData()
     }
     
     func shuffleNews() {
