@@ -17,11 +17,11 @@ class OnboardingViewController: UIViewController    {
     let firstToNowLabel = UILabel ()
     let pageControl = UIPageControl()
     let scrollView = UIScrollView()
-    let imagesOfCity = ["cityOne", "cityTwo"]
+    let imagesOfCity = ["mainScreen", "catigory"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        scrollView.delegate = self
         scrollViewConfigure()
         pageControlFunc()
         labelConfigure ()
@@ -48,7 +48,7 @@ class OnboardingViewController: UIViewController    {
             
             page.image = UIImage(named: imagesOfCity[x])
     
-            scrollView.isScrollEnabled = false
+          pageControl.currentPage += 1
             page.layer.cornerRadius = 20
             scrollView.addSubview(page)
             
@@ -64,7 +64,7 @@ class OnboardingViewController: UIViewController    {
             return
         }
         pageControl.currentPage += 1
-        firstToNowLabel.text = ""
+//        firstToNowLabel.text = "Все новости в одном месте"
         scrollView.setContentOffset(CGPoint(x:  view.frame.size.width - 70, y: 0), animated: true)
         button.setTitle(NSLocalizedString("ONBOARDING_GET_STARTED_BUTTON", comment: "Get Started"), for: .normal)
        
@@ -89,12 +89,7 @@ class OnboardingViewController: UIViewController    {
     
     func buttonConfigure () {
         button.configure(title: NSLocalizedString("ONBOARDING_NEXT_BUTTON", comment: "Next"))
-    
-      
     }
-   
-
-//
     // Labels
     
     func labelConfigure () {
@@ -170,4 +165,17 @@ class OnboardingViewController: UIViewController    {
     }
 }
 
+extension OnboardingViewController : UIScrollViewDelegate {
+     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+         pageControl.currentPage = Int(floorf(Float(scrollView.contentOffset.x)) - Float (70))
+         firstToNowLabel.text = "Категории"
+         allNewsLabel.text = NSLocalizedString("ONBOARDING_ALL_NEWS_LABEL_TWO", comment: "The latest news from Russia \nand around the world")
+         if pageControl.currentPage == 0 {
+             firstToNowLabel.text = "Главный экран"
+             allNewsLabel.text = NSLocalizedString("ONBOARDING_ALL_NEWS_LABEL", comment: "All news in one place, be \nthe first to know last news")
+             
+         }
+        
+    }
+}
 

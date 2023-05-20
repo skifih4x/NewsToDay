@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   NewsToDay
 
@@ -38,8 +38,9 @@ FORGET_EMAIL_TEXTFIELD = "Адрес электронной почты";
 FORGET_RESET_PASSWORD_BUTTON = "Сбросить";
 FORGET_RESET_PASSWORD_ALERT = "Пожалуйста, заполните адрес электронной почты";
 
-ONBOARDING_FIRST_TO_KNOW_LABEL = "Первый, кто узнает";
-ONBOARDING_ALL_NEWS_LABEL = "Все новости в одном месте, будьте первыми, кто узнает последние новости";
+ONBOARDING_FIRST_TO_KNOW_LABEL = "Главный экран";
+ONBOARDING_ALL_NEWS_LABEL = "Удобный выбор категорий новостей в интерфейсе приложения";
+ONBOARDING_ALL_NEWS_LABEL_TWO = "Лучшее приложение для порсмотра актуальных новостей";
 ONBOARDING_NEXT_BUTTON = "Дальше";
 ONBOARDING_GET_STARTED_BUTTON = "Начать";
 
