@@ -246,12 +246,12 @@ extension HomeViewController: RecommendedNewsCellDelegate {
     func removeFromBookmarks(_ cell: RecommendedViewCell) {
             
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
-        self.storageManager.deleteItem(by: self.news[indexPath.row].link)
+        self.storageManager.deleteItem(by: self.randomNews[indexPath.row].link)
     }
     
     func addToBookmarks(_ cell: RecommendedViewCell) {
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
-        self.storageManager.save(article: news[indexPath.row])
+        self.storageManager.save(article: randomNews[indexPath.row])
     }
     
 }

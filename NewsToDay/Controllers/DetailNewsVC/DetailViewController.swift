@@ -11,6 +11,7 @@ import UIKit
 class DetailViewController: CustomViewController<DetailView> {
     
     var articleInfo: ArticleInfo?
+    var storageManager: StorageManagerProtocol = StorageManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,7 @@ class DetailViewController: CustomViewController<DetailView> {
         customView.textOfNews.text = articleInfo?.content ?? "Article without content"
         
         updateHeightContentView()
+        configureBookmarkButton()
     }
     
     func setImage() {
@@ -49,6 +51,16 @@ class DetailViewController: CustomViewController<DetailView> {
             customView.layoutIfNeeded()
         }
     }
+
+    func configureBookmarkButton() {
+        let articleLink = articleInfo?.link ?? ""
+        let hasInRealm = storageManager.hasObjectInStorage(with: articleLink)
+        if hasInRealm {
+            customView.bookmarkButton.setBackgroundImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+        } else {
+            customView.bookmarkButton.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
+        }
+    }
 }
 
 extension DetailViewController: DetailViewDelegate {
@@ -57,10 +69,25 @@ extension DetailViewController: DetailViewDelegate {
     }
     
     func DetailView(_ view: DetailView, bookmarkButtonPressed button: UIButton) {
-        
-    }
-    
-    func DetailView(_ view: DetailView, forwardButtonPressed button: UIButton) {
-        
+        if button.currentBackgroundImage == UIImage(systemName: "bookmark") {
+            button.setBackgroundImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+            let article = Article(title: articleInfo?.title ?? "",
+                                  keywords: nil,
+                                  link: articleInfo?.link ?? "",
+                                  creator: [articleInfo?.author ?? ""],
+                                  videoUrl: nil,
+                                  description: nil,
+                                  content: articleInfo?.content,
+                                  pubDate: "",
+                                  urlToImage: articleInfo?.image,
+                                  sourceID: "",
+                                  category: [articleInfo?.category ?? ""],
+                                  country: [""],
+                                  language: "")
+            storageManager.save(article: article)
+        } else {
+            button.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
+            storageManager.deleteItem(by: articleInfo?.link ?? "")
+        }
     }
 }
