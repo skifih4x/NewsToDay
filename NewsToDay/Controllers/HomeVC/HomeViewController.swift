@@ -21,10 +21,12 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
     var networkManadger = NetworkManager.shared
     var categoryStorage = CategoriesStorage.shared
     var dataManager = DataManager.shared
+    var storageManager = StorageManager()
 
     var categories: Category?
     
     var news: [Article] = []
+    var randomNews = [Article]()
     
     var selectedCategory: String?
     
@@ -83,6 +85,15 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
         tableView.isHidden = true
         setupTableView()
         saveData()
+        
+        shuffleNews()
+        //randomNews = news.shuffled()
+        
+    }
+    
+    func shuffleNews() {
+        randomNews = news.shuffled()
+        collectionView.reloadSections(IndexSet(integer: 2))
     }
     
     // MARK: - Fetch data
@@ -100,6 +111,7 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
                 
                 DispatchQueue.main.async {
                     self?.collectionView.reloadSections(IndexSet(integer: 1))
+                    
             }
                 
             case .failure(let error):
