@@ -51,14 +51,6 @@ class DetailView: CustomView {
         return element
     }()
 
-    lazy var forwardButton: UIButton = {
-        let element = UIButton()
-        element.setImage(UIImage(named: "forward"), for: .normal)
-        element.addTarget(self, action: #selector(backButtonPressed(_:)), for: .touchUpInside)
-        element.translatesAutoresizingMaskIntoConstraints = false
-        return element
-    }()
-
     lazy var categoryLabel: UILabel = {
         let element = UILabel()
         element.font = UIFont.boldSystemFont(ofSize: 16)
@@ -75,7 +67,7 @@ class DetailView: CustomView {
         let element = UILabel()
         element.font = UIFont.boldSystemFont(ofSize: 25)
         element.textColor = .white
-        element.backgroundColor = Resources.Colors.greyLight
+        element.backgroundColor = UIColor(hex: 0x666C8E, alpha: 0.7)
         element.numberOfLines = 4
         element.adjustsFontSizeToFitWidth = true
         element.minimumScaleFactor = 0.3
@@ -87,7 +79,7 @@ class DetailView: CustomView {
         let element = UILabel()
         element.font = UIFont.boldSystemFont(ofSize: 18)
         element.textColor = .white
-        element.backgroundColor = Resources.Colors.greyLight
+        element.backgroundColor = UIColor(hex: 0x666C8E, alpha: 0.7)
         element.numberOfLines = 2
         element.adjustsFontSizeToFitWidth = true
         element.minimumScaleFactor = 0.5
@@ -115,7 +107,6 @@ class DetailView: CustomView {
         contentView.addSubview(textOfNews)
         contentView.addSubview(backButton)
         contentView.addSubview(bookmarkButton)
-        contentView.addSubview(forwardButton)
         contentView.addSubview(topLabel)
         contentView.addSubview(authorNameLabel)
         contentView.addSubview(categoryLabel)
@@ -158,11 +149,6 @@ class DetailView: CustomView {
             bookmarkButton.heightAnchor.constraint(equalToConstant: 40),
             bookmarkButton.widthAnchor.constraint(equalToConstant: 40),
 
-            forwardButton.trailingAnchor.constraint(equalTo: imageOfNews.trailingAnchor, constant: -26),
-            forwardButton.topAnchor.constraint(equalTo: imageOfNews.topAnchor, constant: 125),
-            forwardButton.heightAnchor.constraint(equalToConstant: 30),
-            forwardButton.widthAnchor.constraint(equalToConstant: 30),
-
             categoryLabel.leadingAnchor.constraint(equalTo: imageOfNews.leadingAnchor, constant: 20),
             categoryLabel.widthAnchor.constraint(equalToConstant: 110),
             categoryLabel.topAnchor.constraint(equalTo: imageOfNews.topAnchor,constant: 130),
@@ -172,13 +158,11 @@ class DetailView: CustomView {
             topLabel.leadingAnchor.constraint(equalTo: imageOfNews.leadingAnchor, constant: 20),
             topLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor,constant: 40),
 
-            authorNameLabel.trailingAnchor.constraint(equalTo: imageOfNews.trailingAnchor),
+            authorNameLabel.trailingAnchor.constraint(equalTo: imageOfNews.trailingAnchor, constant: -20),
             authorNameLabel.leadingAnchor.constraint(equalTo: imageOfNews.leadingAnchor, constant: 20),
             authorNameLabel.bottomAnchor.constraint(equalTo: imageOfNews.bottomAnchor, constant: -20),
 
             textOfNews.topAnchor.constraint(equalTo: imageOfNews.bottomAnchor, constant: 10),
-//            textOfNews.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-//            textOfNews.widthAnchor.constraint(equalTo: contentView.widthAnchor),
             textOfNews.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             textOfNews.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
         ])
