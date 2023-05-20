@@ -13,6 +13,7 @@ final class NetworkManager {
     private let urlMaker = URLMaker.shared
     private let requestMaker = RequestMaker.shared
     private let session = URLSession.shared
+    private var task: URLSessionTask?
 
     //MARK: Метод для поиска, выкидывает объект типа NewsModel
     func fetchSearch(
@@ -55,6 +56,8 @@ final class NetworkManager {
         country: Country,
         completion: @escaping (Result<NewsModel, Error>) -> Void
     ) {
+        task?.cancel()
+        
         let headlinesSourcesURL = urlMaker.getURL(
             withPath: API.path,
             baseURL: API.baseURL
@@ -99,6 +102,7 @@ final class NetworkManager {
             }
         }
         task.resume()
+        self.task = task
     }
     
     func fetchImage(url: String, imageView: UIImageView) {
