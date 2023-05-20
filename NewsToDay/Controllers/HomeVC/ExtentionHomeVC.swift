@@ -84,7 +84,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             fetchLatestNews(for: [categorySelect])
             
         case .lastNews:
-            
             let selectedArticle = news[indexPath.item]
             navigateToDetail(with: selectedArticle)
             
@@ -92,8 +91,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
             let selectedArticle = randomNews[indexPath.item]
             navigateToDetail(with: selectedArticle)
-          
-            
         }
     }
 

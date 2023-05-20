@@ -51,7 +51,7 @@ class DetailViewController: CustomViewController<DetailView> {
             customView.layoutIfNeeded()
         }
     }
-    
+
     func configureBookmarkButton() {
         let articleLink = articleInfo?.link ?? ""
         let hasInRealm = storageManager.hasObjectInStorage(with: articleLink)
