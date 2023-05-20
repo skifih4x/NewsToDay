@@ -53,6 +53,7 @@ class AuthorizationViewController: CustomViewController<AuthorizationView> {
     }
 }
 
+//MARK: - AuthorizationViewDelegate
 extension AuthorizationViewController: AuthorizationViewDelegate {
     func AuthorizationView(_ view: AuthorizationView, didTapSignInButton button: UIButton) {
         guard let username = customView.usernameText else { return }
@@ -110,6 +111,7 @@ extension AuthorizationViewController: AuthorizationViewDelegate {
     }
 }
 
+//MARK: - UITextFieldDelegate
 extension AuthorizationViewController: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -135,4 +137,10 @@ extension AuthorizationViewController: UITextFieldDelegate {
 
         return true
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+
 }

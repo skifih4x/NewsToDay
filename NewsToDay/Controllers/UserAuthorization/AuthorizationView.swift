@@ -64,6 +64,7 @@ class AuthorizationView: CustomView {
         element.placeholder = NSLocalizedString("AUTHORIZATION_VIEW_USERNAME_TEXTFIELD", comment: "Username")
         element.keyboardType = .default
         element.autocorrectionType = .no
+        element.returnKeyType = .done
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -84,6 +85,7 @@ class AuthorizationView: CustomView {
         element.placeholder = NSLocalizedString("AUTHORIZATION_VIEW_EMAIL_TEXTFIELD", comment: "Email Address")
         element.keyboardType = .emailAddress
         element.autocorrectionType = .no
+        element.returnKeyType = .done
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -116,6 +118,7 @@ class AuthorizationView: CustomView {
         element.placeholder = NSLocalizedString("AUTHORIZATION_VIEW_PASSWORD_TEXTFIELD", comment: "Password")
         element.autocorrectionType = .no
         element.isSecureTextEntry = true
+        element.returnKeyType = .done
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -148,6 +151,7 @@ class AuthorizationView: CustomView {
         element.placeholder = NSLocalizedString("AUTHORIZATION_VIEW_CONFIRM_PASSWORD_TEXTFIELD", comment: "Repeat Password")
         element.isSecureTextEntry = true
         element.autocorrectionType = .no
+        element.returnKeyType = .done
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
