@@ -18,6 +18,8 @@ class DetailView: CustomView {
     weak var delegate: DetailViewDelegate?
     
     //MARK: - Variables
+    lazy var contentViewHeightAnchor = contentView.heightAnchor.constraint(equalToConstant: 1000)
+    
     lazy var scrollView = UIScrollView()
     
     lazy var contentView: UIView = {
@@ -131,7 +133,7 @@ class DetailView: CustomView {
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            contentView.heightAnchor.constraint(equalToConstant: 2000),
+            contentViewHeightAnchor,
             
             imageOfNews.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageOfNews.heightAnchor.constraint(equalToConstant: 384),

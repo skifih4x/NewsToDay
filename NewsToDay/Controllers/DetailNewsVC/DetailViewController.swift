@@ -16,11 +16,14 @@ class DetailViewController: CustomViewController<DetailView> {
         super.viewDidLoad()
         
         customView.delegate = self
+
         setImage()
         customView.categoryLabel.text = articleInfo?.category
         customView.topLabel.text = articleInfo?.title
         customView.authorNameLabel.text = articleInfo?.author ?? "Author unknown"
         customView.textOfNews.text = articleInfo?.content ?? "Article without content"
+        
+        updateHeightContentView()
     }
     
     func setImage() {
@@ -37,6 +40,12 @@ class DetailViewController: CustomViewController<DetailView> {
         } else {
             customView.imageOfNews.image = defaultImage
         }
+    }
+    
+    func updateHeightContentView() {
+        let textSize = customView.textOfNews.sizeThatFits(CGSize(width: UIScreen.main.bounds.size.width - 40, height: CGFloat.greatestFiniteMagnitude))
+        customView.contentViewHeightAnchor.constant = textSize.height + 384
+        customView.layoutIfNeeded()
     }
 }
 
