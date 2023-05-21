@@ -9,19 +9,18 @@ import UIKit
 import SnapKit
 
 protocol ProfileViewDelegate: AnyObject {
-    func ProfileView(_ view: ProfileView, languageButtonPressed button: UIButton)
-    func ProfileView(_ view: ProfileView, developerTeamButtonPressed button: UIButton)
-    func ProfileView(_ view: ProfileView, termsAndConditionsButtonPressed button: UIButton)
-    func ProfileView(_ view: ProfileView, signOutButtonPressed button: UIButton)
+    func profileView(_ view: ProfileView, languageButtonPressed button: UIButton)
+    func profileView(_ view: ProfileView, developerTeamButtonPressed button: UIButton)
+    func profileView(_ view: ProfileView, termsAndConditionsButtonPressed button: UIButton)
+    func profileView(_ view: ProfileView, signOutButtonPressed button: UIButton)
 }
 
 class ProfileView: UIView {
     
     weak var delegate: ProfileViewDelegate?
     
-    private let profileLabel: UILabel = {
+    let profileLabel: UILabel = {
         let label = UILabel()
-        label.text = NSLocalizedString("PROFILE_PROFILE_LABEL", comment: "Profile")
         label.numberOfLines = 1
         label.font = .boldSystemFont(ofSize: 24)
         label.textColor = Resources.Colors.blackPrimary
@@ -54,7 +53,6 @@ class ProfileView: UIView {
     
     let languageButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle(NSLocalizedString("PROFILE_LANGUAGE_BUTTON", comment: "Language"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.tintColor = Resources.Colors.greyDark
         button.contentHorizontalAlignment = .leading
@@ -73,9 +71,8 @@ class ProfileView: UIView {
         return image
     }()
     
-    lazy var developerTeamButton: UIButton = {
+    let developerTeamButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Команда разработки", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.tintColor = Resources.Colors.greyDark
         button.contentHorizontalAlignment = .leading
@@ -94,9 +91,8 @@ class ProfileView: UIView {
         return image
     }()
     
-    lazy var termsAndConditionsButton: UIButton = {
+    let termsAndConditionsButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle(NSLocalizedString("PROFILE_TERMS_AND_CONDITIONS_BUTTON", comment: "Terms & Conditions"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.tintColor = Resources.Colors.greyDark
         button.contentHorizontalAlignment = .leading
@@ -117,7 +113,6 @@ class ProfileView: UIView {
     
     let signOutButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle(NSLocalizedString("PROFILE_SIGN_OUT_BUTTON", comment: "Sign Out"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.tintColor = Resources.Colors.greyDark
         button.contentHorizontalAlignment = .leading
@@ -252,19 +247,19 @@ class ProfileView: UIView {
 private extension ProfileView {
     
     @objc func languageButtonPressed(_ button: UIButton) {
-        delegate?.ProfileView(self, languageButtonPressed: button)
+        delegate?.profileView(self, languageButtonPressed: button)
     }
     
     @objc func developerTeamButtonPressed(_ button: UIButton) {
-        delegate?.ProfileView(self, developerTeamButtonPressed: button)
+        delegate?.profileView(self, developerTeamButtonPressed: button)
     }
     
     @objc func termsAndConditionsButtonPressed(_ button: UIButton) {
-        delegate?.ProfileView(self, termsAndConditionsButtonPressed: button)
+        delegate?.profileView(self, termsAndConditionsButtonPressed: button)
     }
     
     @objc func signOutButtonPressed(_ button: UIButton) {
-        delegate?.ProfileView(self, signOutButtonPressed: button)
+        delegate?.profileView(self, signOutButtonPressed: button)
     }
 }
 

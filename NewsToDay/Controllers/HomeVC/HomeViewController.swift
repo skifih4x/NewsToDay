@@ -11,18 +11,18 @@ import SDWebImage
 
 final class HomeViewController: UIViewController, CategoriesDelegate {
     
-    
     // MARK: - Variables and constants
     
     var timer: Timer?
     
     private var query: String?
+    private let localizationManager = LocalizationManager.localizationManager
     
     var networkManadger = NetworkManager.shared
     var categoryStorage = CategoriesStorage.shared
     var dataManager = DataManager.shared
     var storageManager = StorageManager()
-
+    
     var categories: Category?
     
     var news: [Article] = []
@@ -30,25 +30,22 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
     
     var selectedCategory: String?
     
-    
-   lazy var sections: [Section] = [.categories, .lastNews, .recommended]
+    lazy var sections: [Section] = [.categories, .lastNews, .recommended]
     
     // MARK: - UI Properties
     
     var collectionView: UICollectionView!
     
-    private let titleLabel: UILabel = {
+    let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = NSLocalizedString("HOME_TITLE_LABEL", comment: "Browse")
         label.textColor = Resources.Colors.blackPrimary
         label.font = UIFont.boldSystemFont(ofSize: 24)
         label.textAlignment = .left
         return label
     }()
     
-    private let subtitleLabel: UILabel = {
+    let subtitleLabel: UILabel = {
         let label = UILabel()
-        label.text = NSLocalizedString("HOME_SUBTITLE_LABEL", comment: "Discover things of this world")
         label.textColor = Resources.Colors.greyPrimary
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.textAlignment = .left
@@ -57,7 +54,6 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
     
     lazy var searchBar: UISearchBar = {
         let sbar = UISearchBar()
-        sbar.placeholder = NSLocalizedString("HOME_SEARCH_BAR", comment: "Search")
         sbar.searchBarStyle = .minimal
         sbar.delegate = self
         sbar.frame.size.height = 170
@@ -65,16 +61,15 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
     }()
     
     lazy var tableView: UITableView = {
-       let table = UITableView()
+        let table = UITableView()
         table.delegate = self
         table.dataSource = self
         table.showsVerticalScrollIndicator = false
         table.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 26, right: .zero)
-        
-       return table
+        return table
     }()
     
-// MARK: - View's lifecycle
+    // MARK: - View's lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +83,7 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
         
         shuffleNews()
         //randomNews = news.shuffled()
+        updateLocalizedStrings()
     }
     
     override func viewWillAppear(_: Bool) {
@@ -97,6 +93,12 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
     func shuffleNews() {
         randomNews = news.shuffled()
         collectionView.reloadSections(IndexSet(integer: 2))
+    }
+    
+    private func updateLocalizedStrings() {
+        localizationManager.localizeView("HOME_TITLE_LABEL", view: titleLabel, updatingBlock: nil)
+        localizationManager.localizeView("HOME_SUBTITLE_LABEL", view: subtitleLabel, updatingBlock: nil)
+        localizationManager.localizeView("HOME_SEARCH_BAR", view: searchBar, updatingBlock: nil)
     }
     
     // MARK: - Fetch data
@@ -114,8 +116,7 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
                 
                 DispatchQueue.main.async {
                     self?.collectionView.reloadSections(IndexSet(integer: 1))
-                    
-            }
+                }
                 
             case .failure(let error):
                 print(error.localizedDescription)
@@ -135,9 +136,8 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
                 fetchLatestNews(for: [categoryS])
             }
         }
-        
     }
-
+    
     func fetchSearchData(for searchText: String) {
         
         networkManadger.fetchSearch(searchText: searchText) { [weak self] result in
@@ -146,18 +146,16 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
                 self?.news = newsMod.results
                 
                 DispatchQueue.main.async {
-                self?.tableView.reloadData()
-            }
-    
+                    self?.tableView.reloadData()
+                }
+                
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
     }
     
-    
     // MARK: - setup Collection View
-    
     private func setupCollectionView() {
         
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: UICollectionViewFlowLayout())
@@ -174,21 +172,17 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
         
         // CompositionLayout
         collectionView.collectionViewLayout = creatCompositionalLayout()
-    
+        
         collectionView.delegate = self
         collectionView.dataSource = self
     }
     
     private func setupTableView() {
-        
         tableView.register(SearchCell.self, forCellReuseIdentifier: "SearchCell")
-        
     }
-    
 }
 
 // MARK: - Extention, setup constraints
-
 extension HomeViewController {
     private func configure() {
         view.addSubview(titleLabel)
@@ -196,7 +190,6 @@ extension HomeViewController {
             make.centerX.equalToSuperview()
             make.leading.equalToSuperview().offset(20)
             make.top.equalToSuperview().offset(80)
-            
         }
         
         view.addSubview(subtitleLabel)
@@ -233,7 +226,7 @@ extension HomeViewController {
 
 extension HomeViewController: LastNewsCellDelegate {
     func removeFromBookmarks(_ cell: LastNewsViewCell) {
-            
+        
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
         self.storageManager.deleteItem(by: self.news[indexPath.row].link)
     }
@@ -242,12 +235,11 @@ extension HomeViewController: LastNewsCellDelegate {
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
         self.storageManager.save(article: news[indexPath.row])
     }
-    
 }
 
 extension HomeViewController: RecommendedNewsCellDelegate {
     func removeFromBookmarks(_ cell: RecommendedViewCell) {
-            
+        
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
         self.storageManager.deleteItem(by: self.randomNews[indexPath.row].link)
     }
@@ -256,7 +248,4 @@ extension HomeViewController: RecommendedNewsCellDelegate {
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
         self.storageManager.save(article: randomNews[indexPath.row])
     }
-    
 }
-    
-

@@ -1,4 +1,4 @@
-/*
+/* 
   Localizable.strings
   NewsToDay
 
@@ -38,9 +38,10 @@ FORGET_EMAIL_TEXTFIELD = "Адрес электронной почты";
 FORGET_RESET_PASSWORD_BUTTON = "Сбросить";
 FORGET_RESET_PASSWORD_ALERT = "Пожалуйста, заполните адрес электронной почты";
 
-ONBOARDING_FIRST_TO_KNOW_LABEL = "Главный экран";
-ONBOARDING_ALL_NEWS_LABEL = "Удобный выбор категорий новостей в интерфейсе приложения";
-ONBOARDING_ALL_NEWS_LABEL_TWO = "Лучшее приложение для порсмотра актуальных новостей";
+ONBOARDING_FIRST_LABEL = "Первый, кто узнает";
+ONBOARDING_FIRST_COMMENT_LABEL = "Все новости в одном месте, будьте первыми, кто узнает последние новости";
+ONBOARDING_SECOND_LABEL = "Категории";
+ONBOARDING_SECOND_COMMENT_LABEL = "Последние новости из России и всего мира на различные темы";
 ONBOARDING_NEXT_BUTTON = "Дальше";
 ONBOARDING_GET_STARTED_BUTTON = "Начать";
 
@@ -59,14 +60,13 @@ CATEGORIES_NEXT_BUTTON_TITLE = "Дальше";
 BOOKMARKS_TITLE_LABEL = "Закладки";
 BOOKMARKS_SUBTITLE_LABEL = "Сохраненные статьи в библиотеке";
 BOOKMARKS_MESSAGE_VIEW = "Вы еще не сохранили ни одной статьи. Начните читать и добавлять их в закладки прямо сейчас";
-BOOKMARKS_CELL_CATEGORY_LABEL = "Что-то пошло не так";
-BOOKMARKS_CELL_NEWS_LABEL = "Сейчас мы не можем найти Ваши сохраненные статьи";
 BOOKMARKS_ALERT_TITLE = "Вы хотите удалить эту закладку?";
 BOOKMARKS_CANCEL_ALERT_TITLE = "Отмена";
 BOOKMARKS_DELETE_ALERT_TITLE = "Удалить";
 
-PROFILE_PROFILE_LABEL = "Профиль";
+PROFILE_HEADER_LABEL = "Профиль";
 PROFILE_LANGUAGE_BUTTON = "Язык";
+PROFILE_DEVELOPER_TEAM_BUTTON = "Команда разработчиков";
 PROFILE_TERMS_AND_CONDITIONS_BUTTON = "Правила и условия";
 PROFILE_SIGN_OUT_BUTTON = "Выход";
 PROFILE_ALERT_TITLE = "Выход";
@@ -77,10 +77,15 @@ PROFILE_ALERT_OK_ACTION = "Да";
 LANGUAGE_HEADER_LABEL = "Язык";
 LANGUAGE_ENGLISH_BUTTON = "Английский";
 LANGUAGE_RUSSIAN_BUTTON = "Русский";
-LANGUAGE_ALERT_TITLE = "Перезапустите приложение";
-LANGUAGE_ALERT_MESSAGE = "Перезапустить приложение для изменения языка?";
-LANGUAGE_ALERT_CANCEL_ACTION = "Отмена";
-LANGUAGE_ALERT_OK_ACTION = "Да";
+
+DEVELOPER_HEADER_LABEL = "Команда";
+DEVELOPER_ARTEM_LABEL = "Артем @skifi_h4x#1448\nТимлид. Идейный вдохновитель";
+DEVELOPER_ANTON_LABEL = "Антон @Toha1992#7866\nЭкран Onboarding. Экран детальной информации";
+DEVELOPER_ALBINA_LABEL = "Альбина @Albina#2882\nГлавный экран. Поиск по новостям";
+DEVELOPER_RAMIL_LABEL = "Рамиль @yanram#1731\nРабота с новостной API. Экран Категории";
+DEVELOPER_ILYAS_LABEL = "Ильяс @Ильяс Тюменёв#2579\nЭкран Профиль. Смена языка приложения";
+DEVELOPER_MIKHAIL_LABEL = "Михаил @Mikhail Liubov#6850\nЭкран Избранное";
+DEVELOPER_ANDREY_LABEL = "Андрей @andreyMikKzn#1191\nЭкран авторизации. Firebase. Сохранение статей в Realm";
 
 TERMS_AND_CONDITIONS_HEADER_LABEL = "Правила и условия";
 TERMS_AND_CONDITIONS_MAIN_TEXT = "Пользовательское соглашение для приложения (далее Соглашение) представляет особый вид договора между владельцами приложения и его пользователями касательно порядка его использования, а также определяет обязанности сторон и их ответственность.

@@ -25,27 +25,25 @@ class CustomCell: UITableViewCell {
         return image
     }()
     
-    private let cellCategoryLabel: UILabel = {
+    let cellCategoryLabel: UILabel = {
         let category = UILabel()
         category.textAlignment = .left
         category.font = UIFont.systemFont(ofSize: 14)
         category.textColor = .lightGray
         category.numberOfLines = 1
-        category.text = NSLocalizedString("BOOKMARKS_CELL_CATEGORY_LABEL", comment: "Something went wrong")
         return category
     }()
     
-    private let cellNewsLabel: UILabel = {
+    let cellNewsLabel: UILabel = {
         let news = UILabel()
         news.textAlignment = .left
         news.font = UIFont.systemFont(ofSize: 16)
         news.textColor = .black
         news.numberOfLines = 2
-        news.text = NSLocalizedString("BOOKMARKS_CELL_NEWS_LABEL", comment: "We cant find your saved articles right now")
         return news
     }()
     
-    private lazy var unmarkButton: UIButton = {
+    lazy var unmarkButton: UIButton = {
         let button = UIButton(type: .system)
         button.setBackgroundImage(UIImage(systemName: "bookmark.fill"), for: .normal)
         button.frame = CGRect(x: 0, y: 0, width: 20, height: 20)

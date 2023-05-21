@@ -19,7 +19,7 @@ enum Section {
         case .lastNews:
             return ""
         case .recommended:
-            return NSLocalizedString("HOME_HEADER_TITLE", comment: "Recommended For You")
+            return LocalizationManager.localizationManager.localizeString("HOME_HEADER_TITLE")
         }
     }
 }
