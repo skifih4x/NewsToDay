@@ -14,12 +14,12 @@ protocol ForgetPasswordViewDelegate: AnyObject {
 
 class ForgetPasswordView: CustomView {
     weak var delegate: ForgetPasswordViewDelegate?
+    private let localizationManager = LocalizationManager.localizationManager
     
     //MARK: - Variables
     
-    private lazy var goBackButton: UIButton = {
+    lazy var goBackButton: UIButton = {
         let element = UIButton()
-        element.setTitle(NSLocalizedString("FORGET_GO_BACK_BUTTON", comment: "x"), for: .normal)
         element.setTitleColor(Resources.Colors.purplePrimary, for: .normal)
         element.titleLabel?.font = UIFont.systemFont(ofSize: 24, weight: .heavy)
         element.translatesAutoresizingMaskIntoConstraints = false
@@ -27,18 +27,16 @@ class ForgetPasswordView: CustomView {
         return element
     }()
     
-    private lazy var topLabel: UILabel = {
+    lazy var topLabel: UILabel = {
         let element = UILabel()
-        element.text = NSLocalizedString("FORGET_TOP_LABEL", comment: "Reset your password")
         element.font = UIFont.systemFont(ofSize: 24, weight: .medium)
         element.textColor = Resources.Colors.blackPrimary
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
     
-    private lazy var greetingLabel: UILabel = {
+    lazy var greetingLabel: UILabel = {
         let element = UILabel()
-        element.text = NSLocalizedString("FORGET_GREETING_LABEL", comment: "Don't worry. Please enter your email and we will send you a password reset email.")
         element.lineBreakMode = .byWordWrapping
         element.numberOfLines = 0
         element.font = UIFont.systemFont(ofSize: 16, weight: .regular)
@@ -60,17 +58,16 @@ class ForgetPasswordView: CustomView {
         element.leftView = containerView
         element.leftViewMode = .always
 
-        element.placeholder = NSLocalizedString("FORGET_EMAIL_TEXTFIELD", comment: "Email Address")
+        element.placeholder = localizationManager.localizeString("FORGET_EMAIL_TEXTFIELD")
         element.keyboardType = .emailAddress
         element.autocorrectionType = .no
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
 
-    private lazy var resetPasswordButton: UIButton = {
+    lazy var resetPasswordButton: UIButton = {
         let element = UIButton()
         element.backgroundColor = Resources.Colors.purplePrimary
-        element.setTitle(NSLocalizedString("FORGET_RESET_PASSWORD_BUTTON", comment: "Reset"), for: .normal)
         element.setTitleColor(.white, for: .normal)
         element.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         element.layer.cornerRadius = 12

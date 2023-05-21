@@ -15,11 +15,12 @@ protocol AuthorizationViewDelegate: AnyObject {
 
 class AuthorizationView: CustomView {
     weak var delegate: AuthorizationViewDelegate?
+    private let localizationManager = LocalizationManager.localizationManager
     
     //MARK: - Variables
     lazy var topLabel: UILabel = {
         let element = UILabel()
-        element.text = NSLocalizedString("AUTHORIZATION_VC_TRUE_TOP_LABEL", comment: "Welcome to NewsToDay")
+        element.text = localizationManager.localizeString("AUTHORIZATION_VC_TRUE_TOP_LABEL")
         element.font = UIFont.systemFont(ofSize: 24, weight: .medium)
         element.adjustsFontSizeToFitWidth = true
         element.minimumScaleFactor = 0.5
@@ -30,7 +31,7 @@ class AuthorizationView: CustomView {
     
     lazy var greetingLabel: UILabel = {
         let element = UILabel()
-        element.text = NSLocalizedString("AUTHORIZATION_VC_TRUE_GREETING_LABEL", comment: "Hello, I guess you are new around here. You can start using the application after sign up.")
+        element.text = localizationManager.localizeString("AUTHORIZATION_VC_TRUE_GREETING_LABEL")
         element.lineBreakMode = .byWordWrapping
         element.numberOfLines = 0
         element.font = UIFont.systemFont(ofSize: 16, weight: .regular)
@@ -61,9 +62,10 @@ class AuthorizationView: CustomView {
         element.leftView = containerView
         element.leftViewMode = .always
 
-        element.placeholder = NSLocalizedString("AUTHORIZATION_VIEW_USERNAME_TEXTFIELD", comment: "Username")
+        element.placeholder = localizationManager.localizeString("AUTHORIZATION_VIEW_USERNAME_TEXTFIELD")
         element.keyboardType = .default
         element.autocorrectionType = .no
+        element.returnKeyType = .done
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -81,9 +83,10 @@ class AuthorizationView: CustomView {
         element.leftView = containerView
         element.leftViewMode = .always
 
-        element.placeholder = NSLocalizedString("AUTHORIZATION_VIEW_EMAIL_TEXTFIELD", comment: "Email Address")
+        element.placeholder = localizationManager.localizeString("AUTHORIZATION_VIEW_EMAIL_TEXTFIELD")
         element.keyboardType = .emailAddress
         element.autocorrectionType = .no
+        element.returnKeyType = .done
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -113,9 +116,10 @@ class AuthorizationView: CustomView {
         element.rightView = containerViewRight
         element.rightViewMode = .always
         
-        element.placeholder = NSLocalizedString("AUTHORIZATION_VIEW_PASSWORD_TEXTFIELD", comment: "Password")
+        element.placeholder = localizationManager.localizeString("AUTHORIZATION_VIEW_PASSWORD_TEXTFIELD")
         element.autocorrectionType = .no
         element.isSecureTextEntry = true
+        element.returnKeyType = .done
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -145,9 +149,10 @@ class AuthorizationView: CustomView {
         element.rightView = containerViewRight
         element.rightViewMode = .always
         
-        element.placeholder = NSLocalizedString("AUTHORIZATION_VIEW_CONFIRM_PASSWORD_TEXTFIELD", comment: "Repeat Password")
+        element.placeholder = localizationManager.localizeString("AUTHORIZATION_VIEW_CONFIRM_PASSWORD_TEXTFIELD")
         element.isSecureTextEntry = true
         element.autocorrectionType = .no
+        element.returnKeyType = .done
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -155,7 +160,7 @@ class AuthorizationView: CustomView {
     lazy var forgotPasswordButton: UIButton = {
         let element = UIButton()
         element.backgroundColor = nil
-        element.setTitle(NSLocalizedString("AUTHORIZATION_VIEW_FORGOT_PASSWORD_BUTTON", comment: "Forgot your password?"), for: .normal)
+        element.setTitle(localizationManager.localizeString("AUTHORIZATION_VIEW_FORGOT_PASSWORD_BUTTON"), for: .normal)
         element.setTitleColor(Resources.Colors.blackPrimary, for: .normal)
         element.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         element.translatesAutoresizingMaskIntoConstraints = false
@@ -167,7 +172,7 @@ class AuthorizationView: CustomView {
     lazy var signInButton: UIButton = {
         let element = UIButton()
         element.backgroundColor = Resources.Colors.purplePrimary
-        element.setTitle(NSLocalizedString("AUTHORIZATION_VIEW_SIGNIN_BUTTON", comment: "Sign Up"), for: .normal)
+        element.setTitle(localizationManager.localizeString("AUTHORIZATION_VIEW_SIGNIN_BUTTON"), for: .normal)
         element.setTitleColor(.white, for: .normal)
         element.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         element.layer.cornerRadius = 12
@@ -186,7 +191,7 @@ class AuthorizationView: CustomView {
     
     lazy var createAccountLabel: UILabel = {
         let element = UILabel()
-        element.text = NSLocalizedString("AUTHORIZATION_VIEW_CREATE_ACCOUNT_LABEL", comment: "Already have an account?")
+        element.text = localizationManager.localizeString("AUTHORIZATION_VIEW_CREATE_ACCOUNT_LABEL")
         element.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         element.textColor = Resources.Colors.blackLighter
         element.translatesAutoresizingMaskIntoConstraints = false
@@ -196,7 +201,7 @@ class AuthorizationView: CustomView {
     lazy var createAccountButton: UIButton = {
         let element = UIButton()
         element.backgroundColor = nil
-        element.setTitle(NSLocalizedString("AUTHORIZATION_VIEW_CREATE_ACCOUNT_BUTTON", comment: "Sign In"), for: .normal)
+        element.setTitle(localizationManager.localizeString("AUTHORIZATION_VIEW_CREATE_ACCOUNT_BUTTON"), for: .normal)
         element.setTitleColor(Resources.Colors.blackPrimary, for: .normal)
         element.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         element.translatesAutoresizingMaskIntoConstraints = false

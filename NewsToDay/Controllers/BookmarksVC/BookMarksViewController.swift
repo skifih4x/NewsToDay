@@ -12,6 +12,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     
     var storageManager: StorageManagerProtocol = StorageManager()
     var bookmarks: [BookmarkModel] = []
+    private let localizationManager = LocalizationManager.localizationManager
     
     let vectorView: UIImageView = {
         let vector = UIImageView()
@@ -30,9 +31,8 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     let messageView: UILabel = {
         let message = UILabel()
         message.translatesAutoresizingMaskIntoConstraints = false
-        message.text = NSLocalizedString("BOOKMARKS_MESSAGE_VIEW", comment: "You haven't saved any articles yet. Start reading and bookmarking them now")
         message.font = UIFont.systemFont(ofSize: 16)
-        message.numberOfLines = 3
+        message.numberOfLines = 0
         message.textColor = .black
         message.textAlignment = .center
         return message
@@ -41,7 +41,6 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     let titleLabel: UILabel = {
         let title = UILabel()
         title.translatesAutoresizingMaskIntoConstraints = false
-        title.text = NSLocalizedString("BOOKMARKS_TITLE_LABEL", comment: "Bookmarks")
         title.font = .boldSystemFont(ofSize: 24)
         title.textColor = Resources.Colors.blackPrimary
         title.textAlignment = .left
@@ -51,7 +50,6 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     let subtitleLabel: UILabel = {
         let subtitle = UILabel()
         subtitle.translatesAutoresizingMaskIntoConstraints = false
-        subtitle.text = NSLocalizedString("BOOKMARKS_SUBTITLE_LABEL", comment: "Saved articles to the library")
         subtitle.font = UIFont.systemFont(ofSize: 16)
         subtitle.textColor = Resources.Colors.greyPrimary
         subtitle.textAlignment = .left
@@ -69,6 +67,7 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         setupViews()
         setConstraints()
+        updateLocalizedStrings()
     }
     
     func setupViews() {
@@ -83,6 +82,13 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.dataSource = self
     }
     
+    private func updateLocalizedStrings() {
+        localizationManager.localizeView("BOOKMARKS_MESSAGE_VIEW", view: messageView, updatingBlock: nil)
+        localizationManager.localizeView("BOOKMARKS_TITLE_LABEL", view: titleLabel, updatingBlock: nil)
+        localizationManager.localizeView("BOOKMARKS_SUBTITLE_LABEL", view: subtitleLabel, updatingBlock: nil)
+        localizationManager.localizeView("BOOKMARKS_MESSAGE_VIEW", view: messageView, updatingBlock: nil)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         bookmarks = storageManager.retrieveAll()
         tableView.reloadData()
@@ -91,18 +97,18 @@ class BookmarksViewController: UIViewController, UITableViewDelegate, UITableVie
     func edit(rowIndexPath indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .normal, title: "Delete") { [weak self] (_,_, completionHandler) in
             let alert = UIAlertController(
-                title: NSLocalizedString("BOOKMARKS_ALERT_TITLE", comment: "Do You want to delete this bookmark?"),
+                title: LocalizationManager.localizationManager.localizeString("BOOKMARKS_ALERT_TITLE"),
                 message: "",
                 preferredStyle: .alert
             )
             alert.addAction(UIAlertAction(
-                title: NSLocalizedString("BOOKMARKS_CANCEL_ALERT_TITLE", comment: "Cancel"),
+                title: LocalizationManager.localizationManager.localizeString("BOOKMARKS_CANCEL_ALERT_TITLE"),
                 style: .cancel,
                 handler: { (_) in
                     completionHandler(false)
                 }))
             alert.addAction(UIAlertAction(
-                title: NSLocalizedString("BOOKMARKS_DELETE_ALERT_TITLE", comment: "Delete"),
+                title: LocalizationManager.localizationManager.localizeString("BOOKMARKS_DELETE_ALERT_TITLE"),
                 style: .destructive,
                 handler: { (_) in
                     self?.storageManager.deleteItem(by: self?.bookmarks[indexPath.row].url ?? "")
@@ -217,17 +223,17 @@ extension BookmarksViewController: CellDelegate {
     func buttonPressed(_ cell: CustomCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         let alert = UIAlertController(
-            title: NSLocalizedString("BOOKMARKS_ALERT_TITLE", comment: "Do You want to delete this bookmark?"),
+            title: LocalizationManager.localizationManager.localizeString("BOOKMARKS_ALERT_TITLE"),
             message: "",
             preferredStyle: .alert
         )
         alert.addAction(UIAlertAction(
-            title: NSLocalizedString("BOOKMARKS_CANCEL_ALERT_TITLE", comment: "Cancel"),
+            title: LocalizationManager.localizationManager.localizeString("BOOKMARKS_CANCEL_ALERT_TITLE"),
             style: .cancel,
             handler: nil
         ))
         alert.addAction(UIAlertAction(
-            title: NSLocalizedString("BOOKMARKS_DELETE_ALERT_TITLE", comment: "Delete"),
+            title: LocalizationManager.localizationManager.localizeString("BOOKMARKS_DELETE_ALERT_TITLE"),
             style: .destructive,
             handler: { _ in
                 self.storageManager.deleteItem(by: self.bookmarks[indexPath.row].url)

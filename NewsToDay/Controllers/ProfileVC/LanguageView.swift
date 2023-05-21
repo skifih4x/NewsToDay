@@ -9,9 +9,9 @@ import UIKit
 import SnapKit
 
 protocol LanguageViewDelegate: AnyObject {
-    func LanguageView(_ view: LanguageView, backButtonPressed button: UIButton)
-    func LanguageView(_ view: LanguageView, englishButtonPressed button: UIButton)
-    func LanguageView(_ view: LanguageView, russianButtonPressed button: UIButton)
+    func languageView(_ view: LanguageView, backButtonPressed button: UIButton)
+    func languageView(_ view: LanguageView, englishButtonPressed button: UIButton)
+    func languageView(_ view: LanguageView, russianButtonPressed button: UIButton)
 }
 
 class LanguageView: UIView {
@@ -20,15 +20,14 @@ class LanguageView: UIView {
     
     private let backButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "backButton"), for: .normal)
+        button.setImage(Resources.Profile.backButton, for: .normal)
         button.tintColor = Resources.Colors.greyPrimary
         button.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         return button
     }()
     
-    private let headerLabel: UILabel = {
+    let headerLabel: UILabel = {
         let label = UILabel()
-        label.text = NSLocalizedString("LANGUAGE_HEADER_LABEL", comment: "Language")
         label.numberOfLines = 1
         label.font = UIFont.systemFont(ofSize: 24)
         label.textColor = Resources.Colors.blackPrimary
@@ -38,7 +37,6 @@ class LanguageView: UIView {
     
     let englishButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle(NSLocalizedString("LANGUAGE_ENGLISH_BUTTON", comment: "English"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.tintColor = Resources.Colors.greyDark
         button.contentHorizontalAlignment = .leading
@@ -51,7 +49,6 @@ class LanguageView: UIView {
     
     let russianButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle(NSLocalizedString("LANGUAGE_RUSSIAN_BUTTON", comment: "Русский"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.tintColor = Resources.Colors.greyDark
         button.contentHorizontalAlignment = .leading
@@ -115,14 +112,14 @@ class LanguageView: UIView {
 private extension LanguageView {
     
     @objc func backButtonPressed(_ button: UIButton) {
-        delegate?.LanguageView(self, backButtonPressed: button)
+        delegate?.languageView(self, backButtonPressed: button)
     }
     
     @objc func englishButtonPressed(_ button: UIButton) {
-        delegate?.LanguageView(self, englishButtonPressed: button)
+        delegate?.languageView(self, englishButtonPressed: button)
     }
     
     @objc func russianButtonPressed(_ button: UIButton) {
-        delegate?.LanguageView(self, russianButtonPressed: button)
+        delegate?.languageView(self, russianButtonPressed: button)
     }
 }

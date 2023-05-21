@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 class DatailVC: UIViewController    {
     
     var articleInfo: ArticleInfo?
@@ -25,14 +24,10 @@ class DatailVC: UIViewController    {
     let bookMark = UIButton()
     let forwardButton = UIButton()
     
-    
     override func viewDidLoad() {
-        //print(articleInfo)
-        
         view.addSubview(scrollView)
         view.backgroundColor = .white
         scrollView.addSubview(stackView)
-        
         
         scrollStackViewConfigure()
         stackViewConfigure()
@@ -55,7 +50,6 @@ class DatailVC: UIViewController    {
     
     @objc private func bookmarkButtonPressed(_ sender: UIButton) {
         sender.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
-        print("My name is bookmarkButtonPressed")
     }
     
     @objc private func backButtonPressed(_ sender: UIButton) {
@@ -63,19 +57,13 @@ class DatailVC: UIViewController    {
     }
     
     // Scroll&StackView Configure
-    
     func scrollStackViewConfigure () {
-     
         stackView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         scrollView.frame = CGRect(x: 0, y: -60, width: view.frame.width, height: view.frame.height)
         scrollView.contentSize = CGSize(width: view.frame.size.width, height: textOfNews.frame.height)
-       
-        
-      
-        
     }
-    // Image View Configure
     
+    // Image View Configure
     func stackViewConfigure () {
         imageOfNews.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 384)
         let defaultImage = UIImage(named: "newsImage")
@@ -102,7 +90,6 @@ class DatailVC: UIViewController    {
         bookMark.addTarget(self, action: #selector(bookmarkButtonPressed(_:)), for: .touchUpInside)
         
         forwardButton.setImage(UIImage(named: "forward"), for: .normal)
-     
         
         imageOfNews.addSubview(backButton)
         imageOfNews.addSubview(bookMark)
@@ -123,20 +110,17 @@ class DatailVC: UIViewController    {
             bookMark.heightAnchor.constraint(equalToConstant: 30),
             bookMark.widthAnchor.constraint(equalToConstant: 30),
             
-           forwardButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -26),
-           forwardButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 337),
-           forwardButton.topAnchor.constraint(equalTo: imageOfNews.topAnchor, constant: 123),
-           forwardButton.bottomAnchor.constraint(equalTo: imageOfNews.bottomAnchor, constant: -233),
-           
+            forwardButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -26),
+            forwardButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 337),
+            forwardButton.topAnchor.constraint(equalTo: imageOfNews.topAnchor, constant: 123),
+            forwardButton.bottomAnchor.constraint(equalTo: imageOfNews.bottomAnchor, constant: -233)
         ])
     }
     
-    
     //Label Text View Configure
-    
     func textViewConfigure () {
         stackView.addSubview(textOfNews)
-//        textOfNews.frame = CGRect(x: 0, y: 384, width: view.frame.width, height: 700)
+        //        textOfNews.frame = CGRect(x: 0, y: 384, width: view.frame.width, height: 700)
         textOfNews.numberOfLines = 0
         textOfNews.textColor = UIColor(named: "gray")
         textOfNews.font = textOfNews.font.withSize(20)
@@ -145,8 +129,7 @@ class DatailVC: UIViewController    {
         NSLayoutConstraint.activate([
             textOfNews.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             textOfNews.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            textOfNews.topAnchor.constraint(equalTo: imageOfNews.bottomAnchor, constant: 24),
-           
+            textOfNews.topAnchor.constraint(equalTo: imageOfNews.bottomAnchor, constant: 24)
         ])
     }
     func topViewConfigure () {
@@ -171,7 +154,6 @@ class DatailVC: UIViewController    {
         categoryLabel.backgroundColor = UIColor (named: "purpleColor")
         categoryLabel.textAlignment = .center
         
-        
         topLabel.numberOfLines = 4
         topLabel.adjustsFontSizeToFitWidth = true
         topLabel.minimumScaleFactor = 0.3
@@ -184,8 +166,7 @@ class DatailVC: UIViewController    {
         authorNameLabel.translatesAutoresizingMaskIntoConstraints = false
         categoryLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint.activate([
-            
+        NSLayoutConstraint.activate([            
             categoryLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             categoryLabel.widthAnchor.constraint(equalToConstant: 110),
             categoryLabel.topAnchor.constraint(equalTo: imageOfNews.topAnchor,constant: 130),
@@ -200,4 +181,4 @@ class DatailVC: UIViewController    {
             authorNameLabel.bottomAnchor.constraint(equalTo: imageOfNews.bottomAnchor, constant: -20),
         ])
     }
-            }
+}

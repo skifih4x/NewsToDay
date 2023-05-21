@@ -43,4 +43,24 @@ enum Resources {
         static var eye = UIImage(systemName: "eye")
         static var person = UIImage(systemName: "person")
     }
+    
+    enum Profile {
+        static var profileImage1 = UIImage(named: "profileImage_1.png")
+        static var profileImage2 = UIImage(named: "profileImage_2.png")
+        static var profileImage3 = UIImage(named: "profileImage_3.png")
+        static var profileImage4 = UIImage(named: "profileImage_4.png")
+        static var languageButton = UIImage(named: "languageButton.svg")
+        static var signOutButton = UIImage(named: "signOutButton.svg")
+        static var backButton = UIImage(named: "backButton.svg")
+    }
+    
+    enum DeveloperTeamPhoto {
+        static var Artem = UIImage(named: "artem")
+        static var Anton = UIImage(named: "anton")
+        static var Albina = UIImage(named: "albina")
+        static var Mihail = UIImage(named: "mihail")
+        static var Ilyas = UIImage(named: "ilyas")
+        static var Ramil = UIImage(named: "ramil")
+        static var Andrey = UIImage(named: "andrey")
+    }
 }
