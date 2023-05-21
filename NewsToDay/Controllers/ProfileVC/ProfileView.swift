@@ -9,18 +9,18 @@ import UIKit
 import SnapKit
 
 protocol ProfileViewDelegate: AnyObject {
-    func ProfileView(_ view: ProfileView, languageButtonPressed button: UIButton)
-    func ProfileView(_ view: ProfileView, termsAndConditionsButtonPressed button: UIButton)
-    func ProfileView(_ view: ProfileView, signOutButtonPressed button: UIButton)
+    func profileView(_ view: ProfileView, languageButtonPressed button: UIButton)
+    func profileView(_ view: ProfileView, developerTeamButtonPressed button: UIButton)
+    func profileView(_ view: ProfileView, termsAndConditionsButtonPressed button: UIButton)
+    func profileView(_ view: ProfileView, signOutButtonPressed button: UIButton)
 }
 
 class ProfileView: UIView {
     
     weak var delegate: ProfileViewDelegate?
     
-    private let profileLabel: UILabel = {
+    let profileLabel: UILabel = {
         let label = UILabel()
-        label.text = NSLocalizedString("PROFILE_PROFILE_LABEL", comment: "Profile")
         label.numberOfLines = 1
         label.font = .boldSystemFont(ofSize: 24)
         label.textColor = Resources.Colors.blackPrimary
@@ -53,7 +53,6 @@ class ProfileView: UIView {
     
     let languageButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle(NSLocalizedString("PROFILE_LANGUAGE_BUTTON", comment: "Language"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.tintColor = Resources.Colors.greyDark
         button.contentHorizontalAlignment = .leading
@@ -67,14 +66,33 @@ class ProfileView: UIView {
     
     private let languageButtonImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "languageButton")
+        image.image = Resources.Profile.languageButton
+        image.contentMode = .scaleAspectFit
+        return image
+    }()
+    
+    let developerTeamButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.tintColor = Resources.Colors.greyDark
+        button.contentHorizontalAlignment = .leading
+        button.titleEdgeInsets.left = 24
+        button.backgroundColor = Resources.Colors.greyLighter
+        button.setBackgroundColorForTap(color: Resources.Colors.purplePrimary, forState: .highlighted)
+        button.addTarget(self, action: #selector(developerTeamButtonPressed), for: .touchUpInside)
+        button.layer.cornerRadius = 12
+        return button
+    }()
+    
+    private let developerTeamButtonImage: UIImageView = {
+        let image = UIImageView()
+        image.image = Resources.Profile.languageButton
         image.contentMode = .scaleAspectFit
         return image
     }()
     
     let termsAndConditionsButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle(NSLocalizedString("PROFILE_TERMS_AND_CONDITIONS_BUTTON", comment: "Terms & Conditions"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.tintColor = Resources.Colors.greyDark
         button.contentHorizontalAlignment = .leading
@@ -88,14 +106,13 @@ class ProfileView: UIView {
     
     private let termsAndConditionsButtonImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "languageButton")
+        image.image = Resources.Profile.languageButton
         image.contentMode = .scaleAspectFit
         return image
     }()
     
     let signOutButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle(NSLocalizedString("PROFILE_SIGN_OUT_BUTTON", comment: "Sign Out"), for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         button.tintColor = Resources.Colors.greyDark
         button.contentHorizontalAlignment = .leading
@@ -109,7 +126,7 @@ class ProfileView: UIView {
     
     private let signOutButtonImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "signOutButton")
+        image.image = Resources.Profile.signOutButton
         image.contentMode = .scaleAspectFit
         return image
     }()
@@ -133,6 +150,8 @@ class ProfileView: UIView {
         addSubview(emailLabel)
         addSubview(languageButton)
         addSubview(languageButtonImage)
+        addSubview(developerTeamButton)
+        addSubview(developerTeamButtonImage)
         addSubview(termsAndConditionsButton)
         addSubview(termsAndConditionsButtonImage)
         addSubview(signOutButton)
@@ -180,6 +199,20 @@ class ProfileView: UIView {
             make.width.equalTo(7)
         }
         
+        developerTeamButton.snp.makeConstraints { make in
+            make.bottom.equalTo(termsAndConditionsButton.snp.top).inset(-28)
+            make.leading.equalToSuperview().inset(20)
+            make.trailing.equalToSuperview().inset(19)
+            make.height.equalTo(56)
+        }
+        
+        developerTeamButtonImage.snp.makeConstraints { make in
+            make.centerY.equalTo(developerTeamButton.snp.centerY)
+            make.centerX.equalTo(signOutButtonImage.snp.centerX)
+            make.height.equalTo(11)
+            make.width.equalTo(7)
+        }
+        
         termsAndConditionsButton.snp.makeConstraints { make in
             make.bottom.equalTo(signOutButton.snp.top).inset(-28)
             make.leading.equalToSuperview().inset(20)
@@ -214,15 +247,19 @@ class ProfileView: UIView {
 private extension ProfileView {
     
     @objc func languageButtonPressed(_ button: UIButton) {
-        delegate?.ProfileView(self, languageButtonPressed: button)
+        delegate?.profileView(self, languageButtonPressed: button)
+    }
+    
+    @objc func developerTeamButtonPressed(_ button: UIButton) {
+        delegate?.profileView(self, developerTeamButtonPressed: button)
     }
     
     @objc func termsAndConditionsButtonPressed(_ button: UIButton) {
-        delegate?.ProfileView(self, termsAndConditionsButtonPressed: button)
+        delegate?.profileView(self, termsAndConditionsButtonPressed: button)
     }
     
     @objc func signOutButtonPressed(_ button: UIButton) {
-        delegate?.ProfileView(self, signOutButtonPressed: button)
+        delegate?.profileView(self, signOutButtonPressed: button)
     }
 }
 

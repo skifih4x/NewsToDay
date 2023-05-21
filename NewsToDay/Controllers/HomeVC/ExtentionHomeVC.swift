@@ -13,7 +13,6 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         sections.count
-
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -25,8 +24,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return news.count
         case .recommended:
             return randomNews.count
-        }
-         
+        }         
     }
     
     // MARK: - Delegate
@@ -70,33 +68,27 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.configureCell(article: article, isTintedBookmark: hasInRealm)
             return cell
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-         let section = sections[indexPath.section]
+        let section = sections[indexPath.section]
         
         switch section {
-            
         case .categories:
             let categorySelect  = categoryStorage.categories[indexPath.item]
             fetchLatestNews(for: [categorySelect])
             
         case .lastNews:
-            
             let selectedArticle = news[indexPath.item]
             navigateToDetail(with: selectedArticle)
             
         case .recommended:
-
             let selectedArticle = randomNews[indexPath.item]
             navigateToDetail(with: selectedArticle)
-          
-            
         }
     }
-
+    
     func navigateToDetail(with article: Article) {
         let articleInfo = ArticleInfo(
             title: article.title,
@@ -114,15 +106,18 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         present(detailVC, animated: true)
         
     }
-
+    
     // MARK: - Configure for header
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! HeaderReusableView
+            let section = sections[indexPath.section]
+            LocalizationManager.localizationManager.localizeView("", view: header) { _, view in
+                (view as? HeaderReusableView)?.confugure(name: section.title)
+            }
             
-            header.confugure(name: sections[indexPath.section].title )
             return header
         default:
             return UICollectionReusableView()
@@ -154,10 +149,10 @@ extension HomeViewController {
     // MARK: - Create sections
     
     func createLayoutSection(group: NSCollectionLayoutGroup,
-                                     behavior: UICollectionLayoutSectionOrthogonalScrollingBehavior,
-                                     interGroupSpacing: CGFloat,
-                                     supplementaryItems: [NSCollectionLayoutBoundarySupplementaryItem],
-                                     contentInsets: Bool) -> NSCollectionLayoutSection {
+                             behavior: UICollectionLayoutSectionOrthogonalScrollingBehavior,
+                             interGroupSpacing: CGFloat,
+                             supplementaryItems: [NSCollectionLayoutBoundarySupplementaryItem],
+                             contentInsets: Bool) -> NSCollectionLayoutSection {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = behavior
         section.interGroupSpacing = interGroupSpacing
