@@ -16,12 +16,10 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
     
     var timer: Timer?
     
-    private var query: String?
-    
     var networkManadger = NetworkManager.shared
     var categoryStorage = CategoriesStorage.shared
     var dataManager = DataManager.shared
-    var storageManager = StorageManager()
+    var storageManager: StorageManagerProtocol = StorageManager()
 
     var categories: Category?
     
@@ -29,7 +27,9 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
     var randomNews = [Article]()
     
     var selectedCategory: String?
+    var isShowingSearchResults = false
     
+    var topCategory: Category = .top
     
    lazy var sections: [Section] = [.categories, .lastNews, .recommended]
     
@@ -90,6 +90,21 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
         //randomNews = news.shuffled()
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if isShowingSearchResults {
+            tableView.isHidden = false
+            collectionView.isHidden = true
+        } else {
+            tableView.isHidden = true
+            collectionView.isHidden = false
+        }
+        
+    }
+
+    // MARK: - Shuffle news in recommended
     
     func shuffleNews() {
         randomNews = news.shuffled()
