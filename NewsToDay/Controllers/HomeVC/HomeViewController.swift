@@ -143,30 +143,6 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
         
     }
     
-    /*
-    func fetchLatestNews(for category: [String]) {
-        
-               
-        networkManadger.fetchLatestNews(category: category, country: Country.us) { [weak self] result in
-            switch result {
-            case .success(let newsModel):
-                self?.news = newsModel.results
-                
-                if let fetchNews = self?.news {
-                    self?.dataManager.saveNews(fetchNews)
-                }
-                
-                DispatchQueue.main.async {
-                    self?.collectionView.reloadSections(IndexSet(integer: 1))
-                    
-            }
-                
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
-    */
     func saveData() {
         if let savedCategory = dataManager.loadSelectedCategory() {
             selectedCategory = savedCategory
