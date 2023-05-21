@@ -38,8 +38,10 @@ FORGET_EMAIL_TEXTFIELD = "Email Address";
 FORGET_RESET_PASSWORD_BUTTON = "Reset";
 FORGET_RESET_PASSWORD_ALERT = "Please fill in the email address";
 
-ONBOARDING_FIRST_TO_KNOW_LABEL = "First to know";
-ONBOARDING_ALL_NEWS_LABEL = "All news in one place, be \nthe first to know last news";
+ONBOARDING_FIRST_LABEL = "First to know";
+ONBOARDING_FIRST_COMMENT_LABEL = "All news in one place, be \nthe first to know last news";
+ONBOARDING_SECOND_LABEL = "Categories";
+ONBOARDING_SECOND_COMMENT_LABEL = "Latest news from Russia and around the world on various topics";
 ONBOARDING_NEXT_BUTTON = "Next";
 ONBOARDING_GET_STARTED_BUTTON = "Get Started";
 
@@ -57,14 +59,13 @@ CATEGORIES_NEXT_BUTTON_TITLE = "Next";
 BOOKMARKS_TITLE_LABEL = "Bookmarks";
 BOOKMARKS_SUBTITLE_LABEL = "Saved articles to the library";
 BOOKMARKS_MESSAGE_VIEW = "You haven't saved any articles yet. Start reading and bookmarking them now";
-BOOKMARKS_CELL_CATEGORY_LABEL = "Something went wrong";
-BOOKMARKS_CELL_NEWS_LABEL = "We cant find your saved articles right now";
-BOOKMARKS_ALERT_TITLE = "Do You want to delete this bookmark?";
+BOOKMARKS_ALERT_TITLE = "Do you want to delete this bookmark?";
 BOOKMARKS_CANCEL_ALERT_TITLE = "Cancel";
 BOOKMARKS_DELETE_ALERT_TITLE = "Delete";
 
-PROFILE_PROFILE_LABEL = "Profile";
+PROFILE_HEADER_LABEL = "Profile";
 PROFILE_LANGUAGE_BUTTON = "Language";
+PROFILE_DEVELOPER_TEAM_BUTTON = "Developer team";
 PROFILE_TERMS_AND_CONDITIONS_BUTTON = "Terms & Conditions";
 PROFILE_SIGN_OUT_BUTTON = "Sign Out";
 PROFILE_ALERT_TITLE = "Sign out";
@@ -75,10 +76,15 @@ PROFILE_ALERT_OK_ACTION = "Yes";
 LANGUAGE_HEADER_LABEL = "Language";
 LANGUAGE_ENGLISH_BUTTON = "English";
 LANGUAGE_RUSSIAN_BUTTON = "Russian";
-LANGUAGE_ALERT_TITLE = "Restart the application";
-LANGUAGE_ALERT_MESSAGE = "Restart the app to change the language?";
-LANGUAGE_ALERT_CANCEL_ACTION = "Cancel";
-LANGUAGE_ALERT_OK_ACTION = "Yes";
+
+DEVELOPER_HEADER_LABEL = "Team";
+DEVELOPER_ARTEM_LABEL = "Artem @skifi_h4x#1448\nTeam leader. Ideological inspirer";
+DEVELOPER_ANTON_LABEL = "Anton @Toha1992#7866\nOnboarding screen. Detailed information screen";
+DEVELOPER_ALBINA_LABEL = "Albina @Albina#2882\nThe main screen. News search";
+DEVELOPER_RAMIL_LABEL = "Ramil @yanram#1731\nWorking with the news API. Category screen";
+DEVELOPER_ILYAS_LABEL = "Ilyas @Ильяс Тюменёв#2579\nProfile screen. Changing the application language";
+DEVELOPER_MIKHAIL_LABEL = "Mikhail @Mikhail Liubov#6850\nFavorites Screen";
+DEVELOPER_ANDREY_LABEL = "Andrey @andreyMikKzn#1191\nAuthorization screen. Firebase. Saving articles in Realm";
 
 TERMS_AND_CONDITIONS_HEADER_LABEL = "Terms & Conditions";
 TERMS_AND_CONDITIONS_MAIN_TEXT = "The User Agreement for the application (hereinafter referred to as the Agreement) is a special type of agreement between the owners of the application and its users regarding the procedure for its use, and also defines the obligations of the parties and their responsibilities.

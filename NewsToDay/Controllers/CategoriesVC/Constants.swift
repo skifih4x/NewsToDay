@@ -8,11 +8,11 @@
 import Foundation
 
 struct CategoryConstants {
-    let onboardingHeaderTitle = NSLocalizedString("CATEGORIES_ONBOARDING_HEADER_TITLE", comment: "Select your favourite topics")
-    let headerTitle = NSLocalizedString("CATEGORIES_HEADER_TITLE", comment: "Categories")
+    let onboardingHeaderTitle = LocalizationManager.localizationManager.localizeString("CATEGORIES_ONBOARDING_HEADER_TITLE")
+    let headerTitle = LocalizationManager.localizationManager.localizeString("CATEGORIES_HEADER_TITLE")
 
-    let onboardingSubtitle = NSLocalizedString("CATEGORIES_ONBOARDING_SUBTITLE", comment: "Select some of your favourite topics to let us suggest better news for you.")
-    let subtitle = NSLocalizedString("CATEGORIES_SUBTITLE", comment: "Thousands of articles in each category")
+    let onboardingSubtitle = LocalizationManager.localizationManager.localizeString("CATEGORIES_ONBOARDING_SUBTITLE")
+    let subtitle = LocalizationManager.localizationManager.localizeString("CATEGORIES_SUBTITLE")
 
-    let nextButtonTitle = NSLocalizedString("CATEGORIES_NEXT_BUTTON_TITLE", comment: "Next")
+    let nextButtonTitle = LocalizationManager.localizationManager.localizeString("CATEGORIES_NEXT_BUTTON_TITLE")
 }

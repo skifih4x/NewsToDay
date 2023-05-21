@@ -9,14 +9,14 @@ import UIKit
 import SnapKit
 
 protocol DeveloperTeamViewDelegate: AnyObject {
-    func DeveloperTeamView(_ view: DeveloperTeamView, backButtonPressed button: UIButton)
+    func developerTeamView(_ view: DeveloperTeamView, backButtonPressed button: UIButton)
 }
 
 class DeveloperTeamView: UIView {
     
     weak var delegate: DeveloperTeamViewDelegate?
     
-    private lazy var backButton: UIButton = {
+    let backButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(Resources.Profile.backButton, for: .normal)
         button.tintColor = Resources.Colors.greyPrimary
@@ -24,9 +24,8 @@ class DeveloperTeamView: UIView {
         return button
     }()
     
-    private lazy var headerLabel: UILabel = {
+    let headerLabel: UILabel = {
         let label = UILabel()
-        label.text = "Команда"
         label.numberOfLines = 1
         label.font = UIFont.systemFont(ofSize: 24)
         label.textColor = Resources.Colors.blackPrimary
@@ -34,7 +33,7 @@ class DeveloperTeamView: UIView {
         return label
     }()
     
-    lazy var artemImageView: UIImageView = {
+    let artemImageView: UIImageView = {
         let image = UIImageView()
         image.image = Resources.DeveloperTeamPhoto.Artem
         image.contentMode = .scaleAspectFit
@@ -44,9 +43,8 @@ class DeveloperTeamView: UIView {
         return image
     }()
     
-    private lazy var artemLabel: UILabel = {
+    let artemLabel: UILabel = {
         let element = UILabel()
-        element.text = "Артем @skifi_h4x#1448\nТимлид. Идейный вдохновитель"
         element.numberOfLines = 0
         element.font = UIFont.systemFont(ofSize: 16)
         element.textColor = Resources.Colors.greyPrimary
@@ -54,7 +52,7 @@ class DeveloperTeamView: UIView {
         return element
     }()
     
-    lazy var antonImageView: UIImageView = {
+    let antonImageView: UIImageView = {
         let image = UIImageView()
         image.image = Resources.DeveloperTeamPhoto.Anton
         image.contentMode = .scaleAspectFit
@@ -64,9 +62,8 @@ class DeveloperTeamView: UIView {
         return image
     }()
     
-    private lazy var antonLabel: UILabel = {
+    let antonLabel: UILabel = {
         let element = UILabel()
-        element.text = "Антон @Toha1992#7866\nЭкран Onboarding. Экран детальной информации"
         element.numberOfLines = 0
         element.font = UIFont.systemFont(ofSize: 16)
         element.textColor = Resources.Colors.greyPrimary
@@ -74,7 +71,7 @@ class DeveloperTeamView: UIView {
         return element
     }()
     
-    lazy var albinaImageView: UIImageView = {
+    let albinaImageView: UIImageView = {
         let image = UIImageView()
         image.image = Resources.DeveloperTeamPhoto.Albina
         image.contentMode = .scaleAspectFit
@@ -84,9 +81,8 @@ class DeveloperTeamView: UIView {
         return image
     }()
     
-    private lazy var albinaLabel: UILabel = {
+    let albinaLabel: UILabel = {
         let element = UILabel()
-        element.text = "Альбина @Albina#2882\nГлавный экран. Поиск по новостям"
         element.numberOfLines = 0
         element.font = UIFont.systemFont(ofSize: 16)
         element.textColor = Resources.Colors.greyPrimary
@@ -94,7 +90,7 @@ class DeveloperTeamView: UIView {
         return element
     }()
     
-    lazy var ramilImageView: UIImageView = {
+    let ramilImageView: UIImageView = {
         let image = UIImageView()
         image.image = Resources.DeveloperTeamPhoto.Ramil
         image.contentMode = .scaleAspectFit
@@ -104,9 +100,8 @@ class DeveloperTeamView: UIView {
         return image
     }()
     
-    private lazy var ramilLabel: UILabel = {
+    let ramilLabel: UILabel = {
         let element = UILabel()
-        element.text = "Рамиль @yanram#1731\nРабота с новостной API. Экран Категории"
         element.numberOfLines = 0
         element.font = UIFont.systemFont(ofSize: 16)
         element.textColor = Resources.Colors.greyPrimary
@@ -114,7 +109,7 @@ class DeveloperTeamView: UIView {
         return element
     }()
     
-    lazy var ilyasImageView: UIImageView = {
+    let ilyasImageView: UIImageView = {
         let image = UIImageView()
         image.image = Resources.DeveloperTeamPhoto.Ilyas
         image.contentMode = .scaleAspectFit
@@ -124,9 +119,8 @@ class DeveloperTeamView: UIView {
         return image
     }()
     
-    private lazy var ilyasLabel: UILabel = {
+    let ilyasLabel: UILabel = {
         let element = UILabel()
-        element.text = "Ильяс @Ильяс Тюменёв#2579\nЭкран Профиль. Смена языка приложения"
         element.numberOfLines = 0
         element.font = UIFont.systemFont(ofSize: 16)
         element.textColor = Resources.Colors.greyPrimary
@@ -134,7 +128,7 @@ class DeveloperTeamView: UIView {
         return element
     }()
     
-    lazy var mihailImageView: UIImageView = {
+    let mihailImageView: UIImageView = {
         let image = UIImageView()
         image.image = Resources.DeveloperTeamPhoto.Mihail
         image.contentMode = .scaleAspectFit
@@ -144,9 +138,8 @@ class DeveloperTeamView: UIView {
         return image
     }()
     
-    private lazy var mihailLabel: UILabel = {
+    let mikhailLabel: UILabel = {
         let element = UILabel()
-        element.text = "Михаил @Mikhail Liubov#6850\nЭкран Избранное"
         element.numberOfLines = 0
         element.font = UIFont.systemFont(ofSize: 16)
         element.textColor = Resources.Colors.greyPrimary
@@ -154,7 +147,7 @@ class DeveloperTeamView: UIView {
         return element
     }()
     
-    lazy var andreyImageView: UIImageView = {
+    let andreyImageView: UIImageView = {
         let image = UIImageView()
         image.image = Resources.DeveloperTeamPhoto.Andrey
         image.contentMode = .scaleAspectFit
@@ -164,9 +157,8 @@ class DeveloperTeamView: UIView {
         return image
     }()
     
-    private lazy var andreyLabel: UILabel = {
+    let andreyLabel: UILabel = {
         let element = UILabel()
-        element.text = "Андрей @andreyMikKzn#1191\nЭкран авторизации. Firebase. Сохранение статей в Realm"
         element.numberOfLines = 0
         element.font = UIFont.systemFont(ofSize: 16)
         element.textColor = Resources.Colors.greyPrimary
@@ -199,7 +191,7 @@ class DeveloperTeamView: UIView {
         addSubview(ramilImageView)
         addSubview(ilyasLabel)
         addSubview(ilyasImageView)
-        addSubview(mihailLabel)
+        addSubview(mikhailLabel)
         addSubview(mihailImageView)
         addSubview(andreyLabel)
         addSubview(andreyImageView)
@@ -270,9 +262,9 @@ class DeveloperTeamView: UIView {
             mihailImageView.heightAnchor.constraint(equalToConstant: 72),
             mihailImageView.widthAnchor.constraint(equalToConstant: 72),
             
-            mihailLabel.centerYAnchor.constraint(equalTo: mihailImageView.centerYAnchor),
-            mihailLabel.leadingAnchor.constraint(equalTo: mihailImageView.trailingAnchor, constant: 10),
-            mihailLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            mikhailLabel.centerYAnchor.constraint(equalTo: mihailImageView.centerYAnchor),
+            mikhailLabel.leadingAnchor.constraint(equalTo: mihailImageView.trailingAnchor, constant: 10),
+            mikhailLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
             
             andreyImageView.topAnchor.constraint(equalTo: mihailImageView.bottomAnchor, constant: 20),
             andreyImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
@@ -290,6 +282,6 @@ class DeveloperTeamView: UIView {
 private extension DeveloperTeamView {
     
     @objc func backButtonPressed(_ button: UIButton) {
-        delegate?.DeveloperTeamView(self, backButtonPressed: button)
+        delegate?.developerTeamView(self, backButtonPressed: button)
     }
 }

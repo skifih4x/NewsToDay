@@ -9,11 +9,14 @@ import UIKit
 
 class ForgetPasswordViewController: CustomViewController<ForgetPasswordView> {
     
+    private let localizationManager = LocalizationManager.localizationManager
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         customView.delegate = self
         customView.emailTextField.delegate = self
+        updateLocalizedStrings()
     }
     
     func showAlert(title: String, message: String?) {
@@ -23,6 +26,14 @@ class ForgetPasswordViewController: CustomViewController<ForgetPasswordView> {
                                                 preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
         present(alertController, animated: true)
+    }
+    
+    private func updateLocalizedStrings() {
+        localizationManager.localizeView("FORGET_GO_BACK_BUTTON", view: customView.goBackButton, updatingBlock: nil)
+        localizationManager.localizeView("FORGET_TOP_LABEL", view: customView.topLabel, updatingBlock: nil)
+        localizationManager.localizeView("FORGET_GREETING_LABEL", view: customView.greetingLabel, updatingBlock: nil)
+        localizationManager.localizeView("FORGET_EMAIL_TEXTFIELD", view: customView.emailTextField, updatingBlock: nil)
+        localizationManager.localizeView("FORGET_RESET_PASSWORD_BUTTON", view: customView.resetPasswordButton, updatingBlock: nil)
     }
 }
 
@@ -37,11 +48,11 @@ extension ForgetPasswordViewController: ForgetPasswordViewDelegate {
                 } else {
                     guard let error = err else {return}
                     let errString = String(error.localizedDescription)
-                    self?.showAlert(title: NSLocalizedString("ALERT_ERROR", comment: "Ooops!"), message: errString)
+                    self?.showAlert(title: (self?.localizationManager.localizeString("ALERT_ERROR"))!, message: errString)
                 }
             }
         } else {
-            showAlert(title: NSLocalizedString("FORGET_RESET_PASSWORD_ALERT", comment: "Please fill in the email address"), message: nil)
+            showAlert(title: localizationManager.localizeString("FORGET_RESET_PASSWORD_ALERT"), message: nil)
         }
     }
     
