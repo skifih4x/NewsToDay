@@ -31,7 +31,9 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
     var selectedCategory: String?
     var isShowingSearchResults = false
     
-    lazy var sections: [Section] = [.categories, .lastNews, .recommended]
+   lazy var sections: [Section] = [.categories, .lastNews, .recommended]
+    
+    var selectedCategories: [String] = ["top"]
     
     // MARK: - UI Properties
     
@@ -83,12 +85,9 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
         saveData()
         
         shuffleNews()
+
         //randomNews = news.shuffled()
         updateLocalizedStrings()
-    }
-    
-    override func viewWillAppear(_: Bool) {
-        collectionView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -101,8 +100,9 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
             tableView.isHidden = true
             collectionView.isHidden = false
         }
-        
+        collectionView.reloadData()
     }
+    
 
     // MARK: - Shuffle news in recommended
     
@@ -120,24 +120,36 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
     // MARK: - Fetch data
     
     func fetchLatestNews(for category: [String]) {
-        
-        networkManadger.fetchLatestNews(category: category, country: Country.us) { [weak self] result in
-            switch result {
-            case .success(let newsModel):
-                self?.news = newsModel.results
+        var categoriesToFetch: [String]
                 
-                if let fetchNews = self?.news {
-                    self?.dataManager.saveNews(fetchNews)
+        if category.isEmpty {
+                    categoriesToFetch = selectedCategories
+                } else {
+                    categoriesToFetch = category
                 }
                 
-                DispatchQueue.main.async {
+        DispatchQueue.main.async {
                     self?.collectionView.reloadSections(IndexSet(integer: 1))
                 }
                 
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+        networkManadger.fetchLatestNews(category: categoriesToFetch, country: Country.us) { [weak self] result in
+                    switch result {
+                    case .success(let newsModel):
+                        self?.news = newsModel.results
+                        
+                        if let fetchNews = self?.news {
+                            self?.dataManager.saveNews(fetchNews)
+                        }
+                        
+                        DispatchQueue.main.async {
+                            self?.collectionView.reloadSections(IndexSet(integer: 1))
+                        }
+                        
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+        
     }
     
     func saveData() {
