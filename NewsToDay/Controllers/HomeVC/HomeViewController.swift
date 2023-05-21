@@ -29,6 +29,7 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
     var randomNews = [Article]()
     
     var selectedCategory: String?
+    var isShowingSearchResults = false
     
     lazy var sections: [Section] = [.categories, .lastNews, .recommended]
     
@@ -89,6 +90,21 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
     override func viewWillAppear(_: Bool) {
         collectionView.reloadData()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if isShowingSearchResults {
+            tableView.isHidden = false
+            collectionView.isHidden = true
+        } else {
+            tableView.isHidden = true
+            collectionView.isHidden = false
+        }
+        
+    }
+
+    // MARK: - Shuffle news in recommended
     
     func shuffleNews() {
         randomNews = news.shuffled()

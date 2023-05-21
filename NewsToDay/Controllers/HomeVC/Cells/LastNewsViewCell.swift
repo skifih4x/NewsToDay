@@ -90,12 +90,18 @@ class LastNewsViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+    }
+    
     // MARK: - Methods
     
     func setupView() {
         backgroundColor = .systemGray
         layer.cornerRadius = 16
     }
+    
     
     func configureCell(article: Article, isTintedBookmark: Bool) {
         titleLabel.text = article.title

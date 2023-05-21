@@ -23,6 +23,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        isShowingSearchResults = false
+        
         let article = news[indexPath.row]
        navigateToDetail(with: article)
     }
@@ -48,9 +51,6 @@ extension HomeViewController: UISearchBarDelegate {
             timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [weak self] _ in
                 self?.fetchSearchData(for: searchText)
             })
-        } else if searchBar.text?.count == 0 {
-            news = []
-            tableView.reloadData()
         }
     }
     

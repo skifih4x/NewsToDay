@@ -35,6 +35,19 @@ class DatailVC: UIViewController    {
         topViewConfigure ()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if isMovingFromParent {
+            
+            if let homeViewController = presentingViewController as? HomeViewController {
+                homeViewController.isShowingSearchResults = false
+                homeViewController.collectionView.isHidden = false
+            }
+        }
+    }
+
+    
     @objc private func bookmarkButtonPressed(_ sender: UIButton) {
         sender.setBackgroundImage(UIImage(systemName: "bookmark"), for: .normal)
     }

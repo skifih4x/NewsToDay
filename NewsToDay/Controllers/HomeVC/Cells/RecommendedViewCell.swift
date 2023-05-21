@@ -79,6 +79,11 @@ class RecommendedViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+    }
+    
     // MARK: - Method for cell
    
     func configureCell(article: Article, isTintedBookmark: Bool) {
