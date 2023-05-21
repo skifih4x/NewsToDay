@@ -18,7 +18,7 @@ class OnboardingViewController: UIViewController    {
     let firstToKnowLabel = UILabel ()
     let pageControl = UIPageControl()
     let scrollView = UIScrollView()
-    let imagesOfCity = ["mainScreen", "catigory"]
+    let imagesOfCity = ["mainScreen", "categories"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -156,7 +156,7 @@ extension OnboardingViewController : UIScrollViewDelegate {
         firstToKnowLabel.text = localizationManager.localizeString("ONBOARDING_SECOND_LABEL")
         allNewsLabel.text = localizationManager.localizeString("ONBOARDING_SECOND_COMMENT_LABEL")
         if pageControl.currentPage == 0 {
-            firstToKnowLabel.text = "Главный экран"
+            firstToKnowLabel.text = localizationManager.localizeString("ONBOARDING_FIRST_LABEL")
             allNewsLabel.text = localizationManager.localizeString("ONBOARDING_FIRST_COMMENT_LABEL")
         }
     }

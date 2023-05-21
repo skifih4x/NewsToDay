@@ -86,7 +86,6 @@ DEVELOPER_ILYAS_LABEL = "Ilyas @Ильяс Тюменёв#2579\nProfile screen. 
 DEVELOPER_MIKHAIL_LABEL = "Mikhail @Mikhail Liubov#6850\nFavorites Screen";
 DEVELOPER_ANDREY_LABEL = "Andrey @andreyMikKzn#1191\nAuthorization screen. Firebase. Saving articles in Realm";
 
-
 TERMS_AND_CONDITIONS_HEADER_LABEL = "Terms & Conditions";
 TERMS_AND_CONDITIONS_MAIN_TEXT = "The User Agreement for the application (hereinafter referred to as the Agreement) is a special type of agreement between the owners of the application and its users regarding the procedure for its use, and also defines the obligations of the parties and their responsibilities.
 
