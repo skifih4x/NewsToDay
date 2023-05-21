@@ -28,6 +28,7 @@ final class CategoriesViewController: UIViewController {
 
     var delegate: CategoriesDelegate?
     var category: String?
+    
 
     init(isFirstEnter: Bool) {
         super.init(nibName: nil, bundle: nil)

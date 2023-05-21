@@ -29,9 +29,9 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
     var selectedCategory: String?
     var isShowingSearchResults = false
     
-    var topCategory: Category = .top
-    
    lazy var sections: [Section] = [.categories, .lastNews, .recommended]
+    
+    var selectedCategories: [String] = ["top"]
     
     // MARK: - UI Properties
     
@@ -87,7 +87,6 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
         saveData()
         
         shuffleNews()
-        //randomNews = news.shuffled()
         
     }
     
@@ -103,6 +102,7 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
         }
         
     }
+    
 
     // MARK: - Shuffle news in recommended
     
@@ -114,7 +114,39 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
     // MARK: - Fetch data
     
     func fetchLatestNews(for category: [String]) {
+        var categoriesToFetch: [String]
+                
+        if category.isEmpty {
+                    categoriesToFetch = selectedCategories
+                } else {
+                    categoriesToFetch = category
+                }
+                
+                
+        networkManadger.fetchLatestNews(category: categoriesToFetch, country: Country.us) { [weak self] result in
+                    switch result {
+                    case .success(let newsModel):
+                        self?.news = newsModel.results
+                        
+                        if let fetchNews = self?.news {
+                            self?.dataManager.saveNews(fetchNews)
+                        }
+                        
+                        DispatchQueue.main.async {
+                            self?.collectionView.reloadSections(IndexSet(integer: 1))
+                        }
+                        
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
         
+    }
+    
+    /*
+    func fetchLatestNews(for category: [String]) {
+        
+               
         networkManadger.fetchLatestNews(category: category, country: Country.us) { [weak self] result in
             switch result {
             case .success(let newsModel):
@@ -134,7 +166,7 @@ final class HomeViewController: UIViewController, CategoriesDelegate {
             }
         }
     }
-    
+    */
     func saveData() {
         if let savedCategory = dataManager.loadSelectedCategory() {
             selectedCategory = savedCategory
